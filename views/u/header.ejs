@@ -1,0 +1,51 @@
+<div class="header">
+	<div class="branding">
+		<div class="f-left">
+			<a href="/">
+				<!-- <img alt="Quiz Maker" src="/img3/cm-loggedin-logo1x.jpg" srcset="/img3/cm-loggedin-logo1x.jpg 1x, /img3/cm-loggedin-logo2x.jpg 2x, /img3/cm-loggedin-logo3x.jpg 3x" width="182" height="27"> -->
+				<img alt="Quiz Maker" src="/img3/cm-loggedin-logo-footer_3x.png"  width="182" height="27">
+			</a>
+			<span class="noprint">*****</span>
+		</div>
+		
+		<div class="top-right-nav noprint">
+			<ul class="upgrade-logout-nav">
+				<li><a href="/u/details/">Hi <%=student.firstName%></a></li>
+
+				<li><a href="/logout/">Log out</a></li>
+			</ul>
+		</div>
+	</div>
+
+    <a class="skip-link" href="#content">Skip to Content</a>
+    <div class="access level-1">
+    	<ul id="menu" class="menu main">
+			<li class="<%if(head=="tests"){%>current <%}%> dashboard"><a href="/u/">Group Tests</a></li>
+        	<li class="<%if(head=="groups"){%>current <%}%> dashboard"><a href="/u/groups/">My Groups</a></li>
+
+			<li class="<%if(head=="details"){%>current <%}%> dashboard my-account my-account-student" id="account">
+				<a href="/u/details/" class="account">
+					<span class="text">My Details</span>
+				</a>
+			</li>
+        </ul>
+    </div><!-- END .access -->
+</div>
+     <div class="container">
+		<% if(error && error.length > 0){ %>
+            <div id="msgDiv" class="alert-box error editor">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+		 
+		 <div class="alert-box alert-confirmation editor  closeMeContainer">
+			 <a class="closeV3 closeMeLink right" href="#"><span>x</span></a>
+			 <%= success %>
+		 </div>
+		 
+            <!-- <div id="msgDiv" class="alert-box success editor ">
+                <%//= success %>
+            </div> -->
+        <% } %>        
+    </div>

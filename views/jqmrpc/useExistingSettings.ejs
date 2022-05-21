@@ -1,0 +1,72 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<a href="#" class="close close-generic-overlay"></a>
+		<div class="clearheight"></div>
+		<div class="row">
+			<div class="col-span-5">
+				<h4><i class="fa fa-cog" aria-hidden="true"></i> Select settings</h4>
+			</div>
+			<div class="col-span-5">
+				<p class="f-right littlelink"><a href="#" class="close-generic-overlay" id="use_defaults">Cancel and use Default Settings</a></p>
+			</div>
+		</div>
+		<p>The settings you select below will be pre-set for you on the next page</p>
+		<div class="clearheight"></div>
+		<div class="table">
+			<ul class="table-body">
+				<%for(var g of groups){%>
+				<li>
+					<div class="row accordion-toggle-overlay scrollTop group_container closed">
+						<div class="col-span-10">
+							<h4 class="group-name name" id="use_rg_name_<%=g._id%>"><%=g.group_name%></h4>
+						</div>
+						<span class="caret">&nbsp;</span>
+					</div>
+					<div class="accordion-fold subrow-container group_tests">
+						<ul class="hover-row">
+							<%for(var s of list[g._id]){%>
+							<li class="row">
+								<div class="col-span-7">
+									<p class="test-name name" id="use_test_name_<%=s.forTest%>"><%=tests_list[s.forTest]%></p>
+								</div>
+								<div class="col-span-3 col-btns">
+									<a href="#" class="use_rg_settings btn btn-results close-generic-overlay" data-test-id="<%=s.forTest%>" data-rg-id="<%=g._id%>">Use Settings</a>
+								</div>
+							</li>
+							<%}%>
+						</ul>
+					</div>
+				</li>
+				<%}%>
+			</ul>
+		</div>
+		
+		<script>
+			$("document").ready(function() {
+				$('#use_defaults').click(function(e) {
+					e.preventDefault();
+					/* Set values back on main page */
+					$('#use_existing_settings_div').hide();
+					$('#sas_test_id').removeAttr('name').val('');         //sas = same as settings
+					$('#sas_rg_id').removeAttr('name').val('');//sas = same as settings
+					$('#use_this_rg_name').text('');
+					$('#use_this_test_name').text('');
+					$('#use_default_settings_div').show();
+				});
+
+				$('.use_rg_settings').click(function(e){
+					e.preventDefault();
+					/* Set values back on main page */
+					$('#use_default_settings_div').hide();
+					$('#sas_rg_id').attr('name', 'sas_rg_id').val($(this).data('rg-id'));       //sas = same as settings
+					$('#sas_test_id').attr('name', 'sas_test_id').val($(this).data('test-id')); //sas = same as settings
+					$('#use_this_rg_name').text($('#use_rg_name_'+$(this).data('rg-id')).text());
+					$('#use_this_test_name').text($('#use_test_name_'+$(this).data('test-id')).text());
+					$('#use_existing_settings_div').show();
+				});
+			});
+		</script>
+	</body>
+</html>

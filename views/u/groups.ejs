@@ -1,0 +1,88 @@
+<html lang="en">
+	<head>
+		<%-include("../questions/new/newHeader")%>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/cmstudent.css?v=274" media="screen">
+	</head>
+	<body>
+		<%-include("header")%>
+		
+		<div id="content" class="clearfix">
+			<div class="innerWrapper">
+				<h2 class="group-name name">My Groups</h2>
+				<div class="student-page editor">
+					<%=time%>
+					<div class="clearheight"></div>
+					<form method="post" action="/u/groups/changeGroup" id="changeGroupForm">
+						<input type="hidden" name="token" value="YRNCG3PBFP">
+						<div class="table">
+							<div class="row overall">
+								<div class="col-span-4">
+									Select Group:
+								</div>
+							</div>
+							<%foundGroups.forEach((g,i)=>{%>
+							<div class="row">
+								<div class="col-span-05 radio-icon">
+									<input id="gid_<%=g._id%>" type="radio" name="g_id" value="<%=g._id%>">
+								</div>
+								<div class="col-span-99">
+									<label for="gid_<%=g._id%>"><%=g.group_name%></label>
+								</div>
+							</div>
+							<%})%>
+
+							
+							<!-- <div class="row">
+								<div class="col-span-05 radio-icon">
+									<input id="gid_573553" type="radio" name="g_id" value="573553">
+								</div>
+								<div class="col-span-99">
+									<label for="gid_573553">1st exam</label>
+								</div>
+							</div> -->
+							
+							<div class="row">
+								<div class="col-span-05 radio-icon">
+									&nbsp;
+								</div>
+								<div class="col-span-99">
+									<a id="change_group" href="#" class="btn btn-create">Go to selected Group</a>
+								</div>
+							</div>
+						</div>
+					</form>
+					<!-- <script>google_ad_client = "pub-1813370847715935";
+google_ad_slot = "6394868143";google_ad_width = 234;google_ad_height = 60;</script><p class="noprint"><script src="https://pagead2.googlesyndication.com/pagead/show_ads.js"></script></p>
+<div class="clearheight"></div> -->
+				</div>
+				<div class="student-asside">
+	<!-- <script>google_ad_client = "pub-1813370847715935";google_ad_slot = "6394868143";google_ad_width = 234;google_ad_height = 60;</script><p class="noprint"><script src="https://pagead2.googlesyndication.com/pagead/show_ads.js"></script></p>
+	<div class="clearheight"></div> -->
+					<div class="student-message editor">
+						<p>When you are registered in multiple Groups, each Group may contain separate Tests for you to take.<br><br>Change Groups to check for available Tests under each Group.</p>
+						<a class="btn btn-create popup" href="/docs/ClassMarker-TestTaker-Faq.pdf"><i class="fa fa-download" aria-hidden="true"></i> Help</a>
+					</div>
+	<!-- <script>google_ad_client = "pub-1813370847715935";
+google_ad_slot = "6394868143";google_ad_width = 234;google_ad_height = 60;
+</script><p class="noprint"><script src="https://pagead2.googlesyndication.com/pagead/show_ads.js"></script></p> -->
+				</div>
+				<div class="clearheight30"></div>
+
+<script>
+	$(document).ready(function(){
+		$("#change_group").click( function (){
+			if ( !$('input:radio[name=g_id]:checked').val() ){
+				alert('First select a Group.');
+				return false;
+			} else {
+				$('#changeGroupForm').submit();
+				return false;
+			}
+		});
+	});
+</script>
+			
+			</div><!-- innerWrapper -->
+		</div>
+	</body>
+</html>

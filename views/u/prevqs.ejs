@@ -1,0 +1,105 @@
+<div class="jqmWindow jqmID1" id="display_previous_questions_overlay_div" style="z-index: 3000; display: none;">
+	<style>
+		.flagon {color:#fcd100;}
+	</style>	
+	<div class="jqmAlertTitle clearheight">
+		<a href="#" class="jqmPrevQuestionClose"></a>
+	</div>
+	<div class="flagged-questions-selector">
+		<div class="flagged-questions-selector-all">All Questions</div>
+		<div class="flagged-questions-selector-flagged">
+			<a href="#" id="toggle_show_only_flagged_questions">
+				<span class="flagon">
+					<span class="faspacer-margright">
+						<i class="fa fa-bookmark" aria-hidden="true"></i>
+					</span>
+				</span>Bookmarked (<span id="count_of_flagged_question">0</span>)
+			</a>
+		</div>
+	</div>
+	<div id="previous_questions_container">
+		<div class="row-flagged  question_not_flagged">
+			<a href="#" class="closeJqmWindow">
+				<div class="col-flag">
+					<span class="flagon  hide" id="show_qflag_23442305">
+						<i class="fa fa-bookmark" aria-hidden="true"></i>
+					</span>
+				</div>
+				<div class="col-question">Question 1</div>
+				<div class="col-status notanswered">Unanswered</div>
+				<div class="col-caret">
+					<i class="fa fa-caret-right" aria-hidden="true"></i>
+				</div>
+			</a>
+		</div>
+		<div class="row-flagged  question_not_flagged ">
+			<div class="col-flag"></div>
+			<div class="col-question-notseen">Question 2</div>
+		</div>
+		<div class="row-flagged  question_not_flagged ">
+			<div class="col-flag"></div>
+			<div class="col-question-notseen">Question 3</div>
+		</div>
+		<div class="row-flagged  question_not_flagged ">
+			<div class="col-flag"></div>
+			<div class="col-question-notseen">Question 4</div>
+		</div>
+		<div class="row-flagged  question_not_flagged ">
+			<div class="col-flag"></div>
+			<div class="col-question-notseen">Question 5</div>
+		</div>
+		<div class="row-flagged  question_not_flagged ">
+			<div class="col-flag"></div>
+			<div class="col-question-notseen">Question 6</div>
+		</div>
+		<div class="row-flagged  question_not_flagged ">
+			<div class="col-flag"></div>
+			<div class="col-question-notseen">Question 7</div>
+		</div>
+		<div class="row-flagged  question_not_flagged ">
+			<div class="col-flag"></div>
+			<div class="col-question-notseen">Question 8</div>
+		</div>
+		<div class="row-flagged  question_not_flagged ">
+			<div class="col-flag"></div>
+			<div class="col-question-notseen">Question 9</div>
+		</div>
+		<div class="row-flagged  question_not_flagged ">
+			<div class="col-flag"></div>
+			<div class="col-question-notseen">Question 10</div>
+		</div>
+		<div class="row-flagged  question_not_flagged "><div class="col-flag"></div>
+			<div class="col-question-notseen">Question 11</div>
+		</div>
+		<div class="row-flagged  question_not_flagged ">
+			<div class="col-flag"></div>
+			<div class="col-question-notseen">Question 12</div>
+		</div>
+	</div>
+	<div class="clearheight30"></div>
+
+	<script>
+		$(document).ready(function() {
+			/* scan questions on page and set flag changes if required */
+			var question_flag_ref_id = '';
+			$('a[id^="question_flag_"]').each(function(){
+				question_flag_ref_id = this.id.substring(14);
+				if ($(this).hasClass('flagqon')) {
+					$('#show_qflag_'+question_flag_ref_id).removeClass('hide');
+				}
+			});
+			/* Must use JS to count current flagged questions, because, on page clicks won't be saved in session yet */
+			var count_flagged_questions = 0;
+			$('div#previous_questions_container span.flagon').each(function(){
+				/* Need to do real time updated in case of changes on this page since loading */
+				if ($(this).is(':visible')){
+					count_flagged_questions++;
+					$(this).closest('.row-flagged').removeClass('question_not_flagged');
+				} else {
+					$(this).closest('.row-flagged').addClass('question_not_flagged');
+				}
+			});
+			$('span#count_of_flagged_question').text(count_flagged_questions);
+		});
+	</script>
+</div>

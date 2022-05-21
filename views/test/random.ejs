@@ -1,0 +1,250 @@
+<div id="dotogtab_01_testquestions">
+	<!-- Add + Action Links | Begin -->
+	<div class="table-utility row above">
+		<div class="col-span-5">
+			<div class="dropdown dropdown-x">
+					<a class="dropdown-toggle no_anchor" href="#">Select All </a>
+					<ul class="dropdown-menu">
+						<li><a href="#" class="expandAnswers">Expand answers</a></li>
+						<li><a href="#" class="collapseAnswers">Collapse answers</a></li>
+					</ul>
+				</div>
+			&nbsp;			</div>
+		<!-- Add Questions Links | Begien -->
+		<div class="col-span-4 col-btns">
+			<div class="dropdown">
+				<a class="btn btn-analytics dropdown-toggle no_anchor" href="#">
+					<i class="fa fa-plus" aria-hidden="true"></i>
+					Add Questions
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="/questions/new/?test_id=<%=testId%>&amp;qtype=mcsa">Add a new question</a></li>
+					<li><a href="/questions/?test_id=<%=testId%>">Add from your question bank</a></li>
+					<li><a href="#" title="Have Questions selected at random from your 'Question bank' each time this Test is taken." class="anchor_scroll_autoselect open_anchor_element showTooltipEast highlight_autoselected">Add random questions</a></li>
+					<li><a href="/a/tests/qb/import">Import spreadsheet (.CSV)</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- Add Questions Links | End -->
+		
+		<!-- Action Links | Begien -->
+		<div class="col-span-1 col-btns">
+			<div class="dropdown">
+				<a class="btn btn-actions btn-white">Actions <span class="caret">&nbsp;</span> </a>
+				<ul class="dropdown-menu edit-test-options">
+					<li><a href="/tests/test/order/?test_id=<%=testId%>" title="Set the order Fixed Questions are given in." class="showTooltipEast">Set question order</a></li>
+					<li><a href="/questions/settings/?test_id=<%=testId%>" title="Edit settings for all Fixed Questions in this Test at once." class="showTooltipEast">Edit question settings</a></li>
+					<li class="divider"><a href="/tests/rpc/misc.rpc.php?show_layover=1&amp;view_question_cats_in_test=1&amp;test_id=<%=testId%>" title="View number of Fixed Questions per Category set in this Test." class="showTooltipEast trigger-generic-array not-ie67" data-index="1">View categories used</a></li>
+					<li><a href="#" title="Export the Fixed Questions in this Test." class="showTooltipEast qbankExport">Export questions</a></li>
+					<li class="divider"><a href="/learn/?trk=managetest" title="Learn how to write great Tests." class="showTooltipEast popup"> Learn </a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- Action Links | End -->
+	</div>
+	<!-- Add + Action Links | End -->
+	
+	<!-- Below the fixed questions -->
+	<div class="table-body question-footer-hover-trigger">
+		<div class="row test-question"><span class="explain">Learn how to Create Tests below to get started.</span></div>
+		<%-include("fixed")%>
+ 	<!-- One step back from now on -->
+	<div class="scroll_autoselect  <%if(!test.random_option){%>hide<%}%> ">
+		<div class="row test-question">
+			<!-- Number of random questions Selected-->
+			<%var zn=0%>
+			<%if(test.random_option=="option1"){%>
+				<%zn=test.random_1_num;%>
+			<%}else if(test.random_option=="option2"){%>
+				<%test.random_2_num.forEach((num)=>{%>
+				<%zn+=num%>
+				<%})%>
+			<%}%>
+			
+			<h4 class="question-name name"><%if(!test.random_option){%>Have Extra Questions included from your Question Bank<%}else{%>Questions <%=test.questions.length+1%> – <%=test.questions.length+Number(zn)%> (Randomly selected)<%}%></h4>
+		
+		<%if(test.random_option=="option2" || test.random_option=="option1"){%>
+		<form class="randomQuestionsForm-old" action="/tests/test/editRandomQuestions?_method=PUT" method="post">
+ 			<input type="hidden" name="random_option" value="cancel"><input type="hidden" name="test_id" value="<%=testId%>">
+ 			<a href="#" class="genericSubmitLink showTooltipEast right" original-title="Remove these random Question settings from this Test.">Remove</a>
+ 			<span class="caret">&nbsp;</span>
+ 		</form>
+		<%}%>
+			</div>
+		
+		<div class="row editor dohighlight_autoselected">
+			<div class="confirmation">
+				Currently 
+				<strong><%=zn%></strong>
+				Random Questions will be selected from your Question Bank and included in this Test.
+			</div>
+			<ul class="padleft"></ul>
+			<div class="alert-box alert-default">
+				<i class="fa fa-info-circle"></i>
+				<a href="#random_settings" id="tog_randomexplain" class="showcont">Learn about Fixed vs Random questions</a>
+				<div class="hide" id="dotog_randomexplain">
+					<div class="clearheight"></div>
+					<p>
+						<strong>Tip:</strong>
+						All Questions you add to your Tests are always added to your
+						<a href="/questions/">Question Bank</a>
+						for re-use.
+					</p>
+					<ul class="littledark">
+						<li><strong>Fixed</strong> Questions will be given each time this Test is taken.</li>
+						<li><strong>Random</strong> Questions will be selected from your <strong>Question Bank</strong> (<i>not from Fixed Questions in this Test</i>) each time this Test is taken.</li>
+						<li>You can set either <strong>Fixed</strong> or <strong>Random</strong> Questions in your Test, or use both.</li>
+						<li>The same Question will never appear twice in the same Test.</li>
+					</ul>
+					<div class="clearheight"></div>
+					<h5>How to Randomize the 'Fixed Questions' already in this Test?</h5>
+					<p class="littledark">You can select to randomize the <strong>order</strong> of <strong>Fixed Questions</strong> in this Test when <strong>Assigning</strong> it to be taken.</p>
+				</div>
+			</div>
+			<div class="clearheight"></div>
+			<p><a href="#random_settings" id="tog_drandom" class=" btn btn-results hideme">Select your Random Question Settings</a></p>
+		</div>
+		<div class="row hide random-questions-forms dual" id="dotog_drandom">
+			<div class="col-span-45">
+				<h5>Option 1</h5>
+				<p class="explain">Total Nº of Questions from selected Sub Categories. <span class="showTooltipHTML tooltip" title="Each time the Test is started, select the total number of Questions to be randomly chosen from selected Categories.<br/><br/>Questions will display in random order irrespective of their Categories.">Tip</span></p>
+				<p><a class=" showcont" href="#" id="tograndomoptionleft">Use this option</a></p>
+				<!-- Option 1 form Start -->
+				<form class="<%if(test.random_option=="option1"){}else{%>hide<%}%>" action="/tests/test/editRandomQuestions?_method=PUT" id="dotograndomoptionleft" method="post">
+					<input type="hidden" name="random_option" value="option1">
+					<input type="hidden" name="test_id" value="<%=testId%>">
+					<input type="hidden" name="order_by_cat_id" value="0">
+					<div class="field-group">
+						<label class="form-field-title showTooltip" for="num_rand_id">Nº of Questions</label>
+							<!-- code to put max q number that can be selected equal to qs combined -->
+						<%var qn=0%>
+						<%scats.forEach((scat)=>{%>
+							<%qn+=scat.questions.length%>
+						<%})%>
+						
+						 <input class="input showTooltip input_number_cats" type="number" title="How many random Questions in total you want to add from selected Categories below?" min="0" max="<%=qn%>" size="3" name="num_random" id="num_rand_id" 		<%if(test.random_1_num){%>
+			value="<%=test.random_1_num%>"
+		<%}else{%>value=""<%}%>>
+					
+					</div>
+					<div class="field-group">
+
+					<%pcats.forEach(function(pcat,i){%>
+						<p class="qb-parent-cat"><%=pcat.parent_cat_name%> »</p>
+					<%pcat.cat_name.forEach(function(subcat,j){%>
+					<%scats.forEach(function(scat,k){%>
+					<%if(JSON.stringify(scat._id)==JSON.stringify(subcat)){%>
+						<div>
+	
+							<input <%if(scat.questions.length==0){%>disabled=""<%}%> class="input tab-auto-cats" type="checkbox" id="c1_<%=i%><%=j%>" name="cat_id" value="<%=scat._id%>" <%var x=test.random_1_cats.indexOf(scat._id)%>
+	<%if(x!="-1"){%>checked<%}%>>
+							<label for="c1_5"><%=scat.cat_name%> <span class="right little"><%=scat.questions.length%> Avail</span></label>
+						</div>
+						<br>
+					<%}%><%})%><%})%><%})%>
+					</div>
+					<div class="field-group">
+						<span class="form-field-title">Include:</span>
+						<select name="static_questions_position">
+							<option value="0" selected="selected">Randomly mixed in</option>
+							<option value="1">At end of Test</option>
+							<option value="2">At start of Test</option>
+						</select> 
+						<span title="Choose where randomly selected Questions will display in relation to any Fixed Questions set in this Test." class="showTooltip tooltip">&nbsp;</span>
+					</div>
+					<span class="tab">
+						<input type="submit" class="btn btn-create">
+					</span>
+				</form>
+					<!-- Option 1 form End -->
+			</div>
+
+
+			<div class="col-span-1">
+				<div class="or">or </div> &nbsp;
+			</div>
+
+			<style>
+			#sortable div span { float:left; }
+			</style>
+			<div class="col-span-45 ">
+				<h5>Option 2</h5>
+				<p class="explain">Specific Nº of Questions per selected Sub Category. <span class="showTooltipEast tooltip" title="Each time the Test is started, select a specific number of Questions per Sub Category to be randomly chosen.<br/><br/>Allows ordering and grouping Questions by Category.">Tip</span></p>
+				<p><a class=" showcont" href="#" id="tograndomoptionright">Use this option</a></p>
+
+				<!-- Option 2 form | Begin -->
+				<form class="<%if(test.random_option=="option2"){}else{%>hide<%}%>" action="/tests/test/editRandomQuestions?_method=PUT" id="dotograndomoptionright" method="post">
+					<input type="hidden" name="random_option" value="option2">
+					<input type="hidden" name="test_id" value="<%=testId%>">
+					<div class="field-group">
+						<div id="sortable" class="ui-sortable">
+					<%pcats.forEach(function(pcat,i){%>
+					<%pcat.cat_name.forEach(function(subcat,j){%>
+					<%scats.forEach(function(scat,k){%>
+					<%if(JSON.stringify(scat._id)==JSON.stringify(subcat)){%>
+					<div class="row random-question-categories ui-sortable-handle">
+						<div class="col-span-2">
+							<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+
+					<input type="hidden" name="cat_id2" value="<%=scat._id%>">
+					<input <%if(scat.questions.length==0){%>disabled="" class="input showTooltip input_number_cats" title="No Questions are set in this Category."<%}else{%> title="How many random questions from this Category?"<%}%> class="input showTooltip input_number_cats" size="4" type="number" min="0" max="<%=scat.questions.length%>" name="qnum"
+		<%var x=test.random_2_cats.indexOf(scat._id)%>
+		<%if(x!="-1"){%>
+			value="<%=test.random_2_num[x]%>"
+		<%}else{%>value=""<%}%>
+						   id="c2_<%=i%><%=j%>">
+								</div>
+								<%test.random_2_cats.forEach((R,r)=>{%>
+									<%if(scat._id==test.random){%>
+									<%}%>
+								<%})%>
+								<div class="col-span-65">
+									 <label class="titlename" for="c2_5">
+										 <span class="qb-parent-cat"><%=pcat.parent_cat_name%> »</span><br>
+										 <%=scat.cat_name%>
+									</label>
+								</div>
+								<div class="col-span-11">
+									<span class="right little"><%=scat.questions.length%> Avail</span>
+                            	</div>	
+                              </div>
+					<%}%><%})%><%})%><%})%>
+						</div>
+					</div>
+					<div class="field-group">
+						<span class="form-field-title">Order:</span>
+						<input type="radio" name="order_by_cat_id" value="0" id="rqo1" checked="checked"> 
+						<label for="rqo1">In Random Order</label>
+						<div class="clearheight5"></div>
+						<span class="tab">
+							<input type="radio" name="order_by_cat_id" value="1" id="rqo2">
+							<label for="rqo2">Grouped by Category</label>
+						</span>
+					</div>
+					<div class="field-group">
+						<span class="tab">(Drag by <span class="ui-icon ui-icon-arrowthick-2-n-s"></span> to arrange order)</span>
+					</div>
+					<div class="field-group">
+						<span class="form-field-title">Include:</span>
+						<select name="static_questions_position">
+							<option value="0" selected="selected">Randomly mixed in</option>
+							<option value="1">At end of Test</option>
+							<option value="2">At start of Test</option>
+						</select>
+						<span title="Choose where randomly selected Questions will display in relation to any Fixed Questions set in this Test.
+					 	 Note: If selecting to order Questions 'Grouped by Category' above, you can only choose Fixed Questions to display either at the Start or End of Test (not mixed in)." class="showTooltip tooltip">&nbsp;</span>
+					</div>
+
+					<!--<a href="#" class="genericSubmitLink tab btn btn-create">Save changes</a>-->
+					<span class="tab">
+						<input type="submit" class="btn btn-create" id="remove_empty_random_cat_inputs">
+					</span>
+				</form>
+				<!-- Option 2 form | End -->
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+<!-- It was one step ahead -->

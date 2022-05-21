@@ -1,0 +1,224 @@
+<%questions.forEach((q,i)=>{%>	
+	<div>
+		<div class="row test-question"><a id="q<%=q._id%>"></a>
+			<div class="col-span-3">
+				<h4 class="question-name name">Question <%=i+1%></h4>
+			</div>
+			<div class="col-span-6">
+				<span class="right">
+					<span class="qb-parent-cat">
+						<%pcats.forEach(function(pcat,j){%>
+			<%if(JSON.stringify(pcat._id)==JSON.stringify(q.parent_cat_id)){%>
+							<%=pcat.parent_cat_name%> »
+							<%}%>
+						<%})%>
+					</span>
+					<%scats.forEach(function(scat,j){%>
+				<%if(JSON.stringify(scat._id)==JSON.stringify(q.sub_cat_id)){%>
+						<%=scat.cat_name%>
+						<%}%>
+					<%})%>
+				</span>
+			</div>
+			<div class="col-span-1">
+				<span class="right"><%=q.points%> pt</span>
+			</div>
+		</div>
+		<div class="row ">
+			<div class="editor question">
+				<div class="qpad bbcode">
+					<%=q.question%>
+					<%if(q.type=="p"){%>
+						<p><strong>Incorrect phrase:</strong></p>
+						<p><%=q.p_incorrect%></p>
+					<%}%>
+				</div>
+				<div class="hide" id="dotog_ans<%=q._id%>" style="display: none;">	
+					<div class="divider-solid"></div>
+					<div class="clearheight"></div>
+					<table class="qb-q-info">
+					<tbody>
+						<%if(q.type=="mcma"||q.type=="mcsa"){%>
+						<%var ch=["A","B","C","D","E","F","G","H","I","J"];%>
+						<%var options=q.mc_options%>
+						<%var corrects=q.mc_correct%>
+						<%options.forEach(function(op,i){%>
+						<%if(op.answer!=''){%>
+						<tr>
+						<td>
+							<%if(corrects.includes(i+1)){%>
+							<span class="satick"><img src="/img3/correctv3.png" srcset="/img3/correctv3.png 1x, /img3/correctv3_3x.png 3x" alt="Correct" width="15" height="16"></span>
+							<%}%>
+						</td>
+						<td class="number"><%=ch[i]%>) </td>
+						<td class="answer bbcode"><%=op.answer%></td>
+						</tr>
+						<%}%>
+						<%})%>
+						<%}%>
+																										<%if(q.type=="tf"){%>
+						<%var ch=["A","B"];%>
+						<%var options=q.tf_options%>
+						<%var corrects=q.tf_correct%>
+						<%options.forEach(function(op,i){%>
+						<%if(op.answer!=''){%>
+						<tr>
+						<td><%if(corrects.includes(i+1)){%>
+						<span class="satick"><img src="/img3/correctv3.png" srcset="/img3/correctv3.png 1x, /img3/correctv3_3x.png 3x" alt="Correct" width="15" height="16"></span>
+						<%}%></td>
+
+						<td class="number"><%=ch[i]%>) </td>
+						<td class="answer bbcode"><%=op.answer%></td>
+						</tr>
+						<%}%>
+						<%})%>
+						<%}%>
+										
+						<%if(q.type=="ft"){%>
+						<%var corrects=q.ft_correct%>
+						<%corrects.forEach(function(c,i){%>
+						<%if(c!=''){%>
+						<tr>
+						<td>
+						<span class="satick"><img src="/img3/correctv3.png" srcset="/img3/correctv3.png 1x, /img3/correctv3_3x.png 3x" alt="Correct" width="15" height="16"></span>
+						</td>									
+						<td class="answer bbcode"><%=c%></td>
+						</tr>
+						<%}%>
+						<%})%>
+						<%}%>										
+						<%if(q.type=="p"){%>
+						<p><strong>Correct phrase:</strong>
+						 <span class="tooltip showTooltip" title="User must correct the phrase above to exactly match the correct phrase below.">&nbsp;</span></p>
+						<%var correct=q.p_correct%>
+						<tr>
+						<td>
+						<span class="satick"><img src="/img3/correctv3.png" srcset="/img3/correctv3.png 1x, /img3/correctv3_3x.png 3x" alt="Correct" width="15" height="16"></span>
+						</td>									
+						<td class="answer bbcode"><%=correct%></td>
+						</tr>
+						<%}%>
+						
+									</tbody>
+								</table>
+							
+								<div class="divider-solid"></div>
+								<div class="clearheight"></div>
+								<table class="qb-q-info">
+									<tbody>
+										<tr>
+											<td>
+												<strong>Question Type:</strong>
+											</td>
+											<%if(q.type=="mcsa"){%>
+											<td>Multiple Choice</td>
+											<%}%>
+											<%if(q.type=="mcma"){%>
+											<td>Multiple Response</td>
+											<%}%>
+											<%if(q.type=="tf"){%>
+											<td>True False</td>
+											<%}%>
+											<%if(q.type=="ft"){%>
+											<td>Free Text | Short Answer</td>
+											<%}%>
+											<%if(q.type=="p"){%>
+											<td>Grammar</td>
+											<%}%>
+											<%if(q.type=="e"){%>
+											<td>Essay</td>
+											<%}%>
+											<%if(q.type=="m"){%>
+											<td>Matching</td>
+											<%}%>
+										</tr>
+										<tr>
+											<td>Category:</td>
+											<td>
+												<span class="qb-parent-cat">
+		<%pcats.forEach(function(pcat,j){%>
+			<%if(JSON.stringify(pcat._id)==JSON.stringify(q.parent_cat_id)){%>
+					<%=pcat.parent_cat_name%> »
+			<%}%>
+		<%})%>
+												</span>
+		<%scats.forEach(function(scat,j){%>
+			<%if(JSON.stringify(scat._id)==JSON.stringify(q.sub_cat_id)){%>
+					<%=scat.cat_name%>
+			<%}%>
+		<%})%>
+											</td>
+										</tr>
+										<tr>
+											<td>Points:</td>
+											<td><%=q.points%></td>
+										</tr>
+											
+										<%if(q.type=="mcma"||q.type=="mcsa"){%>	
+										<tr>
+											<td>Randomize Answers:</td>
+											<%if(q.random_a==1){%>
+												<td>Yes</td>
+											<%}else{%>
+												<td>No</td>
+											<%}%>
+										</tr>
+										<%}%>
+										<%if(q.type=="mcma"){%>
+										<tr>
+											<td>Grade style:</td>
+											<%if(q.grade_style==0){%>
+												<td>Full points if all answers are correct</td>
+											<%}else if(q.grade_style==1){%>
+												<td>Partial - points removed for incorrect answers</td>
+											<%}else{%>
+												<td>Partial - points not removed for incorrect answers</td>
+											<%}%>
+										</tr>
+										<%}%>
+										
+										<tr>
+											<td>Date Added:</td>
+											<%if(q.createdAt){%>
+											<td class="padleft5"><span><%=q.createdAt.toDateString()%></span></td>
+											<%}%>
+										</tr>
+										<tr>
+											<td>Last Modified:</td>
+											<%if(q.editedAt){%>
+											<td class="padleft5"><span><%=q.editedAt.toDateString()%></span></td>
+											<%}%>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+			
+			<!-- /////////////// -->
+						
+<div class="question-footer-hover opacityon">
+	<div class="divider-solid"></div>
+		<div class="col-span-7">
+			<div class="question-footer">
+				<a href="#" id="tog_ans<%=q._id%>" class="open-close-toggle"><i class="fa fa-expand" aria-hidden="true"></i> Answers</a>
+					<span class="eq-links-divider"> | </span>
+					<a href="/questions/<%=q._id%>/edit"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+					<span class="eq-links-divider"> | </span>
+					<a href="#" class="upgradeRpc"><i class="fa fa-files-o" aria-hidden="true"></i> Duplicate</a>
+					<span class="eq-links-divider"> | </span>
+					<a id="sqit-<%=q._id%>"><i class="fa fa-location-arrow" aria-hidden="true"></i> Used In</a>
+					<span class="eq-links-divider"> | </span>
+					<a href="/tests/test/order/?test_id=<%=test._id%>"><i class="fa fa-sort" aria-hidden="true"></i> Reorder</a>
+				</div>
+				<div id="dsqit-<%=q._id%>" class="hidden"></div>
+			</div>
+			<div class="col-span-3 col-btns">
+				<span class="right">
+					 <span id="d<%=q._id%>">
+						<a href="#" id="removeq-<%=q._id%>" class="edit-test-page">Remove From Test</a>
+					</span>
+				</span>
+			</div>
+			</div></div>
+			</div>
+<%})%>

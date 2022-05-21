@@ -1,0 +1,96 @@
+	<script>
+	$("document").ready(function(){
+		
+		var users_array = [
+			<%var ss2=G.students%>
+			<%ss2.forEach((gst,i)=>{%>
+			{"first":<%-gst.firstName%>,"last":<%-gst.lastName%>,"username":<%-gst.username%>,"email":<%-gst.email%>,"reg_time":"1601821087","last_login":0,"num_logins":"0","rg_id":<%-G._id%>,"serial":null,"lang":"English","active":"1","user_id":<%-gst._id%>,"last_login_display_date":"N\/A","reg_time_display_date":"Sun 4th Oct 2020 5:48pm"}
+		<%})%>
+		];
+		var sortByProperty = function (property) {
+		    return function (x, y) {
+		        return ((x[property] === y[property]) ? 0 : ((x[property] > y[property]) ? 1 : -1));
+		    };
+		};
+		function printUserTable(sort_by){
+			var html_array = [];
+			if (sort_by == 'last_login' || sort_by == 'reg_time'){
+				users_array.sort(sortByProperty(sort_by));
+				users_array.reverse();
+			} else if (sort_by == 'first'){
+				users_array.sort(sortByProperty('last')); 				users_array.sort(sortByProperty(sort_by));
+			} else if (sort_by == 'last'){
+				users_array.sort(sortByProperty('first')); 				users_array.sort(sortByProperty(sort_by));
+			}
+			$.each(users_array, function( index, value ) {
+				if ( value.active == 1){
+					var active_state = ' checked="checked"';
+					var active_text  = 'Can';
+					var active_class = '';
+				} else {
+					var active_state = '';
+					var active_text  = 'Cannot';
+					var active_class = ' bginactive';
+				}
+				if ( value.email == ''){
+					value.email = 'N/A';
+				}
+				html_array.push('<li><a id="hi'+value.user_id+'"></a>'
+				+ '<div class="row accordion-toggle" id="i'+value.user_id+'">'
+					+ '<div class="col-span-6"><h4 class="member-name name" id="name_'+value.user_id+'">'+value.first+' '+value.last+'</h4></div>'
+					+ '<span class="caret">&nbsp;</span>'
+				+ '</div>'
+				+ '<div class="accordion-fold">'
+					+ '<div class="row '+active_class+'">'
+					+ '<div class="col-span-8 editor"><ul>'
+					+ '<li><span class="members-list-left">Username: </span>'+value.username+'</li>'
+					+ '<li><span class="members-list-left">Password: </span>******</li>'
+					+ '<li><span class="members-list-left">Email: </span><span id="em_'+value.user_id+'">'+value.email+'</span></li>'
+					+ '<li><span class="members-list-left">Interface: </span><span id="lang_'+value.user_id+'">'+value.lang+'</span></li>'
+					+ '<li><span class="members-list-left">Registered: </span>'+value.reg_time_display_date+'</li>'
+					+ '<li><span class="members-list-left">Last Login: </span>'+value.last_login_display_date+'</li>'
+					+ '</ul></div>'
+					+ '<div class="col-span-2 col-btns"><div class="dropdown">'
+					+ '<a class="dropdown-toggle btn btn-results no_anchor" href="#">Results <span class="caret">&nbsp;</span></a>'
+					+ '<ul class="dropdown-menu">'
+						+ '<li><a href="/a/results/rguser/?user_id='+value.user_id+'&amp;rg_id='+value.rg_id+'&amp;b=members">Test Results</a></li>'
+						+ '<li><a href="/a/results/categories/?user_id='+value.user_id+'&amp;rg_id='+value.rg_id+'&amp;b=members">Category Statistics</a></li>'
+					+ '</ul></div></div><div class="divider-solid"></div>'
+					+ '<div class="col-span-7 editor"><div class="question-footer">'
+					+ '<a class="popupSmall" href="/a/users/group/editUserPopup.php?user_id='+value.user_id+'&amp;rg_id='+value.rg_id+'"><i class="fa fa-pencil" aria-hidden="true"></i> Edit details &amp; message</a>'
+						+ '<span> | </span><a class="trigger-generic-array" href="/a/users/transfer/?user_id='+value.user_id+'&amp;rg_id='+value.rg_id+'&amp;show_layover=1" data-index="'+value.user_id+'"><i class="fa fa-user-plus" aria-hidden="true"></i> Transfer User</a>'
+						+ '<span> | </span><a class="trigger-generic-array" href="/a/users/transfer/?user_id='+value.user_id+'&amp;rg_id='+value.rg_id+'&amp;show_layover=1" data-index="'+value.user_id+'"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete User</a>'
+					+ '</div></div>'
+					+ '<div class="col-span-3">'
+					+ '<p class="right"><label for="activeid_'+value.user_id+'_'+value.rg_id+'" id="activestatus_'+value.user_id+'" class="showTooltipEast activestatus"  title="Un-check this box to temporarily disallow Users access to this Group. Re-check this box to allow access again.">'
+						+ active_text + ' Access Group: </label>'
+						+ '<input type="checkbox" name="active_user" '+active_state+' id="activeid_'+value.user_id+'_'+value.rg_id+'" />'
+					+ '</p></div>'
+				+ '</div>'
+				+ '</div></li>'
+				);
+			});
+			$('ul#users-table').empty().append(html_array.join(""));
+			accordionToggleAddClosedClass();
+			triggerGenericArray();
+		}
+		/* Default load view */
+		printUserTable('last_name');
+		$('#sortGroupMembersFirstName').click(function(e){
+			e.preventDefault();
+			printUserTable('first');
+		});
+		$('#sortGroupMembersLastName').click(function(e){
+			e.preventDefault();
+			printUserTable('last');
+		});
+		$('#ssortGroupMembersLogin').click(function(e){
+			e.preventDefault();
+			printUserTable('last_login');
+		});
+		$('#sortGroupMembersRegistered').click(function(e){
+			e.preventDefault();
+			printUserTable('reg_time');
+		});
+	});
+	</script>

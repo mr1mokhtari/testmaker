@@ -1,0 +1,174 @@
+.nopad {
+	margin: 0!important;padding: 0!important;
+}
+.col-full {
+	width: 1014px;
+	margin: 0 auto;
+}
+.home-content-left {
+	float:left;
+	width: 328px;
+}
+.home-content-right {
+	float:left;
+	width: 328px;
+}
+.clear {clear: both;}
+.clearheight {clear: both; height: 15px; width: auto;}
+.clearheight5 {clear: both; height: 5px; width: auto;}
+.clearheight10 {clear: both; height: 10px; width: auto;}
+.clearheight20 {clear: both; height: 20px; width: auto;}
+.clearheight30 {clear: both; height: 30px; width: auto;}
+.clearheight40 {clear: both; height: 40px; width: auto;}
+.clearheight60 {clear: both; height: 60px; width: auto;}
+.clearheight100 {clear: both; height:100px; width: auto;}
+
+#errDivcheckUsername {font-size: 14px;}
+
+
+	#main #regForm input, p.little {width: 220px}
+	#main form#regForm {width: 220px}
+	#main #regForm #agree-to-terms {width: 10px; margin-bottom: 30px;}
+	p#agreetermsid{width: 260px;}
+	#regForm .select-box {width: 208px}
+
+#main {
+	clear: both;
+	background: url(../../img3/home/light-gd.png) repeat;
+	overflow: hidden;
+	padding-bottom: 80px;
+}
+#main h3 {
+	font-family: Helvetica;
+	font-size: 27px;
+	color: #535353;
+	line-height: 1.07;
+	margin-top: 30px;
+	margin-bottom: 14px;
+}
+#main p, #main ul {
+	font-size: 14px;
+	line-height: 1.64;
+	margin-bottom: 21px;
+}
+#main ul {
+	margin-left:23px;
+}
+#main .join-box p {
+	width: 410px;
+	color: #000;
+	font-size: 15px;
+	margin-top: -2px;
+	line-height: 1.2;
+}
+/*----- Reg Form Styles -----*/
+#main form {
+	max-width: 670px;
+	/*margin-top: 50px;*/
+}
+#main label {
+	color: #424242;
+	font-size: 14px;
+	line-height: 1.4;
+}
+
+
+#main input, .share-video input {
+	width: 295px;
+	height: 35px;
+	border: 1px solid #a1a1a1;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	margin-right: 26px;
+	margin-bottom: 4px;
+	text-indent: 10px;
+	padding-right: 5px;
+	float: left;
+}
+
+#main textarea {
+	  width: 288px;
+	  border: 1px solid #a1a1a1;
+	  -webkit-border-radius: 4px;
+	  border-radius: 4px;
+	  margin-right: 26px;
+	  margin-bottom: 4px;
+	  padding: 6px;
+	  float: left;
+  }
+.select-box {
+	width: 282px;
+	height: 28px;
+	border: 1px solid #a1a1a1;
+	background-color: #f3f3f3;
+	background-image: ;
+	background-repeat: no-repeat;
+	background-position: 96% 50%;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	margin-right: 26px;
+	padding: 6px 9px 1px 9px;
+	color: #424242;
+	font-size: 18px;
+	overflow: hidden;
+	line-height: 1.4;
+}
+img.captcha_image{
+	border: solid #8C8C8C 1px;
+	margin-right:10px;
+}
+.cm-capture-style input{
+	height: 15px!important;
+}
+form #regForm .reg-check-box, form #agree-terms .agree-check-box {
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin-left: 0;
+	border: 0 none !important;
+	margin-top: 3px;
+	margin-right: 5px;
+}
+#main .agree-label {
+	color: #424242;
+	font-size: 15px;
+}
+.agree-label a {
+	text-decoration: none;
+	color: #de3e00;
+}
+#main #register-button {
+	width: auto;
+	height: 37px;
+	background: darkgray;
+	text-decoration: none;
+	text-align: center;
+	color: #FFF;
+	font-family: Helvetica;
+	font-weight: bold;
+	font-size: 20px;
+	padding: 0 17px 0 16px;
+	border: 0 none;
+	cursor: pointer;
+	border-radius: 1px 1px 1px 1px;
+	-webkit-box-shadow: 0 0 2px 1px #2e2e2e;
+	box-shadow: 0 0 2px 1px #2e2e2e;
+	width: auto;
+	margin: 15px 0 0 2px;
+	text-indent: 0;
+}
+#main #register-button:hover {
+	-webkit-box-shadow: 0 0 4px 1px #2e2e2e;
+	box-shadow: 0 0 4px 1px #2e2e2e;
+}
+
+
+#checkbox{
+	width: 1px !important;
+	height: 1px;
+	padding: 0;
+	margin-left: 0;
+	border: 0 none !important;
+	margin-top: 0px;
+	margin-right: 0px;
+	display: inline-block;}

@@ -1,0 +1,68 @@
+<%//-include("../partials/header")%>
+<%//-include("new/newHeader")%>
+<%-include("../partials/headerResult")%>
+<%-include("../partials/teacherHead")%>
+
+<div id="content" class="clearfix">
+<div class="innerWrapper">
+	<%-include("bank/menu")%>
+	<div class="clearheight20"></div>
+	<div class="clearheight20"></div>
+	<div id="scrollToShowCount"></div>
+	<%if(!test && !question){%>
+	<div class="alert-box alert-white editor ">
+		<p>You are adding Questions to your <strong>Question bank</strong>. Questions are always kept in your Question bank for easy reuse across your Tests.</p>
+			If you want to add Questions directly to a Test, first select to <strong>Edit</strong> your <a href="/tests">Test</a>, then select the <strong>Fixed Questions</strong> option from the Edit Test page.
+	</div>
+	<a id="qtop"></a>
+	<%}%>
+	
+<!--<div class="page">-->
+<div class="clear"></div>
+<div id="msgDiv" style="display: none;" class="ajaxsuccess">
+	<%if(!test){%>
+		Your Question was saved in your Question Bank.
+	<%}else{%>
+		Your Question was saved in your Question Bank and set in your Test.
+	<%}%>
+	</div>
+<div class="clear"></div>
+<div class="table question-table">	
+	<div class="question_header">
+		<div class="col-span-10 col-btns col-left">
+			<%if(!question){%>
+				<span class="qt_word_title">Select Question Type </span>
+			<%}else{%>
+				<span class="qt_word_title">
+					<%if(question.type=='e'){%>Essay<%}else if(question.type=='tf'){%>True False<%}else if(question.type=='ft'){%>Free Text<%}else if(question.type=='p'){%>Grammar<%}else if(question.type=='m'){%>Matching<%}else if(question.type=='mcsa'){%>Multiple Choice<%}else if(question.type=='mcma'){%>Multiple Answer<%}%>
+					Question Type 
+				</span>
+			<%}%>
+			
+			<%if(test){%>
+				<!-- <div class="col-span-5 col-btns"> -->
+					<a class="btn btn-analytics btn-right" href="/tests/test/?test_id=<%=test._id%>">Back To Test</a>
+				<!-- </div> -->
+			<%}else{%>
+				<a class="btn btn-analytics btn-right" href="/questions">
+					Back to Question Bank
+				</a>
+			<%}%>
+		</div>
+	</div>
+	
+	<div class="question_row edit-questions-bg">
+		<%if(!question){%>
+			<%-include("new/typeSelector")%>
+		<%}%>
+		<div class="clearheight30"></div>		
+		<div class="clear"></div>		
+		
+		<%-include("new/typeSelectorForm")%>
+		<%-include("new/typeSelectorJQ")%>
+	</div>
+</div>
+	<!-- inner wrapper -->
+</div>
+</div>
+<%-include("../partials/footer")%>

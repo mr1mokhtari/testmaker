@@ -1,0 +1,351 @@
+<html><head><script>
+	$("document").ready(function() {
+		$( "#tabs" ).tabs();
+	});
+</script>
+    </head><body><h4>Question Examples<a class="close jqmClose"></a></h4>
+
+<div class="clear"></div>
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Multiple Choice</a></li>
+		<li><a href="#tabs-2">True/False</a></li>
+		<li><a href="#tabs-3">Matching</a></li>
+		<li><a href="#tabs-4">Free Text</a></li>
+		<li><a href="#tabs-5">Grammar</a></li>
+		<li><a href="#tabs-6">Essay</a></li>
+	</ul>
+
+	<div class="table questionExamplesTable editor">
+		<div id="tabs-1">
+			<p class="littledark">Example: <a href="#" id="toggroup_01_mc1">Multiple choice</a> | <a href="#" id="toggroup_01_mc2">Multiple response</a>
+                <span class="right"><i class="fa fa-info" aria-hidden="true"></i> <a href="#" id="toggroup_01_mc3">Instructions</a></span></p>
+
+
+			<div id="dotoggroup_01_mc1">
+				<hr>
+				<p>Using *****, can you embed images, documents, audio and video into question, answer and feedback fields?</p>
+
+				<table cellspacing="0" cellpadding="0"><tbody>
+				<tr><td></td><td class="mcexample"><input name="mcexample" id="mcexample1" type="radio"> <label for="mcexample1"><strong>A)</strong> Yes</label></td></tr>
+				<tr><td></td><td class="mcexample"><input name="mcexample" id="mcexample2" type="radio"> <label for="mcexample2"><strong>B)</strong> No</label></td></tr>
+				<tr><td></td><td class="mcexample"><input name="mcexample" id="mcexample3" type="radio"> <label for="mcexample3"><strong>C)</strong> I'm not sure</label></td></tr>
+				<tr><td width="10"><img src="/img3/i.gif" alt="" width="10" height="1"></td><td width="600"><img src="/img3/i.gif" alt="" width="600" height="1"></td>
+				</tr></tbody></table>
+			</div>
+			<div id="dotoggroup_01_mc2" class="hide">
+				<hr>
+				<p>***** can: (Select 3 options)</p>
+
+				<table cellspacing="0" cellpadding="0"><tbody>
+				<tr><td></td><td class="mcexample"><input name="mrexample1" id="mrexample1" type="checkbox"> <label for="mrexample1"><strong>A)</strong> Grade my Test papers</label></td></tr>
+				<tr><td></td><td class="mcexample"><input name="mrexample2" id="mrexample2" type="checkbox"> <label for="mrexample2"><strong>B)</strong> Give me statistics over Test results</label></td></tr>
+				<tr><td></td><td class="mcexample"><input name="mrexample3" id="mrexample3" type="checkbox"> <label for="mrexample3"><strong>C)</strong> Allow me to re-use questions across my Tests</label></td></tr>
+				<tr><td></td><td class="mcexample"><input name="mrexample4" id="mrexample4" type="checkbox"> <label for="mrexample4"><strong>D)</strong> Make Coffee for me in the morning</label></td></tr>
+				<tr><td width="10"><img src="/img3/i.gif" alt="" width="10" height="1"></td><td width="600"><img src="/img3/i.gif" alt="" width="600" height="1"></td>
+				</tr></tbody></table>
+			</div>
+			<div id="dotoggroup_01_mc3" class="hide littledark">
+				<hr>
+				<ol>
+					<li>Type your question in the question box</li>
+					<li>Type a minimum of two answers</li>
+					<li>Select the right answer/s by clicking the checkboxes directly above each correct answer</li>
+				</ol>
+
+				<p><strong>Grading:</strong> This question type is automatically graded.</p>
+			</div>
+		</div>
+
+
+		<div id="tabs-2">
+			<p class="littledark"><a href="#" id="toggroup_02_1">Example</a>
+				<span class="right"><i class="fa fa-info" aria-hidden="true"></i>  <a href="#" id="toggroup_02_2">Instructions</a></span></p>
+
+
+
+			<div id="dotoggroup_02_1">
+				<hr>
+
+				<p>With *****, only Essay style questions are not graded instantly?</p>
+
+				<table cellspacing="0" cellpadding="0"><tbody>
+				<tr><td></td><td class="mcexample"><input name="mcexample2" id="mcexample21" type="radio"> <label for="mcexample21"> True</label></td></tr>
+				<tr><td></td><td class="mcexample"><input name="mcexample2" id="mcexample22" type="radio"> <label for="mcexample22"> False</label></td></tr>
+				<tr><td><img src="/img3/i.gif" alt="" width="10" height="1"></td><td width="200"></td>
+				</tr></tbody></table>
+			</div>
+			<div id="dotoggroup_02_2" class="hide littledark">
+				<hr>
+
+				<p>Add your question and select True or False as the correct answer.</p>
+
+				<p>You can change the True/False text, Example: Yes/No or into another language.</p>
+
+				<p><strong>Grading:</strong> This question type is automatically graded.</p>
+			</div>
+
+		</div>
+
+		<div id="tabs-3">
+			<p class="littledark">Example: <a href="#" id="toggroup_01_m1">Drop Down</a> | <a href="#" id="toggroup_01_m2">Multimedia</a>
+				<span class="right"><i class="fa fa-info" aria-hidden="true"></i> <a href="#" id="toggroup_01_m3">Instructions</a></span></p>
+
+
+			<div id="dotoggroup_01_m1">
+				<hr>
+				<p>Match the Capitals with the Country:</p>
+
+				<table class="mqsholder border">
+					<tbody>
+					<tr>
+						<td class="bbcode m_cell">England</td>
+						<td class="d_selection m_cell">
+							<select name="mexample">
+								<option value="0">Choose</option>
+								<option value="mexample1">London</option>
+								<option value="mexample2">Washington</option>
+								<option value="mexample3">Beijing</option>
+								<option value="mexample4">Canberra</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="bbcode m_cell">United States of America</td>
+						<td class="d_selection m_cell">
+							<select name="mexample">
+								<option value="0">Choose</option>
+								<option value="mexample1">London</option>
+								<option value="mexample2">Washington D.C.</option>
+								<option value="mexample3">Beijing</option>
+								<option value="mexample4">Canberra</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="bbcode m_cell">China</td>
+						<td class="d_selection m_cell">
+							<select name="mexample">
+								<option value="0">Choose</option>
+								<option value="mexample1">London</option>
+								<option value="mexample2">Washington</option>
+								<option value="mexample3">Beijing</option>
+								<option value="mexample4">Canberra</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="bbcode m_cell">Australia</td>
+						<td class="d_selection m_cell">
+							<select name="mexample">
+								<option value="0">Choose</option>
+								<option value="mexample1">London</option>
+								<option value="mexample2">Washington</option>
+								<option value="mexample3">Beijing</option>
+								<option value="mexample4">Canberra</option>
+							</select>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="dotoggroup_01_m2" class="hide">
+				<hr>
+				<div id="mqsholder_0">
+					<input type="hidden" id="text" value="Edit">
+					<div id="m_column_right_0" style="display: none;">
+						<div class="add_padding">
+							<div id="right_content_1" class="m_content">
+								<div class="m_cell bbcode matching-imgw" data-question-type="matching">
+									<img src="/img3/logos/s3_microsoft.jpg">
+								</div>
+								<div class="m_cell">
+									<h4 class="m_h4">
+										<button type="button" data-value="1" class="btn btn-white" id="match_0_1">Select</button>
+									</h4>
+								</div>
+							</div>
+							<hr class="matching_hr">
+							<div id="right_content_1" class="m_content">
+								<div class="m_cell bbcode matching-imgw" data-question-type="matching">
+									<img src="/img3/logos/s3_dell.jpg">
+								</div>
+								<div class="m_cell">
+									<h4 class="m_h4">
+										<button type="button" data-value="2" class="btn btn-white" id="match_0_1">Select</button>
+									</h4>
+								</div>
+							</div>
+							<hr class="matching_hr">
+							<div id="right_content_1" class="m_content">
+								<div class="m_cell bbcode matching-imgw" data-question-type="matching">
+									<img src="/img3/logos/s3_facebook.jpg">
+								</div>
+								<div class="m_cell">
+									<h4 class="m_h4">
+										<button type="button" data-value="3" class="btn btn-white" id="match_0_1">Select</button>
+									</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					<p>Match the company logos:</p>
+					<table class="table mqsholder m_column_left">
+						<tbody>
+						<!--<tr>
+							<td class="m_cell"><h5>Clue</h5></td>
+							<td class="m_cell"><h5>Match</h5></td>
+						</tr>!-->
+						<tr class="m_margin">
+							<td id="red_bar_0_1"></td>
+							<td id="jms_0_1">
+								<div class="m_cell m_query bbcode">Dell</div>
+							</td>
+							<td class="bbcode matching-imgw m_answer_background" id="m_answer_0_1">
+								<button type="button" class="btn btn-white" id="select_0_1">Choose answer</button>
+							</td>
+						</tr>
+						<tr class="m_margin">
+							<td id="red_bar_0_2"></td>
+							<td id="jms_0_2">
+								<div class="m_cell m_query">Facebook</div>
+							</td>
+							<td class="bbcode matching-imgw m_answer_background" id="m_answer_0_2">
+								<button type="button" class="btn btn-white" id="select_0_2">Choose answer</button>
+							</td>
+						</tr>
+						<tr class="m_margin">
+							<td id="red_bar_0_3"></td>
+							<td id="jms_0_3">
+								<div class="m_cell m_query">Microsoft</div>
+							</td>
+							<td class="bbcode matching-imgw m_answer_background" id="m_answer_0_3">
+								<button type="button" class="btn btn-white" id="select_0_3">Choose answer</button>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="dotoggroup_01_m3" class="hide littledark">
+				<hr>
+				<p><strong>Drop Down</strong> <br> This type allows plain text only to be used for Matches, it suits single word or short sentence matching. A drop down box is used to select matches.</p>
+				<p><strong>Multimedia</strong> <br> This type allows text, as wel as images, audio or video to be used for Matches.</p>
+				<p><strong>Incorrect Matches Option</strong> <br> The extra incorrect Matches can be added for increasing question difficulty.</p>
+			</div>
+		</div>
+
+		<div id="tabs-4">
+			<p class="littledark"><a href="#" id="toggroup_03_1">Example 1</a>
+            | <a href="#" id="toggroup_03_2">Example 2</a>
+			 <span class="right"><i class="fa fa-info" aria-hidden="true"></i> <a href="#" id="toggroup_03_3">Instructions</a></span></p>
+
+
+
+
+
+			<div id="dotoggroup_03_1">
+				<hr>
+				<p>The website you are on is: www.___________.com</p>
+
+				<div class="clearheight"></div>
+				<input type="text" autocomplete="off" autocorrect="off" spellcheck="false" size="30">
+				<div class="clearheight30"></div>
+			</div>
+            <div id="dotoggroup_03_2" class="hide">
+                <hr>
+                <p>Who was the first President of the United States?</p>
+
+                <div class="clearheight"></div>
+                <input type="text" autocomplete="off" autocorrect="off" spellcheck="false" size="30">
+                <div class="clearheight30"></div>
+            </div>
+
+			<div id="dotoggroup_03_3" class="hide littledark">
+				<hr>
+				<p>***** will check that the answer a user types in matches one of the answers you enter
+					below.</p>
+
+				<p><strong>Note:</strong> Capitalization is not checked.<br>E.g. 'Ten apples' and 'TEN APPLES' is a
+					correct match.<br>
+					But 'Ten apples' and 'Ten aples' is not a match unless you add 'Ten aples' as an accepted answer.
+				</p>
+
+				<p>We recommend keeping free text acceptable answers to one or two words maximum.</p>
+
+				<p>You can use Free text questions with underscores _______ for fill in the blank question types.</p>
+
+				<p>For extended Free text, use Essay
+					questions, which will allow you to read and grade answers yourself.</p>
+
+				<p><strong>Grading:</strong> This question type is automatically graded.</p>
+			</div>
+		</div>
+
+
+		<div id="tabs-5">
+			<p class="littledark"><a href="#" id="toggroup_04_1">Example</a>
+			 <span class="right"><i class="fa fa-info" aria-hidden="true"></i> <a href="#" id="toggroup_04_2">Instructions</a></span></p>
+
+
+
+
+
+
+
+			<div id="dotoggroup_04_1">
+				<hr>
+				<p>Correct this phrase:</p>
+
+				<div class="clearheight"></div>
+				<input type="text" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="off" size="40" value="The car was parkked over their.">
+				<div class="clearheight30"></div>
+
+			</div>
+			<div id="dotoggroup_04_2" class="hide littledark">
+				<hr>
+				<p>Type a sentence with incorrect grammar or punctuation. Users need to correct the <strong>grammar, punctuation</strong>
+					and <strong>word capitalization</strong>.</p>
+				<ol>
+					<li>In the first box, type the incorrect version. This is the one the users will see.</li>
+					<li>In the second box, type the correct version. This is the version ***** will use to check
+						for a correct or incorrect answer.
+					</li>
+				</ol>
+				<p><strong>Grading:</strong> This question type is automatically graded.</p>
+			</div>
+
+
+		</div>
+
+
+		<div id="tabs-6">
+
+			<p class="littledark"><a href="#" id="toggroup_05_1">Example</a>
+			 <span class="right"><i class="fa fa-info" aria-hidden="true"></i> <a href="#" id="toggroup_05_2">Instructions</a></span></p>
+
+
+
+
+			<div id="dotoggroup_05_1">
+				<hr>
+				<p>Briefly describe the advantages of having test papers graded instantly:</p>
+
+				<div class="clearheight"></div>
+				<textarea autocomplete="off" autocorrect="off" spellcheck="false" cols="40" rows="3"></textarea>
+				<div class="clearheight30"></div>
+
+			</div>
+			<div id="dotoggroup_05_2" class="hide littledark">
+				<hr>
+				<strong>Instructions</strong>
+				<p>Essay questions are designed for extended answers that you read and grade yourself.</p>
+
+				<p>You can grade these questions after the test has been completed.</p>
+
+				<p>Use <strong>Free Text</strong> questions if you want ***** to correct single and multiple-word answers for you.</p>
+				<p><strong>Grading:</strong> This question type is not automatically graded. You can manually grade this question after the test is finished and the test score will be adjusted for you.</p>
+			</div>
+		</div>
+	</div>
+</div></body></html>

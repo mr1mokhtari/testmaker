@@ -1,0 +1,23 @@
+<html><head></head><body><div class="row">
+			<div class="col-span-9"><h4>Delete Parent Category</h4></div>
+
+			<div class="col-span-1"><a class="close jqmClose"></a></div>
+		</div>
+		<div class="clearheight10"></div>
+
+		<div class="row">
+
+			<div class="col-span-7 editor">
+				<p><strong>Note:</strong> Parent Categories can only be deleted when they <strong>do not</strong> have any Sub Categories assigned to them.</p>
+				<div class="clearheight10"></div>
+				<hr>
+				<h5 class="category-name name"><%=pcat.parent_cat_name%></h5>
+				<form method="post" action="/tests/categories/parentcat/<%=pcat._id%>?_method=DELETE">
+					<input name="parent_cat_id" type="hidden" value="<%=pcat._id%>">
+					<input type="submit" class="btn btn-delete" value="Delete Parent Category">
+				</form>
+			</div>
+
+		</div>
+		<div class="clearheight30"></div>
+		</body></html>

@@ -1,0 +1,69 @@
+<html lang="en">
+	<head>
+		<%-include("../questions/new/newHeader")%>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/cmstudent.css?v=274" media="screen">
+	</head>
+	<body>
+		<%-include("header")%>
+
+		<div id="content" class="clearfix">
+			<div class="innerWrapper">
+				<div class="width-test-text editor classmarker_content quiz_center" id="questions_container">
+					<h3 class="testname"><%=test.test_name%> </h3>
+					<div class="clearheight"></div>
+					<div class="alert-box alert-default">
+						<p class="titlename bold">Instructions:</p>
+						<ul class="titlename instructions-list">
+							<%var num2=0,num1=0%>
+							<%if(test.random_2_num[0]){%>
+								<%test.random_2_num.forEach((num)=>{%>
+									<%num2+=parseInt(num)%>
+								<%})%>
+							<%}%>
+							<%if(test.random_1_num){var num1=parseInt(test.random_1_num)}%>	
+							<li>Number of questions: <strong><%=test.questions.length+num2+num1%></strong></li>
+							<li>Has a time limit of: <strong><%=s.time_limit%> minutes</strong></li><%=s%>
+							<li>Number of attempts allowed: <strong><%if(s.practice=='0'){%>One<%}else if(s.practice=='1'){%> <%=s.attempts_allowed%><%}else if(s.practice=='2'){%>Unlimited<%}%></strong></li>
+							<!-- <li>Number of remaining attempts: <strong></strong></li> -->
+							<li>Must be finished in one sitting. You cannot save and finish later.</li>
+							<li>Questions displayed per page: <strong><%=s.questions_displayed_per_page%></strong> </li>
+							<li>Will allow you to go back and change your answers.</li>
+							<li>Will not let you finish with any questions unattempted.</li>
+						</ul>
+					</div>
+					<div class="clearheight30"></div>
+					<%if((test.questions.length+num2+num1)>0){%>
+					<div class="f-left">&nbsp;<a href="/u/" class="prev2 prev2dark">Go back</a>&nbsp;<div class="clearheight30"></div>
+					</div>
+					<div class="f-right margright">
+						<form action="/test/" method="POST" id="startRegTestForm">
+							<input type="hidden" name="test_id" value=<%=test._id%>>
+							<input type="hidden" name="setting_id" value=<%=s._id%>>
+							<input type="submit" class="btn" value="fuck exam"></p>
+						</form>
+						<a class="next2 fade_content_btn" href="#" id="startRegTestLink">Start</a>
+						<div class="clearheight30"></div>
+					</div>
+					<%}else{%>
+					<div class="alert-box error editor ">No questions are currently included in this test. Please ask the person who has given you this test to check this, then you can come back and try again.</div>
+					<%}%>
+					<div class="clearheight30"></div>
+					<script>
+						$('#startRegTestLink').click(function() {
+							$('form#startRegTestForm').submit();
+						});
+					</script>
+					<noscript>
+						<div class="alert-box error editor ">You must have JavaScript enabled in your browser to use this page.<br/>Please enable JavaScript in your web browser then refresh this page.<br/><br/><a href="https://support.google.com/bin/answer.py?hl=en&amp;answer=23852" target="_blank">Learn how</a>.<br/>This page will open in a new browser window.</div>
+					</noscript>
+				</div>
+				<script>
+					asset_image_toggle_max_width = 600;
+				</script>
+				<div id="icon_loading_kit_div">
+				<img id="icon_loading_kit" class="hide" src="/img3/icon_loading_kit.gif" alt="Loading">
+				</div>
+			</div><!-- innerWrapper -->
+		</div>
+	</body>
+</html>

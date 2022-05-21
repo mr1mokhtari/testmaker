@@ -1,0 +1,53 @@
+<script>
+$(document).ready(function() {
+		//Start Add Members
+	$("#email_on").on('click', function(){
+		$('#show_email_form').show();$('#checklist').hide();$('#showRegBtn').show();
+		$("#datepickerfrom_addmembers").val('');//stop browsers autofill
+		$("input[name='acc_password']").attr('type', 'password').val('');//stop browsers autofill passwords
+		$("#datepickerfrom_addmembers").datepicker({ minDate:'NOW', maxDate: '+6M' });
+	});
+	$("#email_off").on('click', function(){
+		$('#show_email_form').hide();$('#showRegBtn').show();
+	});
+	//End Add Members
+
+
+	//Start Notify Members
+	$(".trigger_datepickerfromnotify").on('click', function(){
+		$("#datepickerfromnotify").val('');//stop browsers autofill
+		$("input[name='acc_password_notify_members']").attr('type', 'password').val('');//stop browsers autofill passwords
+		$("#datepickerfromnotify").datepicker({ minDate:'NOW', maxDate: '+6M' });
+	});
+	//End Notify Members
+
+	//Start Notify Members
+	$(".trigger_memberpasswords").on('click', function(e) {
+		e.preventDefault();
+		$("#toggroup_01_resetp").trigger("click");
+		if (!$("#dotoggroup_03_pass").is(':visible')){
+			setTimeout(function () {
+				$("#toggroup_03_pass").trigger("click");
+			}, 600);
+		}
+	});
+	//End Notify Members
+
+
+	$('input[type=radio][name=sendemail]').click(function() {
+		if (this.value == '1') {
+			$("#dotoggroup_05_password").addClass('hide');
+			$("#dotoggroup_05_emailresetpassword").removeClass('hide');
+			$("#usedForIeResubmit_resetAllPasswords :submit").val("Send Reset Password Link");
+		}
+		else if (this.value == '0') {
+			$("#dotoggroup_05_password").removeClass('hide');
+			$("#dotoggroup_05_emailresetpassword").addClass('hide');
+			$("#usedForIeResubmit_resetAllPasswords :submit").val("Change All Members Passwords");
+
+		}
+	});
+
+	
+});
+</script>

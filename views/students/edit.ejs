@@ -1,0 +1,21 @@
+<%-include("../partials/header")%>
+<div class="ui main text container segment">
+	<div class="ui huge header" id="uihugeheader">
+		Edit Blog Post: <%student.email%>
+	</div>
+	<form class="ui form" method="post" action="/students/<%=student._id%>?_method=PUT">
+		<div class="field">
+			<label>Email</label>
+			<input type="text" value="<%=student.email%>" name="student[email]"></input>	
+		</div>
+		<div class="field">
+			<label>password</label>
+			<input type="password" value="<%=student.password%>" name="student[password]"></input>	
+		</div>
+
+		<div class="field">		
+		<button class="ui  big violet basic button">Submit</button>
+	</form>
+	<a href="/students">Go back</a>
+</div>
+<%-include("../partials/footer")%>

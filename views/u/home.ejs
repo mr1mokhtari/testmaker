@@ -1,0 +1,153 @@
+<html lang="en">
+	<head>
+		<%-include("../questions/new/newHeader")%>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/cmstudent.css?v=274" media="screen">
+	</head>
+	<body>
+		<%-include("header")%>
+		<div id="content" class="clearfix">
+			<div class="innerWrapper">
+				
+				<h2 class="group-name name"><%=group.group_name%></h2>
+				<div class="student-page editor">
+					<div class="clearheight"></div>
+				</div>
+				<%if(student.groups[1]){%>
+				<div class="student-asside">
+					<div class="clearheight"></div>
+					<div class="student-message editor">
+						<p>You are registered in multiple Groups.</p>
+						<p><a href="/u/groups/">Change Groups</a> to view tests in other Groups</p>
+						<a class="btn btn-create popup" href="/docs/TestTaker-Faq.pdf"><i class="fa fa-download" aria-hidden="true"></i> Help</a> 
+					</div>
+				</div>
+				<%}%>
+    			<div class="clearheight30"></div>
+    			<table id="testTable">
+        			<thead class="head-row">
+            		<tr>
+                		<th class="name-title">Name</th>
+                		<th class="percentage-title">Percentage</th>
+                		<th class="score-title">Score</th>
+                		<th colspan="2" class="duration-title">Duration</th>
+            		</tr>
+        			</thead>
+					
+        			<tbody class="sort-data-set">
+						<%if(!tests[0]){%>
+							<tr><td colspan="5" class="notests"><div class="clearheight"></div><div class="row">No Tests are currently available to take under this Group.</div><div class="clearheight"></div></td></tr>
+						<%}%>
+						<%tests.forEach((t,i)=>{%>
+						<tr class="single-hover-row">
+							<td class="nonametitle">
+								<h2 class="test-name name"><%=t.test_name%></h2>
+								<%var s=setting[i] %>
+								<div class="extra-info editor"><p>Attempts allowed: <%if(s.practice=='0'){%>One<%}else if(s.practice=='1'){%> <%=s.attempts_allowed%><%}else if(s.practice=='2'){%>Unlimited<%}%></p></div>
+								<div class="extra-info editor">
+									<p>Attempts remaining:
+								<%if(prev_exams_results[t._id]!=undefined){%>
+									<%if(s.practice=='0'){%><%=(1-prev_exams_results[t._id].length)%><%}else if(s.practice=='1'){%> <%=(Number(s.attempts_allowed)-prev_exams_results[t._id].length)%><%}else if(s.practice=='2'){%>Unlimited<%}%>
+								<%}else{%>
+									<%if(s.practice=='0'){%>One<%}else if(s.practice=='1'){%> <%=s.attempts_allowed%><%}else if(s.practice=='2'){%>Unlimited<%}%>
+								<%}%>
+									</p>
+								</div>
+
+								<div class="extra-info editor">
+									<a href="#" id="tog_<%=t._id%>" class=" showcont">Show previous scores</a><br>
+									<div id="dotog_<%=t._id%>" class="hide" style="display: none;">
+										<table class="prev_scores_table">
+											<thead class="head-row">
+												<tr>
+													<th>%</th>
+													<th>Score</th>
+													<th>Duration</th>
+													<th>Date started</th>
+												</tr>
+											</thead>
+											<tbody>
+								<!-- Taken Previously -->
+								<%if(prev_exams_results[t._id]!=undefined){%>
+									<%prev_exams_results[t._id].forEach( (prev,l)=>{if(l+1!=prev_exams_results[t._id].length){%>
+												<tr class="tr_prev_scores">
+													<td><%=prev['perc']%>%</td>
+													<td> <%=prev['total_points']%> / <%=prev['t_point']%></td>
+													<td><%=prev.duration%></td>
+													<td><%=moment(new Date(parseInt(prev['endTime']))).tz(student.timezone)%></td>
+												</tr>
+									<%}})%>
+								<%}%>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<!-- **************** -->
+								<%if(av[i]=="1"){%>
+								<div class="extra-info editor">Available:<br><%=s.show_from_date.toDateString()%> <%=s.show_form_h%>:<%=s.show_form_m%><%=s.show_form_ampm%> - <%=s.show_until_date.toDateString()%> <%=s.show_until_h%>:<%=s.show_until_m%><%=s.show_until_ampm%><br></div>
+								<div class="extra-info editor"><p><a class="btn btn-results" href="/test/start/?test_id=<%=t._id%>">Start</a></p></div>
+								<%}else if(s.show_from=="1"){%>
+								<div class="extra-info editor">Available : Available</div>
+								<div class="extra-info editor"><p><a class="btn btn-results" href="/test/start/?test_id=<%=t._id%>">Start</a></p></div>
+								<%}else if(av[i]=="0"){%>
+								<div class="extra-info editor">Available:<br><%=//s.show_from_date.toDateString()%> <%=s.show_form_h%>:<%=s.show_form_m%><%=s.show_form_ampm%> - <%=//s.show_until_date.toDateString()%> <%=s.show_until_h%>:<%=s.show_until_m%><%=s.show_until_ampm%><br></div>
+								<%}else if(s.show_from=="0"){%>
+								<div class="extra-info editor">Available : Unavailable</div>
+								<%}%>
+							</td>
+							<%if(prev_exams_results[t._id]==undefined){%>
+								<td class="nocontent">-</td>
+								<td class="nocontent">-</td>
+								<td class="nocontent">-</td>
+								<td class="noactiontitle col-btns"></td>
+							<%}%>
+							<%if(prev_exams_results[t._id]!=undefined){%>
+								<%var prevs=prev_exams_results[t._id];var prev=prevs[(prevs.length)-1]%>
+								<td class="graph">
+									<span class="value"><%=prev.perc%></span>
+                                    <div class="graphics">
+                    	            	<span class="bar-graph " style="width: <%=prev.perc%>px;">&nbsp;</span>
+                                    </div>
+								</td>
+								<td>
+									<span class="value"><%=prev.total_points%>/<%=prev.t_point%></span>
+								</td>
+								<td>
+                                <span class="value res-duration"><%=prev.duration%></span>
+                                </td>
+								<td class="noactiontitle col-btns">
+									<p><a class="btn btn-analytics" href="/test/results/?test_id=<%=prev.exam_id%>">Results</a></p>
+								</td>
+							<%}%>
+						</tr>
+						
+						<tr>
+							<td colspan="5" class="nonametitle">
+								<div class="row">
+									<div class="extra-info editor">
+										<!-- Google Ad -->
+									</div>
+								</div>
+							</td>
+						</tr>
+						<%})%>
+						<!-- <tr class="single-hover-row">
+							<td class="nonametitle">
+								<h2 class="test-name name">new12</h2>
+								<div class="extra-info editor">Available:<br>23 Oct '20 00:00 - 24 Oct '20 00:00 GMT+3:30<br></div>
+								<div class="extra-info editor"></div>
+								<div class="extra-info editor"></div>
+							</td>      
+							<td class="nocontent">-</td>
+							<td class="nocontent">-</td>      
+							<td class="nocontent">-</td>
+							<td class="noactiontitle col-btns"></td>
+						</tr> -->
+					</tbody>
+				</table>
+				<script>
+					asset_image_toggle_max_width = 600;
+				</script>
+			</div><!-- innerWrapper -->
+		</div>
+	</body>
+</html>

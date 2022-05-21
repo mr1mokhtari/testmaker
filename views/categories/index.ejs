@@ -1,0 +1,338 @@
+<%//-include('newHeader')%>
+<%-include("../partials/headerResult")%>
+<%-include("../partials/teacherHead")%>
+<!-- NEW NEW NEW -->
+<script src="/js/cmEditInline/jquery.cmEditInline.js?v=211"></script>
+
+<div id="content" class="clearfix">
+	<div class="innerWrapper">		
+		<div class="col-span-7">
+			<p class="breadcrumb3">
+				<a href="/tests/" class="first">
+					<span>Tests</span>
+				</a>
+				<span>Categories</span>
+			</p>
+		</div>
+		<div class="col-span-3">
+			<ul class="menu-sections" id="walkthrough-menu">
+				<li class="test">
+					<a href="/tests/">
+						<span>Tests</span>
+					</a>
+				</li>
+				<li class="group">
+					<a class="sect" href="/tests/groups">
+						<span>Groups</span>
+					</a>
+				</li>
+				<li class="link">
+					<a class="sect" href="/tests/links">
+						<span>Links</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="clearheight20"></div>		
+		<div class="clearheight20"></div>
+		<%if(msg=="successadd"){%>
+		<div class="alert-box alert-confirmation editor ">
+			Your Category has been added.
+		</div>
+		<%}else if(msg=="failadd"){%>
+		<div class="alert-box error editor ">
+			Your Category has not been added.
+		</div>
+		<%}else if(msg=='deletesuccess'){%>
+		<div class="alert-box alert-confirmation editor ">
+			Your Category has been deleted
+		</div>
+		<%}else if(msg=='deletefail'){%>
+		<div class="alert-box error editor ">
+			Your deletion did not occur. Please try again.
+		</div>
+		<%}else if(msg=='missing_val'){%>
+		<div class="alert-box error editor  closeMeContainer">
+			Your update did not occur. Either no Category name was added or perhaps you already have a Category with the same name.
+		</div>
+		<%}else if(msg=='deleteerrorquestions'){%>
+		<div class="alert-box error editor  closeMeContainer">
+			This Sub Category cannot be deleted at present because it is being used with some of your Questions or Tests.<br>
+Go to your <a href="/questions/"> Question Bank </a> or <a href='/tests/'> Tests </a>  pages and view content using this Category and change their Category. Then you can come back to delete this Category.
+		</div>
+		<%}else if(msg=='deleteerrorparentsubcats'){%>
+		<div class="alert-box error editor ">
+			This Parent Category cannot be deleted at present because it has Sub Categories assigned to it.<br>Edit those those Sub Categories below and Assign them to a different Parent Category, then try again.
+		</div>
+		<%}%>
+		<div class="clear"></div>
+		<a class="scroll_add_new"></a>
+		<div class="hide top_hidden_box_div closeMeContainer">
+			<h4>Parent Categories <a href="#" class="closeMeLink right close"><img src="/img3/close.gif" alt="Hidden Closing Image" class=""></a></h4>
+			<div class="row">
+				<div class="col-span-7">
+					<div class="editor explain">
+					<ul class="padleft">
+						<li>Create <strong>Parent Categories</strong> to better organize and group your <strong>Sub Categories</strong>.</li>
+						<li>You can add multiple <strong>Sub Categories</strong> under <strong>Parent Categories</strong>.</li>
+					</ul>
+					</div>
+					<div class="clearheight"></div>
+					<!--******** Form ********-->
+					<form id="dosubmit_addParentCategory" action="/tests/categories/parentcat/" method="post">
+					<div class="field-group">
+						<label class="form-field-title" for="parent_category_name">Name:</label>
+						 <input type="text" name="parent_cat_name" size="30" maxlength="30" class="checkEmpty limitchars_refname_30 input" id="parent_category_name">
+						  <span class="showTooltip tooltip" title="Create new Categories to categorize your Tests and Questions.">Tip</span> <span class="refname_info explain">Maximum 30 characters</span>
+					</div>
+					<div class="field-group">
+						<a href="#" id="submit_addParentCategory" class="btn btn-create tab">Add Parent Category</a>
+					</div>
+					</form>
+				</div>				
+				
+				<div class="col-span-3 editor explain">
+				<p class="bold">Example</p>
+				<p><i>Parent Category 1</i><br>
+				<i class="padleft">Sub Category 1</i><br>
+				<i class="padleft">Sub Category 2</i></p>
+				<p><i>Parent Category 2</i><br>
+				<i class="padleft">Sub Category 3</i><br>
+				<i class="padleft">Sub Category 4</i></p>
+				</div>			
+			</div>			
+
+		<div class="clearheight"></div>
+		<hr>
+		<h4>Sub Categories</h4>
+
+		<div class="editor explain col-span-7">
+			<ul class="padleft">
+				<li>You can categorize your Questions and Tests using Sub Categories.</li>
+				<li>Each Question can be set to one Sub Category.</li>
+				<li>Multiple Questions can be set under the same Sub Category.</li>
+			</ul>
+		</div>
+		<div class="clearheight"></div>
+		<!--******* Second Form *******-->
+		<form id="dosubmit_addCategory" action="/tests/categories/subcat/" method="post">
+
+			<div class="field-group">
+				<label class="form-field-title" for="parent_category_name2">Parent category:</label>
+				<select name="parent_cat_id" id="parent_category_name2" class="parent-cat-dd">
+					<%pcats.forEach(function(pcat,i){%>
+					<option value="<%=pcat._id%>"><%=pcat.parent_cat_name%></option>
+					<%})%>
+					<!-- <option value="0">Generic Parent</option> -->
+				</select>								
+				<span class="explain">Select which Parent Category this Sub Category belongs to.</span>
+			</div>
+			<div class="field-group">
+				<label class="form-field-title" for="category_name">Name:</label>
+				<input type="text" name="cat_name" size="30" maxlength="30" class="checkEmpty limitchars_refname2_30 input" id="category_name">
+				<span class="showTooltip tooltip" title="Create new Categories to categorize your Tests and Questions.">Tip</span>
+				<span class="refname2_info explain">Maximum 30 characters</span>
+			</div>
+			<div class="field-group">
+				<a href="#" id="submit_addCategory" class="btn btn-create tab">Add Sub Category </a>
+			</div>			
+		</form>
+
+		<div class="clearheight"></div>
+		<hr>
+		<div class="editor explain col-span-10">
+		Note: The 'Generic Parent' and 'Generic' Category names cannot be edited or deleted. Each account needs these default Categories.
+		</div>			
+		</div>		
+		<ul class="cmtableTabs">
+			<li class="taboff"><a href="/tests/">Tests</a></li>
+			<li class="taboff"><a href="/questions">Question Bank</a></li>
+			<li class="tabon"><a href="/tests/categories/">Categories</a></li>
+			<li class="taboff"><a href="/tests/files/">Files</a></li>
+			<li class="taboff"><a href="/tests/certificates/">Certificates</a></li>
+			<li class="taboff"><a href="/tests/community/">Community</a></li>
+		</ul>		
+		<div class="table">			
+			<div class="table-utility row">				
+				<div class="col-span-7">
+					<div class="dropdown dropdown-x hide_if_no_data">
+						<a class="dropdown-toggle no_anchor" href="#"> Options </a>
+						<ul class="dropdown-menu">
+							<li><a href="#" class="expandAll2">Expand All</a></li>
+							<li><a href="#" class="collapseAll2">Collapse All</a></li>
+						</ul>						
+					</div>					
+				</div>	
+				<div class="col-span-3 col-btns">				
+					<!-- <div class="dropdown">
+						<a class="btn btn-actions btn-white no_anchor" href="#">Actions <span class="caret">&nbsp;</span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/tests/categories/ids/" class="popup">View Category IDs</a></li>
+							<li><a href="/tests/categories/ids/?export_cat_ids=1">Export Category IDs</a></li>
+						</ul>
+					</div> -->
+					<span class="margleft"><a class="anchor_scroll_add_new btn btn-create" href="#">New Category <span class="caret">&nbsp;</span></a></span>
+				</div>				
+			</div>
+			<ul class="table-body hover-row">
+				<div id="type" data-var=<%=pcats.length%> ></div>
+				<!-- ??????^^^^^^^^^^^^^^??????????? -->
+				<%pcats.forEach(function(pcat,i){%>
+					<li>
+						<div class="row accordion-toggle scrollTop closed">
+							<form id="editinline-parent-cat-id<%=i+1%>">
+								<div class="col-span-6">
+									<div data-it="hidden" data-value="<%=pcat._id%>" data-name="parent_cat_idPUT"></div>
+									<!--^^^^ ?? PUT?????? -->
+									<h4 class="category-name name">
+										<div id="divId<%=i%>" data-it="text" data-name="parent_cat_name" data-value="<%=pcat.parent_cat_name%>"><%=pcat.parent_cat_name%></div>
+										<!-- ^^^^^ DIVID??? -->
+									</h4>
+								</div>
+								<div class="col-span-05">&nbsp;</div>
+								<div class="col-span-15">
+									<span class="cmEditInline-display-result margright little"></span>&nbsp;
+								</div>
+								<div class="col-span-2 col-btns">
+									<div class="hide margright" data-display-form-elements="1">
+										<div data-it="submitLink" data-name="Update" data-value="Update" data-class="submit" class="btn btn-edit"></div>
+										<a class="cmEditInline-cancel-link btn btn-edit">Cancel</a>
+									</div>
+									<div class="margright" data-display-nonform-elements="1">
+										<a href="#" class="btn btn-edit cmEditInline-edit-link-parent-cat-id">Edit</a>
+										<a href="/tests/rpc/deleteParentCategory?parent_cat_id=<%=pcat._id%>" id="editCat_random_id_<%=pcat._id%>" class="btn btn-edit">Delete</a>
+										<!-- <input type="submit" class="btn btn-edit" value="Delete" form="inner<%//=i+1%>"> -->
+									</div>
+								</div>
+							</form>
+							<!-- inner form trick  -->
+							<!-- <form id="inner<%//=i+1%>" action="/tests/categories/parentcat/<%//=pcat._id%>?_method=DELETE" method="post"></form> -->
+							<!-- inner form trick ends -->
+							<span class="caret">&nbsp;</span>
+						</div>					
+					<div class="accordion-fold subrow-container test_groups" style="display: none;">
+						<ul class="hover-row">
+							<%pcat.cat_name.forEach(function(subCat,j){%>
+								<li>
+								<form id="editinline-cat-id<%=pcat._id%><%=j+1%>">
+									<div class="row">
+										
+	<div id='pid<%=pcat._id%>' data-it="hidden" data-value="<%=pcat._id%>" data-name="parentCatId"></div> 
+	<!-- ^^^^^For Subcat Parent Edit^^^^^^^^ -->
+	<%scats.forEach(function(scat,s){%>
+												
+		<%if(JSON.stringify(scat._id)==JSON.stringify(subCat)){%>
+								<div class="col-span-6">
+									<div class="name f-left">
+												
+			<div data-it="text" data-value="<%=scat.cat_name%>" data-name="cat_name" data-char-limit="30"><%=scat.cat_name%></div>
+			
+			<!-- Added for Sub name Edit. Begin -->
+		<div data-it="hidden" data-value="<%=scat._id%>" data-name="subCatId"></div>	
+		<!-- Added for Sub name Edit. End -->
+			
+									</div>
+									<div data-it="select" data-hide="1" class="parent-cat-dd" data-select-options-name="parent_cats_array" data-selected-option="<%=i%>" data-name="parent_cat_idArray"></div>
+									<div data-it="hidden" data-value="<%=j+1%>" data-name="cat_id"></div>
+								</div>
+								<div class="col-span-05">
+									<a href="/questions/?filter_cat_id=<%=scat._id%>" class="showTooltip" title="The number of Questions Assigned to this Sub Category"><%=scat.questions.length%></a>
+								</div>
+		<%}%>
+	<%})%>
+
+										
+										<div class="col-span-15">
+											<span class="cmEditInline-display-result margright little"></span>&nbsp;
+										</div>
+										<div class="col-span-2 col-btns">
+											<div class="hide margright" data-display-form-elements="1">
+												<div data-it="submitLink" data-name="Update" data-value="Update" data-class="submit" class="btn btn-edit"></div>
+												<a class="cmEditInline-cancel-link btn btn-edit ">Cancel</a>
+											</div>
+											<div class="margright" data-display-nonform-elements="1">
+												
+												<a href="#" class="btn btn-edit cmEditInline-edit-link-cat-id">Edit</a>
+												<a href="/tests/rpc/deleteSubCategory?cat_id=<%=subCat%>&parent_cat_id=<%=pcat._id%>" id="editCat_random_id_<%=subCat%>" class="btn btn-edit">Delete</a>
+												<!-- <input class="btn btn-edit" type="submit" value="Delete" form="innerSub<%=//j+1%>"> -->
+											</div>
+										</div>
+									</div>
+								</form>									
+								<!-- inner form trick  -->
+									<!-- <form id="innerSub<%=//j+1%>" action="/tests/categories/<%=//pcat._id%>/<%=//subCat%>/<%=//j%>?_method=DELETE" method="post"></form> -->
+								<!-- inner form trick ends -->
+								</li>
+							<%})%>
+							
+						</ul>
+					</div>
+				</li>
+				<%})%>				
+			</ul>	
+			
+			<div class="table-utility row bellow">
+				<div class="col-span-5">
+					<div class="dropdown dropdown-x hide_if_no_data">
+						<a class="dropdown-toggle no_anchor" href="#"> Options </a>
+						<ul class="dropdown-menu">
+							<li><a href="#" class="expandAll2">Expand All</a></li>
+							<li><a href="#" class="collapseAll2">Collapse All</a></li>
+						</ul>
+					</div>
+				</div>	
+			<div class="col-span-5 col-btns">				
+				<a class="anchor_scroll_add_new btn btn-create" href="#">New Category <span class="caret">&nbsp;</span></a>
+				</div>
+			</div>
+		</div>
+		<div class="table editor">
+			<div class="row">
+				<h5>What are Categories used for?</h5>
+				<p>Categories are used to categorize your Tests and Questions.</p>
+				<p>You can organise your Sub Categories by Grouping them under Parent Categories.</p>
+				Categories allow you to:
+				<ul>
+					<li>View Statistics by Sub Category to analyze problem areas</li>
+					<li>Have Questions included in your Tests at random, grouped by Sub Category</li>
+				</ul>
+				<a href="/online-testing/manual/#categories" class="popup">Learn more</a>
+			</div>
+		</div>
+		<div class="jqmWindow jqmID1" id="editCatDiv"></div>
+		
+		<script>
+		$(document).ready(function(){
+			$('#editCatDiv').jqm({ajax: '@href', trigger: 'a[id^=editCat_random_id_]'});
+
+			var dropdowns_array = new Array();
+			var parent_cats_array = new Array();
+			var k=$("div[id^='divId']").length;
+			for(i=0;i<k;i++){
+				parent_cats_array[i] = document.getElementById('divId'+i).dataset.value;
+			}
+			dropdowns_array['parent_cats_array'] = parent_cats_array;
+			///
+			// var dropdowns_id_array = new Array();
+			// var parent_cats_id_array = new Array();
+			// var k=$("div[id^='pid']").length;
+			// for(i=0;i<k;i++){
+			// 	parent_cats_id_array[i] = document.getElementById('pid'+i).dataset.value;
+			// }
+			// dropdowns_id_array['parent_cats_id_array'] = parent_cats_id_array;
+			///
+			$('.cmEditInline-edit-link-cat-id').cmEditInline({
+				url:'/tests/categories/subcat/?_method=PUT',
+				dropdowns_array: dropdowns_array
+			});
+			//cat Adin edit elir
+			$('.cmEditInline-edit-link-parent-cat-id').cmEditInline({
+				url:'/tests/categories/parentcat/?_method=PUT'
+			});
+		});
+		</script>
+	</div>
+	<!-- innerWrapper -->
+	<img src="/img3/icon_loading_circleV3.gif" alt="Hidden Loading Image" class="hide" width="20" height="20">
+</div>
+<%-include("../partials/footer")%>

@@ -1,0 +1,46 @@
+<form action="/tests/groups/delete/deleteGroupAndMembers?_method=DELETE" method="post" autocomplete="off">
+				<input type="hidden" name="rg_id" value="<%=G._id%>"><br>
+				<table class="margleft" cellspacing="0" cellpadding="0">
+					<tbody>
+						<tr>
+							<td>
+								<input type="radio" name="delete_option" value="0" id="d0" checked="checked">
+							</td>
+							<td>&nbsp;</td>
+
+							<td><label class="titlename" for="d0">Delete all Members in this Group and their Results.</label></td>
+						</tr>
+						<tr>
+							<td colspan="3">&nbsp;</td>
+						</tr>
+						<tr>
+							<td><input type="radio" name="delete_option" value="1" id="d1"></td>
+							<td>&nbsp;</td>
+							<td><label class="titlename" for="d1">Delete all Members in this Group, their Results and Unassign all Tests from this group.</label></td>
+						</tr>
+						<tr>
+							<td colspan="3">&nbsp;</td>
+						</tr>
+						<tr>
+							<td><input type="radio" name="delete_option" value="2" id="d2"></td>
+							<td>&nbsp;</td>
+							<td><label class="titlename" for="d2">Delete all Members in this Group, their Results and this Group completely.</label></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="clearheight"></div>
+				<div class="dotted"></div>
+				<div class="clearheight"></div>
+				<p class="explain">For security, please verify your username and password to delete.</p>
+				<p class="explain">You are about to perform this action for Group: <strong><%=G.group_name%></strong></p>
+				<p class="red explain bold">Deleting is permanent.</p>
+				<div class="clearheight"></div>
+				<div class="field-group">
+					<label class="form-field-title lineup-tab" for="username">Username:</label>
+					<input type="text" name="username" id="username"> <br>
+					<label class="form-field-title lineup-tab" for="pass">Password:</label>
+					<input type="password" name="password" id="pass">
+					<div class="clearheight"></div>
+					<input type="submit" class="btn btn-create tab checkDelete" value="Delete Now">
+				</div>
+			</form>

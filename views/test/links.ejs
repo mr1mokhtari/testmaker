@@ -1,0 +1,24 @@
+<div class="col-span-3">
+	<ul class="menu-sections" id="walkthrough-menu">
+		<li class="test current"><a href="/tests/"><span>Tests</span></a></li>
+		<li class="group"><a class="sect" href="/tests/groups"><span>Groups</span></a></li>
+		<li class="link"><a class="sect" href="/tests/"><span>Links</span></a></li>
+	</ul>
+</div>
+
+<div class="clearheight20"></div>
+<div class="clearheight20"></div>
+
+
+    <div class="container">
+		<% if(error && error.length > 0){ %>
+            <div class="alert-box error editor" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert-box editor alert-confirmation" role="alert">
+                <%= success %>
+            </div>
+        <% } %>        
+    </div>

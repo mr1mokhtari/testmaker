@@ -1,0 +1,231 @@
+<html lang="en">
+	<head>
+		<%-include("../questions/new/newHeader")%>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/cmstudent.css?v=274" media="screen">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/quiz.css" media="screen">
+	</head>
+	<body>
+		<%-include("header")%>
+		<div id="content" class="clearfix">
+			<div class="innerWrapper">
+				<div class="col640">
+					<div id="ajax-container">
+						<div class="classmarker_content quiz_center">
+							<a id="q"></a>
+							<div class="clearheight5"></div>
+							<div class="v3QuizHolder">
+								<div class="hide" id="do_auto_save_flag"></div>
+								<form method="post" action="/test/start2/?exam_id=<%=exam._id%>&finish='1'"  id="questionform" autocomplete="off" onselectstart="return false;" oncopy="return false;" oncut="return false;" ondrop="return false;" onpaste="return false;" spellcheck="false">
+									<input type="hidden" name="page" value="<%=page%>">
+									<input type="hidden" name="test_id" value="<%=exam.forTest%>">
+									<input type="hidden" id="timeoutinput" name="na1" value="na">
+									<input type="hidden" id="finishnowinput" name="na2" value="na">
+									<input type="hidden" id="control" name="next" value="1">
+									<input type="hidden" name="rtla" value="1603873577">
+									<input type="hidden" name="autosavequestion_token" value="c45e9da999177548a8aa22b5e41ce5d9">
+									<input type="hidden" id="status_question_flag_23442305" value="0">
+									<h3 class="testname">1</h3>
+									<input type="hidden" id="jump_to_this_id_ref" name="jump_to_this_id">
+									<div class="showPrevQuestionsDiv" style="opacity: 1;">
+										<a id="showPrevQuestions" href="#display_q_links">
+											<span class="faspacer-margright">
+												<i class="fa fa-list" aria-hidden="true"></i>
+											</span>See all questions			
+										</a>
+										<div id="display_q_links" class="hide mandatory_imgw_container"></div>
+									</div>
+<%-include("prevqs")%>
+		<script>
+		$("document").ready(function() {
+			$('#display_previous_questions_overlay_div').jqm({
+				ajax: '/test/rpc/getPrevQuestions.rpc.php',
+				//trigger: 'a[id^=showPrevQuestions]',
+				closeClass: 'jqmPrevQuestionClose'
+			});
+		});
+		</script>
+	<div class="clearheight5"></div>
+									
+	<!-- if there's a time limit -->
+	<div id="quiz_timer_container">
+		<div class="show_timer hide" style="display: block;"><strong>Time left:</strong> <span class="countdown"> </span>
+			<!-- <input name="time_left" class="hide" id="hidden_time"> -->
+			<div class="timetotal">
+				<div class="timeleft" style="width:25%;"></div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$('span.countdown').countdown({seconds: <%-exam.time_left%>,callback: 'finishTest()'}, <%-setting.time_limit*60%>, (Math.round(new Date().getTime() / 1000) + <%-exam.time_left%>));
+			// $('#hidden_time').val()
+		});
+		function finishTest(){
+			if (typeof(can_click_quiz_button) != "undefined" && can_click_quiz_button === false){
+				return;
+			}
+			if (cdftiit()){
+				return;
+			}
+			can_click_quiz_button = false;
+			// window.onbeforeunload = null;
+			$("#timeoutinput").attr("name","timeout");
+			$("#timeoutinput").attr("value","timeout");
+			$("#finishnowinput").attr("name","finish");
+			$("#finishnowinput").attr("value","finish");
+			$("form#questionform").submit();
+		}
+	</script>
+					
+									
+	<div class="clearheight5"></div>
+	<script>uid=8879676</script>
+		<%=Qpack%>
+		<%Qpack.forEach((q,i)=>{%>
+		<div id="questions_container">
+			<div class="single_question_box">
+				<a id="q<%=q._id%>"></a>
+				<div class="qbox">
+			  		<div class="qboxprogress"><h2>Question <%=((page-1)*setting.questions_displayed_per_page)+i+1%> of <%=exam.qs.length%> </h2></div>
+					<div class="qboxflag"><a href="#" id="question_flag_<%=q._id%>" class="flagqoff"><i class="fa fa-bookmark" aria-hidden="true"></i></a></div>
+					<div class="qboxcatandpoints"></div>
+					<div class="clear"></div>
+				</div>
+				<div class="col600 qsholder editor" data-must-answer="1" data-question-type=<%q.type%> >
+					<%if(q.type=="p"){%>
+						<p class="gray">Correct the sentence.</p>
+						<div class="qpad"><%=q.p_incorrect%></div>
+					<%}%>
+					<%if(q.type!="p"){%>
+						<div class="bbcode qpad"><%=q.question%></div>
+					<%}%>
+				</div>
+				<div class="dotted_quiz"></div>
+				
+				<%if(q.type=="p" || q.type=="e" || q.type=="ft"){%>
+				<div class="answersDiv">
+					<%if(q.type=="p"){%>
+						<p><input autocomplete="off" autocorrect="off" autocapitalize="off" type="text" size="60" <%if(setting.allow_pastetext=="1"){%>onpaste="return false;"<%}%> id="<%=q.type%>_<%=q._id%>" name="answer[p_<%=q._id%>]" value="<%if(exam.answers[q._id]){%><%=exam.answers[q._id]%><%}else{%><%=q.p_incorrect%><%}%>" ></p>
+					<%}%>
+					<%if(q.type=="e"){%>
+						<p><textarea rows="2" cols="60" id="e_<%=q._id%>" name="answer[e_<%=q._id%>]" <%if(setting.allow_pastetext=="1"){%>onpaste="return false;"<%}%>><%if(exam.answers[q._id]){%><%=exam.answers[q._id]%><%}%></textarea></p>
+						<div><a id="eword_count<%=q._id%>" href="#" class="showcont custom_color">Show word count</a></div>
+						<div><span id="show_eword_count<%=q._id%>" class="hide"><br>Words: <span id="counte_<%=q._id%>"></span></span></div>
+						<div class="clearheight"></div>
+					<%}%>
+					<%if(q.type=="ft"){%>
+						<p><input autocomplete="off" autocorrect="off" type="text" size="40" id="ft_<%=q._id%>" <%if(setting.allow_pastetext=="1"){%>onpaste="return false;"<%}%> name="answer[ft_<%=q._id%>]" value="<%if(exam.answers[q._id]){%><%=exam.answers[q._id]%><%}%>"></p>
+					<%}%>
+				</div>
+				<%}%>
+				
+				<div class="mcanswersDiv">
+					<fieldset class="qfieldset">
+						<legend><span class="hide">Answer options for question <%=((page-1)*setting.questions_displayed_per_page)+i+1%></span></legend>
+						<div class="clear"></div>
+						
+						<%if(q.type=="tf"){%>
+							<div class="ans_select">
+								<input type="radio" id="rmc_<%=q._id%>_0" name="answer[mcsa_<%=q._id%>]" value="1" <%if(exam.answers[q._id]){if(exam.answers[q._id]=='1'){%>checked<%}}%>>
+							</div>
+							<div class="ans_content_letter"><strong onclick="$('#rmc_<%=q._id%>_0').prop('checked', true);">A)&nbsp;</strong></div>
+							<div class="ans_content_prefixed editor">
+        						<label for="rmc_<%=q._id%>_0" class=""><%=q.tf_options[0].answer%></label>
+        					</div>
+							<div class="clear"></div>
+						
+							<div class="ans_select">
+								<input type="radio" id="rmc_<%=q._id%>_1" name="answer[mcsa_<%=q._id%>]" value="2" <%if(exam.answers[q._id]){if(exam.answers[q._id]=='2'){%>checked<%}}%>>
+							</div>
+							<div class="ans_content_letter"><strong onclick="$('#rmc_<%=q._id%>_1').prop('checked', true);">B)&nbsp;</strong></div>
+							<div class="ans_content_prefixed editor">
+        						<label for="rmc_<%=q._id%>_1" class=""><%=q.tf_options[1].answer%></label>
+        					</div>
+						<%}%>
+						
+						<%if(q.type=="mcsa"){%>
+						<%var ch=["A","B","C","D","E","F","G","H","I","J"];%>
+							<%q.mc_options.forEach((opt,i)=>{%>
+							<%if(opt.answer!=''){%>
+								<div class="ans_select">
+									<input type="radio" id="rmc_<%q._id%>_<%=i%>" name="answer[mcsa_<%=q._id%>]" value="<%=i+1%>" <%if(exam.answers[q._id]){if(exam.answers[q._id]==i+1){%>checked<%}}%>>
+								</div>
+								<div class="ans_content_letter">
+									<strong onclick="$('#rmc_<%q._id%>_<%=i%>').prop('checked', true);"><%=ch[i]%>)&nbsp;</strong>
+								</div>
+								<div class="ans_content_prefixed editor">
+            	 					<label for="rmc_<%q._id%>_<%=i%>" class=" bbcode"><strong><%=opt.answer%></strong></label>
+            					</div>
+								<div class="clear"></div>
+							<%}%>
+							<%})%>
+						<%}%>
+						<%if(q.type=="mcma"){%>
+						<%var ch=["A","B","C","D","E","F","G","H","I","J"];%>
+							<%q.mc_options.forEach((opt,i)=>{%>
+							<%if(opt.answer!=''){%>
+								<div class="ans_select">
+									<input type="checkbox" class="mmr_<%=q._id%>" id="rmmr_<%=q._id%>_<%=i%>" name="answer[mcma_<%=q._id%>_<%=i%>]" value="<%=i+1%>" <%if(exam.answers[q._id]){var ss=exam.answers[q._id];if(ss["choices"].indexOf((i+1).toString())>=0){%>checked<%}}%> >
+								
+									
+            					</div>
+           						<div class="ans_content_letter"><strong onclick="$('#rmmr_<%=q._id%>_<%=i%>').trigger('click');"><%=ch[i]%>)&nbsp;</strong></div>
+           						<div class="ans_content_prefixed editor">
+            	 					<label for="rmmr_<%=q._id%>_<%=i%>" class=" bbcode"><i><%=opt.answer%></i></label>
+								</div>
+								<div class="clear"></div>
+							<%}%>
+							<%})%>
+						<div class="hide" id="cmmr_<%=q._id%>"><%=q.mc_correct.length%></div>
+						<%}%>
+					</fieldset>
+					
+				</div>
+			</div>
+		</div>
+		<%})%>
+
+		<div class="hide" id="showRefreshInstructions">
+			<div class="alert-box error editor ">Please wait another 30 seconds and if nothing happens, please <a class="removeOnBeforeUnload" href="?refreshtest">click here</a> to reload this page.<br><br><strong>Important Note:</strong> Reloading this page will clear your answers on this page. To ensure you do not lose the answers on this page, make sure you copy any written answers into a text document so you can copy and paste them into the answer boxes again after your refresh your browser.</div>
+		</div>
+		<div class="nextprev mainnextprevbox">
+			<%if(page>1){%>
+				<div class="prevbox">
+					<button class="prev2" href="#" id="qprev" formaction="/test/start2/?exam_id=<%=exam._id%>&page=<%=page-1%>" type="submit">Previous</button>
+				</div><%}else{%><%}%>
+
+				<%if(page<Math.ceil(exam.qs.length / parseInt(setting.questions_displayed_per_page))){%>
+					<!-- <div class="nextbox"><a class="next2" href="#" id="qnext">Next</a></div> -->
+					<div class="nextbox"><button type="submit" formaction="/test/start2/?exam_id=<%=exam._id%>&page=<%=page+1%>" class="next2" href="#" id="qnext" >Next</button></div>
+			
+				<%}else{%>
+					<div id="dfinish" class="finishbox"><a class="finish2" href="#" id="qfinish" >Finish test</a></div>
+			<!-- formaction="/test/finish/?exam_id=<%=exam._id%>" class="confirmfinish2 hide" -->
+					<button type="submit" class="confirmfinish2 hide" href="#" id="qfinish_confirm" >Confirm finish now</button>
+				<%}%>
+				</div>
+				<div class="clearheight"></div>
+			</form>
+		<script>
+		//asset_image_toggle_max_width = 550;
+		var web_root = '/test/';
+		var message_test_error_unanswered_text = 'You must attempt all questions to continue.';
+		$(document).ready(function() {
+		    if ( typeof(auto_save_question_timeout_var) !== "undefined") {
+		        /* We restart auto_save_questions here on each page load */
+                restartAutoSaveQuestionTimeout();
+            }
+		});
+		</script>
+	</div>
+	<div id="icon_loading_kit_div"><img id="icon_loading_kit" class="hide" src="/img3/icon_loading_kit.gif" alt="Loading"></div></div></div>
+<script>
+	// window.onbeforeunload= function(){
+	// 	return 'You must use the Next, Previous or Finish buttons to move away from this page.\n\nYou will lose these answers unless you Cancel this operation and use the Next, Previous or Finish buttons on this page.\n\nNote: If you are only allowed 1 Attempt at this Test and leave it now, you may not be able to restart it.';
+	// };
+</script>
+</div></div><!-- innerWrapper -->
+</div>
+		
+	</body>
+</html>

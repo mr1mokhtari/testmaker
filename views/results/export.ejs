@@ -1,0 +1,221 @@
+<div class="top_hidden_box_div hide closeMeContainer editor">
+	<h4>Choose Filters <a href="#" class="closeMeLink right close"></a></h4>
+	<form id="filter_result_form" method="post" action="/a/results/delete/">
+	<input type="hidden" name="export_page_type" value="single_test_results_page">
+			<input type="hidden" name="rg_id" value="592380">
+		<input type="hidden" name="group_type" value="reg">
+		<input type="hidden" name="test_id" value="1479449">
+	<input type="hidden" name="token" value="T7FVXQ7R">
+	<input type="hidden" name="dt" value="all">
+	<input type="hidden" name="export_type" value="0">
+			<input type="hidden" name="return" value="g">
+		<div id="date-dropdown">
+		<a class="btn btn-actions btn-white no_anchor" id="date-title" href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span id="date-filter-title"> All dates </span><span class="caret">&nbsp;</span></a>
+		<ul class="dropdown-menu delete-filter-padding">
+			<li>
+				<div class="littledark date-started">Date started:</div>
+				<div id="date-between"><div><label class="form-field-title not-input" for="from">From: </label><input type="text" name="from" id="from" placeholder="mm/dd/yyyy" value="" size="15" maxlength="10" autocomplete="off" class="hasDatepicker"> <select id="show_from_h" name="show_from_h"><option value="12">12</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option></select> <select id="show_from_m" name="show_from_m"><option value="00">00</option><option value="05">05</option><option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option><option value="30">30</option><option value="35">35</option><option value="40">40</option><option value="45">45</option><option value="50">50</option><option value="55">55</option></select> <select id="show_from_ampm" name="show_from_ampm"><option value="am">am</option><option value="pm">pm</option></select>  <span class="showTooltipHTML tooltip" title="Leave blank for all results before end date">Tip</span></div><div><label class="form-field-title not-input" for="until">Until: </label><input type="text" name="until" id="until" placeholder="mm/dd/yyyy" value="" size="15" maxlength="10" autocomplete="off" class="hasDatepicker"> <select id="show_until_h" name="show_until_h"><option value="12">12</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option></select> <select id="show_until_m" name="show_until_m"><option value="00">00</option><option value="05">05</option><option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option><option value="30">30</option><option value="35">35</option><option value="40">40</option><option value="45">45</option><option value="50">50</option><option value="55">55</option></select> <select id="show_until_ampm" name="show_until_ampm"><option value="am">am</option><option value="pm">pm</option></select>  <span class="showTooltipHTML tooltip" title="Leave blank for all results after start date">Tip</span></div></div>
+				<a class="btn btn-actions btn-cancel no_anchor padleft" id="date_filter_ok" href="#">Set Filter</a>
+				<a class="littledark" id="remove-date-filter" href="#">Reset</a>
+			</li>
+		</ul>
+	</div>
+	<div id="score-dropdown">
+		<a class="btn btn-actions btn-white no_anchor" id="score-title" href="#"><i class="fa fa-trophy" aria-hidden="true"></i><span id="score-filter-title"> Any status &amp; score </span><span class="caret">&nbsp;</span></a>
+		<ul class="dropdown-menu delete-filter-padding" id="score_status">
+			<li>
+				<div class="littledark status">Status:</div>
+				<div class="padleft">
+					<div class="clearheight5"></div>
+					<input type="radio" name="status_score" value="0" checked="checked" id="finished_in_progress"> <label for="finished_in_progress">Finished or In progress</label><br>
+					<div class="clearheight5"></div>
+					<input type="radio" name="status_score" value="1" id="in_progress_only"> <label for="in_progress_only">In progress only</label><br>
+					<div class="clearheight5"></div>
+					<input type="radio" name="status_score" value="2" id="finished_only"> <label for="finished_only">Finished only</label><br>
+					<div class="clearheight5"></div>
+					<input type="radio" name="status_score" value="3" id="finished_and_scored"> <label for="finished_and_scored">Finished and scored:</label><br>
+					<div class="clearheight5"></div>
+				</div>
+			</li>
+			<li class="hide" id="percentage_points_div">
+				<div class="clearheight5"></div>
+				<div class="littledark status margleft">Filter By Score:</div>
+				<div class="clearheight5"></div>
+				<div class="padleft30">
+					<input type="radio" name="test_score" value="0" checked="checked" id="percentage-selector"> <label for="percentage-selector">Percentage</label>
+					<input type="radio" name="test_score" value="1" id="points-selector"> <label for="points-selector">Points</label><br>
+				</div>
+				<div class="clearheight"></div>
+				<div class="littledark padleft30" id="percentage-div"><span class="explain">Equal To or Over:</span>
+					<a href="#" id="get-score-50">50%</a>
+					<a href="#" id="get-score-60">60%</a>
+					<a href="#" id="get-score-70">70%</a>
+					<a href="#" id="get-score-80">80%</a>
+					<a href="#" id="get-score-90">90%</a>
+					<div class="clearheight5"></div>
+					<label for="percentage_over">Equal To or Over</label>&nbsp;&nbsp; <input type="text" class="number showTooltip" title="Example: 50.0" id="percentage_over" name="percentage_over" value=""> %<br>
+					<label for="percentage_under">Equal To or Under</label> <input type="text" class="number showTooltip" title="Example: 100.0" id="percentage_under" name="percentage_under" value=""> %
+				</div>
+				<div class="hide littledark padleft" id="points-div">
+					<label for="point_over">Equal To or Over</label>&nbsp;&nbsp; <input type="text" class="number showTooltip" title="Example: 5.0" id="point_over" name="point_over" value=""> pts<br>
+					<label for="point_under">Equal To or Under</label> <input type="text" class="number showTooltip" title="Example: 10.0" id="point_under" name="point_under" value=""> pts
+				</div>
+			</li>
+			<li>
+				<a class="btn btn-actions btn-cancel no_anchor" id="score_filter_ok" href="#">Set Filter</a>
+				<a class="littledark" id="remove-score-filter" href="#">Reset</a>
+			</li>
+		</ul>
+	</div>
+	<div id="duration-dropdown">
+		<a class="btn btn-actions btn-white no_anchor" id="duration-title" href="#"><i class="fa fa-clock-o" aria-hidden="true"></i><span id="duration-filter-title"> Any duration </span><span class="caret">&nbsp;</span></a>
+		<ul class="dropdown-menu delete-filter-padding">
+			<li>
+				<div class="result-filter">Equal To or Over <input type="text" class="number showTooltip" title="Example: 0" id="duration_over" name="duration_over" value=""><label for="duration_over"> mins</label></div>
+				<div class="result-filter">Under <input type="text" class="number showTooltip" title="Example: 100" id="duration_under" name="duration_under" value=""><label for="duration_under"> mins</label></div>
+				<div class="clear">
+					<a class="btn btn-actions btn-cancel no_anchor" id="duration_filter_ok" href="#">Set Filter</a>
+					<a class="littledark" id="remove-duration-filter" href="">Reset</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="dropdown">
+		<a class="btn btn-actions btn-white no_anchor" href="#"><i class="fa fa-pencil" aria-hidden="true"></i><span id="grade-filter-title"> No grade filter </span><span class="caret">&nbsp;</span></a>
+		<ul class="dropdown-menu">
+			<li><a href="#" id="grade-0">No grade filter</a></li>
+			<li class="divider"><a href="#" id="grade-2">Not graded</a></li>
+			<li><a href="#" id="grade-1">Graded</a></li>
+		</ul>
+		<input type="hidden" name="test_grade" value="0">
+	</div>
+	<div class="dropdown" id="action-dropdown">
+		<a class="btn btn-create no_anchor" href="#">Check Results</a>
+		<ul class="dropdown-menu dropdown results-actions">
+			<li><a href="#" class="export-check"><i class="fa fa-download" aria-hidden="true"></i> Export all results</a></li>
+			<li><a href="#" id="delete-check"><i class="fa fa-trash" aria-hidden="true"></i> Delete all results</a></li>
+		</ul>
+	</div>
+</form>
+<div class="clearheight"></div>
+<div class="closeMeContainer alert-box error editor hide" id="result-filter-error"></div>
+<div class="clearheight"></div>
+<script>
+	var assistant_can_delete_results_boolean = true;	var link_max_export = 20000;
+	var generic_error_try_again = "It looks like something just went wrong.<br/>Please try again.";
+	var web_root = '/';
+</script>
+<script src="/js3/cm_inst_testresultsfilter.js?v=217"></script>
+
+
+
+	<div class="export_results_div hide">
+		<div class="clearheight"></div>
+		<h4>Export Results</h4>
+
+		<div class="field-group">
+			<strong>Based on your Filters</strong>, you are about to export <span id="export-result"></span> for this Test under this Group.
+		</div>
+				<p class="comma">Export files are COMMA separated .csv files.</p>
+		<div class="clearheight"></div>
+		<div class="field-group legacy">
+	<div class="alert-box editor alert-confirmation ">
+
+		<div class="clearheight10"></div>Upgraded accounts can export Test results.<div class="clearheight"></div>
+		<span class="little"><a href="#" class="upgradeRpc">Upgraded Account Features</a></span>
+
+		</div>		</div>
+		<div class="classical">
+			<div class="field-group">
+				<a id="tog_export_test" class="showcont" href="#">Export Test scores</a>
+			</div>
+			<div id="dotog_export_test" class="field-group hide margleft alert-box alert-white">
+				<input type="hidden" name="group_type" value="reg">
+				<form id="export-csv-form" method="post">
+					<p>Select the <strong>Date Format</strong> to use:</p>
+					<div class="field-group half-tab">
+						<select name="date_format">
+							<option value="">Fri 15th Oct 2019 8:50AM</option>
+							<option value="yyyy-MM-dd">2019-10-15</option>
+							<option value="yyyy-MM-dd HH:mm">2019-10-15 08:50</option>
+							<option value="dd/MMM/yy h:mm a">15/Oct/19 8:50AM</option>
+							<option value="MM/dd/yy hh:mm a">10/15/19 08:50AM</option>
+							<option value="timestamp">Unix Timestamp</option>
+						</select>
+					</div>
+					<div class="alert-box editor alert-confirmation ">
+
+		<div class="clearheight10"></div>Upgraded accounts can export Test results.<div class="clearheight"></div>
+		<span class="little"><a href="#" class="upgradeRpc">Upgraded Account Features</a></span>
+
+		</div>				</form>
+			</div>
+		</div>
+
+				<div class="field-group legacy">
+					</div>
+		<div class="classical">
+			<div class="field-group">
+				<a id="tog_export_test_answer" class="showcont" href="">Export Test scores &amp; selected answers</a>
+			</div>
+			<div id="dotog_export_test_answer" class="field-group hide margleft alert-box alert-white">
+				<form id="export-csv-answer-form" method="post">
+					<p>Select the <strong>Date Format</strong> to use:</p>
+					<div class="field-group half-tab">
+						<select name="date_format">
+							<option value="">Fri 15th Oct 2019 8:50AM</option>
+							<option value="yyyy-MM-dd">2019-10-15</option>
+							<option value="yyyy-MM-dd HH:mm">2019-10-15 08:50</option>
+							<option value="dd/MMM/yy h:mm a">15/Oct/19 8:50AM</option>
+							<option value="MM/dd/yy hh:mm a">10/15/19 08:50AM</option>
+							<option value="timestamp">Unix Timestamp</option>
+						</select>
+					</div>
+					<p>Select the <strong>Value</strong> to use for each Answer:</p>
+					<div class="field-group">
+						<input type="radio" id="value1" class="half-tab" name="answer_value" value="1" checked=""> <label for="value1">Selected / Typed Answer</label> <span class="showTooltip tooltip" title="Will display Test Takers selected Multiple choice option, or Typed answer (depending on Question type).">Tip</span><br>
+						<input type="radio" id="value2" class="half-tab" name="answer_value" value="2"> <label for="value2">Points received</label> <span class="showTooltip tooltip" title="Will display Test Takers the points received per answer.">Tip</span>
+					</div>
+					<p>Select the Question <strong>Column Title:</strong></p>
+					<div class="field-group">
+						<input type="radio" id="answer0" class="half-tab" name="question_format" value="0" checked=""> <label for="answer0">Incremental: Q1, Q2, Q3</label> <br>
+						<input type="radio" id="answer1" class="half-tab" name="question_format" value="1"> <label for="answer1">Actual Question ID: Q746356, Q784736, Q785678</label> <span class="showTooltip tooltip" title="These are the Question IDs used by ClassMarker. This will help if you are importing data to your own database to keep data related.">Tip</span><br>
+						<input type="radio" id="answer2" class="half-tab" name="question_format" value="2"> <label for="answer2">Include actual Question text: Q1) What year was the ....?</label> <span class="showTooltip tooltip" title="The Question text will be included above the Answers for easy viewing.">Tip</span>
+					</div>
+					<div class="alert-box editor alert-confirmation ">
+
+		<div class="clearheight10"></div>Upgraded accounts can export Test results.<div class="clearheight"></div>
+		<span class="little"><a href="#" class="upgradeRpc">Upgraded Account Features</a></span>
+
+		</div>				</form>
+			</div>
+		</div>
+				</div>
+
+	<!--Display hidden delete results div
+ * Set session to ensure deletion is safe and came from this specific link on this current page
+ */-->
+
+
+<a class="scroll_delete_results"></a> <!--keep space above box when displayed -->
+<div class="delete_results_div hide editor">
+
+	<div class="clearheight"></div>
+	<h4>WARNING: Deleting results is PERMANENT!</h4>
+	<div class="alert-box error editor "><p>We <strong>STRONGLY</strong> advise you <a href="#" class="export-check">Export results</a> first to keep a backup for your files. <em>Deleted results cannot be retrieved.</em></p>
+							<p>If any results are waiting to be emailed, they cannot be emailed after deleting.</p></div>	<div class="field-group">
+		<div class="alert-box alert-default editor">
+			<div class="field-group" id="show-result"><strong>Based on your Filters</strong>, you are about to delete <span id="delete-result-count"></span>
+				for this Test under this Group.
+			<br><br>
+				Deleting may take a few minutes or more for very large result sets, do not click away from this page during deletion.</div>
+			<img src="/img3/icon_loading_circleV3.gif" alt="Hidden Loading Image" class="hide tab" id="loading_icon" width="20" height="20">
+			<button class="btn btn-create hide showLoading" id="delete-result" name="permanent_delete" value="1" type="submit">Delete <span class="delete-count-plain"></span> results permanently</button>
+		</div>
+	</div>
+</div>
+	<div class="clearheight"></div>
+	<div class="auto-delete-tip">
+		<p>Delete old results <a href="/a/myaccount">automatically</a> <span class="showTooltip tooltip" title="You can choose to have results from all your Groups and Links deleted Automatically from 1 week old to 2 years old from your My Account page.">Tip</span><br></p>
+	</div>
+</div>

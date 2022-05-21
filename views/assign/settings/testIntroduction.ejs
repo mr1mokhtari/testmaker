@@ -1,0 +1,40 @@
+<h4>Test Introduction</h4>
+<a id="instructions"></a>
+<div class="settings-box">
+	<div class="accordion-toggle scroll_instructions setting-instructions closed">
+		<h3 class="form-field-title">Instructions</h3>
+		<div class="settings-status"><%if(edits=='0'){%>Yes<%}%><%if(edits=='1'){if(setting.show_instructions=='1'){%>Yes<%}else{%>No<%}}%></div><div class="caret">&nbsp;</div>
+	</div>
+	<div class="accordion-fold delay_hide_sceditor" style="display: none;">
+		<div class="field-group leftpad">
+			<p><strong>Pre-Test Guidelines</strong> (optional)</p>
+			<input type='hidden' name='settings[show_instructions]' value='0' id='si_22'>
+			<input type="checkbox" name="settings[show_instructions]"  value='1' <%if(edits=='0'){%> checked=true <%}else if(edits=='1'){if(setting.show_instructions=='1'){%>checked=true <%}else{%><%}}%>  id="si_2">
+
+			<label for="si_2">Display guidelines before Test starts</label>
+		</div>
+		<div class="field-group leftpad">
+			<p>Example Guidelines:</p>
+			<hr>
+			<p class="littledark" style="margin-left:40px;font-style: italic;">This Test:</p>
+			<table style="margin:0 0 20px 60px;font-style: italic; ">
+				<tbody><tr>
+					<td class="littledark">* Will allow you to save and finish at a later date</td>
+				</tr>
+				<tr>
+					<td class="littledark">* Will not allow you to go back and change your answers</td>
+				</tr>
+				<tr>
+					<td class="littledark">* Has a time limit of 20 minutes</td>
+				</tr>
+				<tr>
+					<td class="littledark">* Has a pass mark of 70%</td>
+				</tr>
+			</tbody>
+			</table>
+			<p class="littledark">Guidelines will be created automatically and reflect your chosen settings on this page.</p>
+			<hr>
+		</div>
+	</div>
+</div>
+<div class="clearheight30"></div>

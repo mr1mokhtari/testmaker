@@ -1,0 +1,27 @@
+<%-include("../../partials/headerResult")%>
+<%-include("../../partials/teacherHead")%>
+<div id="content" class="clearfix">
+	<div class="innerWrapper">
+		<%-include("links")%>
+		<h2 class="group-name name">
+			<a href="/tests/groups/edit/?group_id=<%=G._id%>" class="graylink"><%=G.group_name%></a>
+		</h2>
+		<%-include("deleteGroupOptions")%>
+		<div class="page editor">
+			<div class="table">
+				<div class="row">
+					<h5>Select an option:</h5>
+					<%-include("deleteForm")%>
+				</div>
+			</div>
+		</div>
+		<div class="aside editor">
+			<div class="aside-message">
+				<p><strong>Deleting Group Tips</strong></p>
+				<p>Deleting a Group and/or Group Members is permanent.<br><br>You can export results via Results pages before deleting any data to keep an offline copy.</p>
+			</div>
+		</div>
+	</div><!-- innerWrapper -->
+	<img src="/img3/icon_loading_circleV3.gif" alt="Hidden Loading Image" class="hide" width="20" height="20">
+</div>
+<%-include("../../partials/footer")%>

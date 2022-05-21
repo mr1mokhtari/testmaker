@@ -1,0 +1,346 @@
+<%-include("../partials/headerResult")%>
+<%-include("../partials/teacherHead")%>
+<div id="content" class="clearfix">
+	<div class="innerWrapper">
+		<div class="col-span-7"><p class="breadcrumb3"><a href="/tests/" class="first"><span>Tests</span></a><span>Edit Test</span></p></div>
+		<%-include("links")%>
+		<!-- Number of random questions Selected-->
+			<%var zn=0%>
+			<%if(test.random_option=="option1"){%>
+				<%zn=test.random_1_num;%>
+			<%}else if(test.random_option=="option2"){%>
+				<%test.random_2_num.forEach((num)=>{%>
+				<%zn+=num%>
+				<%})%>
+			<%}%>
+		<hr>
+		<div class="clearfix">
+			<div id="wrapEdit_tn">
+				<form class="genericForm" id="dosubmit_testname" method="post" action="/tests/test/new?_method=put">
+					<input name="div_id" type="hidden" value="tn">
+					<input name="test_id" type="hidden" value="<%=testId%>">
+					<div class="misc_cat hide">
+						<div class="field-group">
+							<label class="form-field-title" for="editText_tn">Test Name:</label>
+							<input size="40" type="text" id="editText_tn" class="hide" name="test_name" maxlength="255" value="<%=test.test_name%>">
+						</div>
+						<div class="field-group">
+							<label class="form-field-title" for="cat_id">Category:</label>
+							<select name="sub_cat_id" id="cat_select" class="no_parent_cat_selection parent-cat-dd">
+	<%pcats.forEach(function(pcat,i){%>
+		<option value="pc<%=pcat._id%>" disabled="">- <%=pcat.parent_cat_name%> -</option>
+		<%pcat.cat_name.forEach(function(subcat,j){%>
+			<%scats.forEach(function(scat,k){%>
+				<%if(JSON.stringify(scat._id)==JSON.stringify(subcat)){%>
+					<option value="p<%=pcat._id%>sc<%=scat._id%>" <%if(test.sub_cat_id=="p"+pcat._id+"sc"+scat._id){%>selected<%}%> >
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=scat.cat_name%>
+					</option>
+				<%}%>
+			<%})%>
+		<%})%>
+	<%})%>
+							</select>
+							<a href="#" id="createCatRpc" class="littlelink">New Category</a>
+							<span class="showTooltip tooltip" title="Categorizing your Tests and Questions allows you to easily keep these items organized. You can also view results by Category to help better analyze problem areas.">Tip</span>
+							</div>
+						</div>
+					<div id="editLink_tn"><h2 id="showText_tn" class="bbcodeInWrapper test-name-big name-big edit-name show-edit-symbol"><%=test.test_name%><span class="edit-symbol"></span></h2></div>
+					<div class="misc_testname tab hide"><br>
+						<!-- <a href="/tests" class=" hide btn btn-create " id="submit_testname">Update</a> -->
+						<a href="#" class="ie_btn ajaxSubmitBtn hide btn btn-create notextchange" id="submit_testname">Update</a>
+						<a class="ie_btn ajaxCancelBtn hide btn btn-cancel notextchange">Cancel</a>
+						<div class="clearheight60"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="clearheight5"></div>
+		<div class="menu-options">
+			<a id="toggroup_01_duplicate" class="toggle-active" href="#"><i class="fa fa-files-o" aria-hidden="true"></i> Duplicate</a>
+			<a id="toggroup_01_paper" class="toggle-active" href="#"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+			<a id="toggroup_01_deletetest" class="toggle-active" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+			<input type="hidden" name="test_id" value="<%=test._id%>">
+			<%if(test.questions.length+Number(zn)==0){%>
+			<a href="#" onclick="alert('First add Questions to your Test.');return false;" class="right assign-test-big"><i class="fa fa-share fa-flip-vertical" aria-hidden="true"></i> Assign Test</a>
+			<%}else{%>
+			<a href="/assign/groups/?test_id=<%=test._id%>" class="right assign-test-big"><i class="fa fa-share fa-flip-vertical" aria-hidden="true"></i> Assign Test</a>
+			<a href="/test/start/?test_id=<%=test._id%>" class="right preview-test-big"><i class="fa fa-play" aria-hidden="true"></i> Preview Test **</a>
+			<%}%>
+		</div>
+		<div class="clearheight10"></div>
+		<div class="test-message hide editor" id="dotoggroup_01_assign">
+			<div class="page pagecontent editor">
+				<h3>Assign Test</h3>
+				<p>Tests must be assigned to a Group or Link before they can be taken.</p>
+				<a href="/a/assign/groups/?test_id=1528198" class="btn btn-assign">Assign Test</a>
+			</div>
+			<div class="clearheight"></div>
+		</div>
+		<div class="test-message hide editor" id="dotoggroup_01_duplicate">
+			<h5>What would you like to do?</h5>
+			<div class="alert-box alert-white table">
+			<div class="table noborder">
+				<div class="row noborder ">
+					<div class="col-span-4 editor">
+						<p class="bold">Assign this Test again:</p>
+						<ul class="littledark">
+							<li>Each Test can be assigned multiple times with customized settings applied each time.</li>
+							<li>There is NO need to duplicate your Test, simply assign it to a different Group or Link.</li>
+						</ul>
+
+					</div>
+					<div class="col-span-1">
+						&nbsp;
+					</div>
+
+					<div class="col-span-5 editor">
+						<p class="bold">Duplicate this Test:</p>
+						<ul class="littledark">
+							<li>Duplicate and make slight variations of this Test.</li>
+							<li>For example, you can duplicate this Test and then add or delete Questions without affecting the original version. <strong>Important:</strong> See <strong>Question</strong> options below.</li>
+						</ul>
+
+					</div>
+				</div>
+
+				<div class="row noborder nopad">
+					<div class="col-span-4 editor">
+						<p><a class="btn btn-create" href="/a/assign/groups/?test_id=1528198">Assign</a></p>
+					</div>
+					<div class="col-span-1">
+						&nbsp;
+					</div>
+					<div class="col-span-5 editor">
+						<p><a class="anchor_scroll_confirmduplicate open_anchor_element btn btn-create" href="#">Duplicate</a></p>
+					</div>
+
+				</div>
+			</div>
+			</div>
+			<div class="clearheight"></div>
+
+
+			<div class="scroll_confirmduplicate hide">
+				<div class="alert-box alert-white table">
+				<h4>Duplicate Test</h4>
+				<div class="alert-box error editor " >You can only Duplicate this Test if it has "Fixed Questions" in it. You have "0 Fixed Questions" set in this Test.<br><br><strong>Note:</strong> If you only use "Random Questions", create a new Test instead, then select the same Random Questions settings in the new Test.</div>				<div class="clearheight"></div>
+				</div>
+			</div>
+		</div>
+		<div class="test-message hide editor" id="dotoggroup_01_paper">
+			<div class="page pagecontent editor">
+				<h5>Paper Testing</h5>
+				<div class="alert-box alert-white table">
+					<div class="clearheight"></div>
+					<p>You can print Tests to paper, in addition to providing online, if required.</p>
+						<div class="clearheight"></div>
+					<a href="/a/tests/test/print/?test_id=1528198" class="btn btn-assign">Prepare Test for Printing</a>
+					<div class="clearheight"></div>
+				</div>
+			</div>
+			<div class="clearheight"></div>
+		</div>
+						<!-- Delete Test -->
+		<div class="test-message hide editor" id="dotoggroup_01_deletetest">
+			<div class=" editor">
+				<h5>Delete Test</h5>
+				<form action="/tests/test/<%=testId%>?_method=delete" method="post" class="genericPostForm" id="usedForIeResubmit_deleteTest">
+					<input type="hidden" name="test_id" value="<%=testId%>">
+					<div class="alert-box alert-white table">
+						<div class="clearheight5"></div>
+						<h2 class="test-name name">new2</h2>
+						<div class="margleft">
+						<ul>
+							<li>Deleting this Test is Permanent!</li>
+							<li>Questions in this Test will remain in your Question Bank</li>
+						</ul>
+						</div>
+						<div id="msgDiv<%=testId%>" class="hide"></div>
+						<div class="clearheight"></div>
+						<p><input type="submit" class="submitBtn btn btn-create checkDelete" value="Delete this Test"></p>
+						<div class="clearheight5"></div>
+					</div>
+				</form>
+			</div>
+			<div class="clearheight"></div>
+		</div>
+						<!-- Test Introduction -->
+		<div class="clearheight30"></div>
+		<h4 class="edit-message">Test Introduction</h4>
+		<p><a href="#" id="tog_testintro">+ Add Introduction</a></p>
+		<div class="delay_hide_sceditor test-message editor" id="dotog_testintro" style="display: none;">
+			<p>Introduction text will be displayed before Users start this Test. Introduction text is optional.</p>
+			<div>
+				<form id="dosubmit_testintro" class="genericPostForm" method="post" action="/tests/test/editTestComments/<%=testId%>">
+					<input name="test_id" type="hidden" value="<%=testId%>">
+					<textarea rows="3" cols="70" class="fullBBcodeEditor showTooltip" id="test_msg" title="This Test introduction text is optional and is displayed to users before they start the Test." name="test_comments" style="display: none;"></textarea>
+					<div id="msgDivMain"></div>
+					<div id="msgDivLoggedOutJsonError"></div><br>
+					<p><input type="submit" id="submit_testintro" class="btn btn-create btnSubmit" value="Update"></p>
+				</form>
+			</div>
+		</div>
+		<div class="clearheight30"></div>
+			<div class="editor table noborder" id="scrollToShowCount">
+				
+				<div class="col-span-7">
+                	<span id="how-man-questions">
+						<span id="total_questions_count"><%=test.questions.length+Number(zn)%></span>
+						Questions
+					</span>
+		        	<span class="qcount-summary">
+						<span id="num_static_questions" class="bold"><%=test.questions.length%></span>
+						Fixed Questions
+						<%if(questions!=0){%>
+						<%var q0=0%>
+						<%questions.forEach((q1)=>{%>
+							<%q0+=parseInt(q1.points)%>
+						<%})%>
+						<%}%>
+			           (<span id="static_points"><%=q0%></span>
+						Points)
+					</span>
+	            	<span class="qcount-summary">
+						<span id="random-questions" class="bold"><%=zn%></span>
+						Random Questions
+					</span>
+	        	</div>
+				<div class="col-span-3">
+	<!-- code to put max q number that can be selected equal to qs combined -->
+						<%var qn=0%>
+						<%scats.forEach((scat)=>{%>
+							<%qn+=scat.questions.length%>
+						<%})%>
+			    <p class="explain right"><strong>Question Bank:</strong> <span id="question_bank_count"><%=qn%></span> Questions</p>
+	        </div>
+        </div>
+        <div class="clearheight5"></div>
+
+<ul class="cmtableTabs">
+	<li class="tabon"><a href="#" id="togtab_01_testquestions">Test Questions</a></li>
+	<li class="taboff"><a href="#" id="togtab_01_testassignments"><strong>0</strong> Test Assignments</a></li>
+</ul>
+
+<div class="table">
+	<%-include("random")%>
+					<!-- Begin -->
+
+	<div id="dotogtab_01_testassignments" class="hide">
+			<ul class="table-body">
+				<li class="row hint">&nbsp;</li>
+				<li class="row test-question">
+					<span class="explain">You need to Assign this Test to a Group or Link before it can be taken. <a href="/a/help/manual/#assign" class="popup">Learn more</a>.</span>
+				</li>
+			</ul>
+	</div>
+</div>
+<a id="bottom"></a>
+<div class="clearheight"></div>
+
+<div class="alert-box alert-confirmation editor "><strong>Did you know!</strong> All Questions you add to ClassMarker are stored in your <strong>Questions Bank</strong>. Your Tests simply reference those Questions.</div>
+	<div class="clearheight"></div>
+	<h4>There are 3 ways to build Tests in ClassMarker:</h4>
+	<div class="col-span-3">
+		<div class="table editor">
+			<div class="row test-question"><h4>Fixed Question Tests</h4></div>
+			<div class="row">
+				The <strong>Same</strong> Questions will be given each time.
+			</div>
+			<div class="row row-shade">
+				<ul>
+					<li>Questions can be given in a randomized order</li>
+					<li>You can Add or Remove Fixed Questions in your Tests any time</li>
+				</ul>
+			</div>
+			<div class="row">
+				<p><i>Step by Step:</i></p>
+				<ol>
+					<li>Select an option from the blue <strong>Fixed Questions</strong> button above</li>
+					<li>Start adding your Questions into this Test</li>
+					<li>Select the Tests' settings when you Assign your Test</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<div class="col-span-05">&nbsp;</div>
+	<div class="col-span-3">
+		<div class="table editor">
+			<div class="row test-question"><h4>Random Question Tests</h4></div>
+			<div class="row">
+				<strong>Different</strong> Questions will be given each time.
+			</div>
+			<div class="row row-shade">
+				<ul>
+					<li>Based on your <a href="#" class="anchor_scroll_autoselect open_anchor_element highlight_autoselected">Random Question settings</a>, Questions will be selected from your Question Bank each time the Test is taken</li>
+				</ul>
+			</div>
+			<div class="row">
+				<p><i>Step by Step:</i></p>
+				<ol>
+					<li>Add Questions into your <a href="/a/tests/qb/">Question Bank</a>, <i>Not into this Test!</i></li>
+					<li>Come back &amp; Edit Settings from the <strong>Random Questions</strong> button</li>
+					<li>Select more Test settings when you Assign your Test</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<div class="col-span-05">&nbsp;</div>
+	<div class="col-span-3">
+		<div class="table editor">
+			<div class="row test-question"><h4>Fixed and Random</h4></div>
+			<div class="row">
+				<strong>Combine</strong> Fixed and Random Questions.
+			</div>
+			<div class="row row-shade">
+				<ul>
+					<li>The Fixed Questions will <strong>always</strong> be given, as well as Randomly selected Questions from your Question Bank</li>
+				</ul>
+			</div>
+			<div class="row">
+				<p><i>Step by Step:</i></p>
+				<ol>
+					<li>Add <strong>Fixed Questions</strong> into your Test</li>
+					<li>Select your <strong>Random Question</strong> Settings</li>
+					<li>Select more Test settings when you Assign your Test</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<div class="clearheight"></div>
+	<p><strong>ClassMarker is Flexible:</strong> You can change your Tests at any time by simply adding or removing Fixed Questions and Random Question Settings.</p>
+
+<script>
+asset_image_toggle_max_width = 600; asset_image_allow_toggle = false;
+$(document).ready(function() {	
+	$("#sortable").sortable();
+	$('#duplicate2').click(function(){
+		$('#duplicate3').show();
+	});
+	$('#duplicate1').click(function(){
+		$('#duplicate3').hide();
+	});
+	$('.dselected').click(function(){
+		$('#dselected_id').attr('checked', 'checked');
+	});
+});
+</script>
+
+<div class="generic-overlay">
+				<div class="generic-overlay-content"></div>
+				<div class="clearheight30"></div>
+			</div><div class="jqmWindowWide jqmID3 jqDrag jqmID1" id="qbankExportDiv"></div>
+<script>
+$(document).ready(function(){
+	$('#qbankExportDiv').jqm({ajax: '/a/tests/rpc/qbankExport.rpc.php?test_id=1528198', trigger: 'a.qbankExport'});
+	/* If coming from edit question page, open answers div for that question */
+	var hash = window.location.hash.substr(2);
+	if (hash.length > 0){
+	    $('#dotog_ans'+hash).show();
+	}
+});
+</script>
+</div><!-- innerWrapper -->
+<img src="/img3/icon_loading_circleV3.gif" alt="Hidden Loading Image" class="hide" width="20" height="20">
+</div>
+<%-//include("new2JS")%>
+<%-include("../partials/footer")%>

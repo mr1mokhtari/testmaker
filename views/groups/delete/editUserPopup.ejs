@@ -1,0 +1,180 @@
+<%-include("../../questions/new/newHeader")%>
+<body>
+<div id="content" class="editor">
+	<div id="edit-user-popup-content">
+		<div class="col420">
+			<!-- <img alt="Quiz Maker" src="/img3/retina/cm-loggedin-logo1x.jpg" srcset="/img3/retina/cm-loggedin-logo1x.jpg 1x, /img3/retina/cm-loggedin-logo2x.jpg 2x, /img3/retina/cm-loggedin-logo3x.jpg 3x" width="182" height="27"> -->
+			<span class="f-right">
+				<a class="close" onclick="window.close();"></a>
+			</span>
+		</div>
+		<hr>
+		<h4 class="nograd">User details</h4>
+	<!--Add your own Classes but don't change any existing classes or IDS-->
+	<div id="wrapEdit_u<%=st._id%>">
+		<div class="titlename">
+			<p>
+				<span style="float: left; margin-right: 5px;" id="showText_f<%=st._id%>" class="bbcodeInWrapper"><%=st.firstName%></span>
+				<span id="showText_l<%=st._id%>"><%=st.lastName%></span>
+			</p>
+			<p>
+				<span class="gray" id="showText_e<%=st._id%>"></span>
+			</p>
+			<p>
+				<span class="gray" id="showText_lang<%=st._id%>"></span>
+			</p>
+		</div>
+		<form class="XgenericForm" id="dotog_u<%=st._id%>" method="post" action="/users/group/editMemberDetails?_method=PUT">
+			<input name="div_id" type="hidden" value="u<%=st._id%>">
+			<input name="user_id" type="hidden" value="<%=st._id%>">
+			<div class="misc_buts<%=st._id%> hide">
+				<table>
+					<tbody><tr>
+						<td width="130">Username:</td>
+						<td>
+							<%=st.username%>
+							<div class="clearheight10"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><label for="editText_f<%=st._id%>">First name:</label></td>
+						<td><input name="user[firstName]" type="text" title="First name" id="editText_f<%=st._id%>" value="<%=st.firstName%>"></td>
+					</tr>
+					<tr>
+						<td><label for="editText_l<%=st._id%>">Last name:</label></td>
+						<td><input name="user[lastName]" type="text" title="Last name" id="editText_l<%=st._id%>" value="<%=st.lastName%>"></td>
+					</tr>
+					<tr>
+						<td><label for="editText_e<%=st._id%>">Email:</label></td>
+						<td><input name="user[email]" type="text" id="editText_e<%=st._id%>" value="<%=st.email%>"></td>
+					</tr>
+					<tr>
+						<td><label for="editText_tz<%=st._id%>">Time zone:</label></td>
+						<td>
+							<%-include('timezone')%>
+						</td>
+					</tr>
+					<tr>
+						<td><label for="editText_lang<%=st._id%>">Interface:</label></td>
+						<td><select name="user[language]" id="editText_lan<%=st._id%>" class="lang-selector" value="<%=st.language%>"><option value="12">Arabic</option><option value="21">Bulgarian</option><option value="9">Chinese (Simplified)</option><option value="14">Chinese (Traditional)</option><option value="20">Danish</option><option value="6">Dutch</option><option value="0" selected="selected">English</option><option value="15">Finnish</option><option value="1">French</option><option value="4">German</option><option value="19">Greek</option><option value="18">Hungarian</option><option value="3">Italian</option><option value="10">Japanese</option><option value="11">Korean</option><option value="23">Malay</option><option value="16">Norwegian</option><option value="7">Polish</option><option value="5">Portuguese</option><option value="24">Romanian</option><option value="8">Russian</option><option value="22">Slovenian</option><option value="2">Spanish</option><option value="17">Swedish</option><option value="13">Turkish</option></select> (Interface Language)
+						</td>
+					</tr>
+					<tr>
+						<td><label for="new_password">Change password:(Leave it empty if you don't want to change the password)</label>&nbsp;</td>
+						<td>
+							<input name="password" maxlength="72" id="new_password" class="misc_pw<%=st._id%>_ hide showTooltipHTML" title="Change password or leave blank to keep the same password. Password must be at least 8 characters long.<br/>Maximum password length is 72 characters.<br/>Password must contain at least:<br/>1 Number<br/>1 Letter<br/>1 Special character" type="text">
+							(minimum 8 characters)
+						</td>
+					</tr>
+				</tbody>
+				</table>
+				<div class="clearheight"></div>
+				<p><a href="#" class="ajaxSubmitBtn hide genericSubmitLink noloadinggif btn btn-create">Update</a> <a class="ajaxCancelBtn hide btn btn-edit">Cancel</a></p></div>
+			<div class="clearheight"></div>
+			<p><a href="#" id="editLink_u<%=st._id%>" class="bstn btsn-edit doHide">Edit: User Details / Password / Language</a></p>
+		</form>
+		<div id="edit_success" class="ajaxsuccess width350 hide"></div>
+		<% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success ajaxsuccess width350" role="alert">
+                <%= success %>
+            </div>
+        <% } %>        
+	</div>
+
+	<div class="clearheight"></div>
+	<hr>
+	<h4 class="nograd">Private message</h4>
+	<p>Add and edit private messages that will show only to this User on their "My Tests" page.<br>You can add a separate message from each Group they belong to.</p>
+	<div id="msgDivMain"></div>
+	<br>
+	<div class="clearheight"></div>
+	<p class="editor"><strong>Private message for</strong> <%=st.firstName%><%=st.lastName%> <strong>under Group:</strong> 0???</p>
+	<div class="editor">
+		<form id="dosubmit_privatemessage592380" class="genericPostForm" method="post" action="/a/users/group/editPrivateMessage.rpc.php">
+			<input name="user_id" type="hidden" value="<%=st._id%>">
+			<input name="rg_id" type="hidden" value="592380">
+			<textarea rows="3" cols="65" class="fullBBcodeEditor editquestion " id="msg_592380" name="private_message" style="display: none;"></textarea>
+			<textarea style="display: none; width: 500px; height: 41px;" dir="ltr"></textarea>
+			<div class="sceditor-grip"></div>
+			<div class="sceditor-resize-cover" style="display: none;"></div>
+			<br>
+			<p><input type="submit" id="submit_privatemessage592380" class="btn btn-create btnSubmit" value="Update"></p>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="jqmWindow" id="imgUploadDiv"></div>
+<div class="jqmWindow jqmID1" id="fileSelectorDiv"></div>
+<div class="jqmWindow jqmID2" id="createCatDiv"></div>
+<div class="jqmWindow" id="obj_ref"></div>
+<script>
+
+    $(document).ready(function () {
+        $('#fileSelectorDiv').jqm({
+            ajax: '/a/tests/rpc/fileSelector.rpc.php?1602491035',
+            trigger: 'li[id^=selectYt_]'
+        });
+        $('#createCatDiv').jqm({
+            ajax: '/a/tests/rpc/editCategory.rpc.php?insertnew=11602491035',
+            trigger: 'a[id^=createCatRpc]'
+        });
+
+
+        $('#email_new_password').click(function () {
+            if ($('#new_password').val().length < 6) {
+                alert('To email a \'new password\' it must be at least 8 characters in length.');
+                $('#email_new_password').attr('checked', false);
+            }
+            if ($('#editText_e<%=st._id%>').val().length == 0) {
+                alert('You must add the users \'email address\' to email the password to.');
+                $('#email_new_password').attr('checked', false);
+            }
+        });
+
+        $('input[type=radio][name=resetpassword]').click(function () {
+            if (this.value == 0) {
+                $("#sendemailoff").trigger("click");//turn off email sending
+                $("#reset_password_row").hide();
+            }
+            else if (this.value == 1) {
+                $("#reset_password_row").show();
+            }
+        });
+        $('input[type=radio][name=sendemail]').click(function () {
+            if (this.value == 0) {
+                $("#sendemailondiv").hide();
+                $("#sendemailoffdiv").slideDown();
+            }
+            else if (this.value == 1) {
+                $("#sendemailoffdiv").hide();
+                $("#sendemailondiv").slideDown();
+            }
+        });
+
+        $('#resetpassword0, #sendemailon').click(function () {
+        	/* Rmeove password is they decide not to change it */
+        	$('#new_password').val('');
+        });
+
+
+    });
+
+    window.onbeforeunload = function () {
+        window.opener.jQuery("#name_<%=st._id%>").text($("#showText_f<%=st._id%>").text() + ' ' + $("#showText_l<%=st._id%>").text());
+        if ($("#showText_e<%=st._id%>").text().length) {
+            window.opener.jQuery("#em_<%=st._id%>").text($("#showText_e<%=st._id%>").text());
+        } else {
+            window.opener.jQuery("#em_<%=st._id%>").text('N/A');
+        }
+
+        window.opener.jQuery("#lang_<%=st._id%>").text($(".lang-selector option:selected").text());
+
+    };
+
+</script>
+</body>

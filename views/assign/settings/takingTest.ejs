@@ -1,0 +1,32 @@
+<h4>Taking Test</h4>
+<div class="settings-box">
+	<div class="accordion-toggle scroll_TL setting-time-limit closed">
+		<h3 class="form-field-title">Time Limit</h3>
+		<div class="settings-status"><%if(edits=='1'){if(setting.time_limit=='0'){%>No<%}else{%>Yes<%}}else{%>No<%}%></div>
+		<div class="caret">&nbsp;</div>
+	</div>
+	<div class="accordion-fold">
+		<div class="field-group">
+			<input class="tab" id="tl" type="text" name="settings[time_limit]" maxlength="3" size="3" <%if(edits=='0'){%> value="0" <%}else if(edits=='1'){%>value="<%=setting.time_limit%>"<%}%>>
+			<label for="tl">Minutes</label>
+			<span class="showTooltipHTML tooltip" title="Set a time limit for this Test. <br/>Example: 2 hrs = 120 <br/><br/>Leave blank or set as 0 for no time limit.<br/><br/>If you allow Save and Resume later below, time taken will only be counted while the Test is active.">Tip</span>
+		</div>
+	</div>
+</div>
+<div class="settings-box">
+	<div class="accordion-toggle scroll_resume setting-resume-later closed">
+		<h3 class="form-field-title">Resume Later</h3>
+		<div class="settings-status"><%if(edits=='1'){if(setting.save_finish_later=='0'){%>No<%}else if(setting.save_finish_later=='1'){%>Yes<%}}else if(edits=='0'){%>No<%}%></div>
+		<div class="caret">&nbsp;</div>
+	</div>
+	<div class="accordion-fold">
+		<div class="field-group">
+			<input type='hidden' name='settings[save_finish_later]' value='0' id='sfl_22'>
+			<input class="tab" type="checkbox" name="settings[save_finish_later]" value="1" id="sfl_2" <%if(edits=='1'){if(setting.save_finish_later=='1'){%>checked=true<%}}%> > 
+			<label for="sfl_2">Allow save and resume later</label>
+			<span class=" showTooltip tooltip" title="Allow Test takers to save this Test and come back and finish it at another time. If not set, Test must be finished in one sitting.">Tip</span>
+		</div>
+		<div class="clearheight"></div>
+	</div>
+</div>
+<div class="clearheight30"></div>

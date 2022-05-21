@@ -1,0 +1,92 @@
+<div class="table narrow-row">
+	<div class="row spacerrow"></div>
+	<div class="rows">
+		<div class="nav-question-bank">
+			<form action="/questions/" id="search_form">			
+				<div class="col-span-1">
+					<p class="littledark">Filters:</p>
+					<a id="fl" class="hide" href="">Remove filters</a>
+				</div>
+				<div class="col-span-15">
+					<p class="littledark bold">
+						<label for="status1">
+							Status 
+							<span class="showTooltip tooltip" title="Questions are considered 'Used' when they are 'Currently' set in one or more Tests.">Tip</span>
+						</label>
+					</p>
+					<p>
+						<select name="filter_status" id="status1">
+							<option value="">All</option>
+							<option value="used">Used</option>
+							<option value="unused">Unused</option>
+						</select>
+					</p>
+				</div>
+				<div class="col-span-2">
+					<p class="littledark bold">
+						<label for="qtype1">Question Type</label>
+					</p>
+					<p>
+						<select name="filter_qtype" id="qtype1">
+							<option value="">All</option>
+							<option value="mcsa">Multiple Choice</option>
+							<option value="mcma">Multiple Response</option>
+							<option value="tf">True / False</option>
+							<option value="m">Matching</option>
+							<option value="ft">Free Text</option>
+							<option value="p">Grammar</option>
+							<option value="e">Essay</option>
+						</select>
+					</p>
+				</div>
+				<div class="col-span-2">
+					<p class="littledark bold">
+						<label for="cat_select">
+							Category
+						</label>
+					</p>
+					<p>
+						<%if(test){%>
+						<select name="test_id" class="hide">
+							<option value="<%=test._id%>" selected ></option>
+						</select>
+						<%}%>
+						
+						<select name="filter_cat_id" id="cat_select" class="cats_in_qb_filter">
+							<option value="no_cat_filter">All</option>
+							<%pcats.forEach(function(pcat,i){%>
+								<option value="pc<%=pcat._id%>" disabled="">- <%=pcat.parent_cat_name%> -</option>
+								<%pcat.cat_name.forEach(function(subcat,j){%>
+									<%scats.forEach(function(scat,k){%>
+										<%if(JSON.stringify(scat._id)==JSON.stringify(subcat)){%>
+											<option value="<%=scat._id%>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=scat.cat_name%></option>
+										<%}%>
+									<%})%>
+								<%})%>
+							<%})%>
+						</select>
+					</p>
+				</div>
+				<div class="col-span-2">
+					<p class="littledark bold">
+						<label for="query1">
+							Search Term 
+							<span class="showTooltip tooltip" title="Search for a term within the 'Question' text.">Tip</span>
+						</label>
+					</p>
+					<p>
+						<input type="text" name="filter_query" id="query1" size="15" maxlength="50" value="" onclick="this.select();">
+					</p>
+				</div>
+				<div class="col-span-15">
+					<p class="littledark">&nbsp;</p>
+					<p>
+						<a href="#" class="genericSubmitLink btn">
+						Go &gt;</a>
+					</p>
+				</div>
+			</form>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+<%-include("../partials/header")%>
+<h1>
+	this is input form
+</h1>
+
+<form method="post" action="/students">
+	<input type="text" placeholder="email" name="newStudent[email]">
+	<input type="password" placeholder="password" name="newStudent[password]">
+	<button>Submit</button>	
+</form>
+<%-include("../partials/footer")%>

@@ -1,0 +1,12 @@
+<%-include("../partials/header")%>
+<h1>
+	Hi this is index
+</h1>
+
+<%students.forEach((st)=>{%>
+<li><%=st%></li>
+<a href="/students/<%=st._id%>">See more</a>
+<%})%>
+<br>
+<a href="/students/new">make a new student</a>
+<%-include("../partials/footer")%>

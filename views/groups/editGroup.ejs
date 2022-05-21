@@ -1,0 +1,457 @@
+<%-include("../partials/headerResult")%>
+<%-include("../partials/teacherHead")%>
+<div id="content" class="clearfix">
+	<div class="innerWrapper">
+		<div class="col-span-7">
+			<p class="breadcrumb3">
+				<a href="/tests/groups/" class="first"><span>Groups</span></a>
+				<span>Edit Group</span>
+			</p>
+		</div>
+		<div class="col-span-3">
+			<ul class="menu-sections" id="walkthrough-menu">
+				<li class="test"><a href="/tests/"><span>Tests</span></a></li>
+				<li class="group"><a class="sect" href="/tests/groups"><span>Groups</span></a></li>
+				<li class="link"><a class="sect" href="/tests/links"><span>Links</span></a></li>
+			</ul>
+		</div>
+		<div class="clearheight20"></div>
+		<div class="clearheight20"></div>
+		<hr>
+		<div class="alert-box alert-confirmation editor "></div>
+		<div class="clearfix">
+			<div id="wrapEdit_gn">
+				<form id="dosubmit_groupname" class="gCCenericForm" method="post" action="/tests/groups/new?_method=put">
+					<input name="div_id" type="hidden" value="gn">
+					<input name="rg_id" type="hidden" value="<%=G._id%>">
+					<div class="misc_groupname hide">
+						<div class="field-group">
+							<label class="form-field-title" for="editText_gn">Group name:</label>
+							<input size="40" type="text" id="editText_gn" class="hide" maxlength="100" name="group_name" value="<%=G.group_name%>">
+						</div>
+					</div>
+					<div id="editLink_gn">
+						<h2 id="showText_gn" class="bbcodeInWrapper group-name-big name-big edit-name show-edit-symbol"><%=G.group_name%><span class="edit-symbol"></span></h2>
+					</div>
+					<div class="misc_groupname tab hide">
+						<a href="#" class="ie_btn ajaxSubmitBtn hide btn btn-create" id="submit_groupname">Update</a>
+						<a class="ie_btn ajaxCancelBtn hide btn btn-cancel">Cancel</a>
+						<div class="clearheight60"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="clearheight5"></div>
+		<a id="regnew"></a>
+		<div class="menu-options">
+			<a href="#" id="toggroup_01_addmembers" class="toggle-active"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Members</a>
+			<a href="#" id="toggroup_01_resetp" class="toggle-active"><i class="fa fa-sliders" aria-hidden="true"></i> Member Settings</a>
+			<a href="#" id="toggroup_01_notify" class="trigger_datepickerfromnotify toggle-active"><i class="fa fa-envelope" aria-hidden="true"></i> Notify Members</a>
+			<a href="#" id="toggroup_01_delete" class="toggle-active"><i class="fa fa-trash" aria-hidden="true"></i> Delete Options</a>
+			<a href="/assign/tests/" class="right assign-test-big"><i class="fa fa-share fa-flip-vertical" aria-hidden="true"></i> Assign Test</a>
+		</div>
+		<div class="clearheight10"></div>
+		<div class="hide group-message" id="dotoggroup_01_addmembers">
+			<div class="col-span-7">
+				<div class="col-span-45 editor">
+					<div class="alert-box alert-white">
+						<h5>Register Now</h5>
+						<p>You Register Users into this Group</p>
+						<a href="#" id="toggroup_02_upmembers" class="showcont">Use This Option</a>
+					</div>
+				</div>
+			<div class="col-span-05"><br><br><br>
+				&nbsp;&nbsp;&nbsp;<strong>Or</strong>
+			</div>
+			<div class="col-span-45 editor">
+				<div class="alert-box alert-white">
+					<h5>Self Registration</h5>
+					<p>Allow Users to register themselves</p>
+					<a href="#" id="toggroup_02_invitecodes" class="showcont">Use This Option</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-span-3">
+			&nbsp;
+		</div>
+		<div class="clearheight30"></div>
+			<div class="hide  editor" id="dotoggroup_02_upmembers">
+				<div class="alert-box alert-confirmation editor "><p>Manually register Users into this Group now. Have their username and password emailed to them.<br>Note: Self Registration codes are a separate way to register Users and are not required with this option.</p></div>
+				<div class="col-span-6">
+					<div class="clearheight30"></div>
+					<div class="editor">
+						<h5>Instructions</h5>
+						<ol>
+							<li>Add New Members details below</li>
+							<li>Select to Email users their log in details or Hand them out manually later</li>
+							<li>Members can then log in and take any Tests you Assign to their Group</li>
+							<li>You can add/transfer Members to multiple Groups, after they are registered</li>
+						</ol>
+					</div>
+				</div>
+				<div class="col-span-4">
+					<div class=" alert-box alert-white editor table">
+						<div class="row spacerrow">
+							<h5><i class="fa fa-bar-chart" aria-hidden="true"></i> Member Chart</h5>
+						</div>
+						<div class="row midpad">
+							<div class="col-span-15"><span class="right"><strong>4,987</strong></span></div>
+							<div class="col-span-05">&nbsp;</div>
+							<div class="col-span-8">Member places available <span class="showTooltipHTML tooltip" title="Each Account can register up to 5,000 Members at the same time.<br/><br/>Members can be deleted and replaced.">&nbsp;</span></div>
+						</div>
+						<div class="row midpad">
+							<div class="col-span-15"><span class="right"><strong>1,000</strong></span></div>
+							<div class="col-span-05">&nbsp;</div>
+							<div class="col-span-8">Max. Members per Group</div>
+						</div>
+						<div class="row midpad noborder">
+							<div class="col-span-15"><span class="right"><strong>2</strong></span></div>
+							<div class="col-span-05">&nbsp;</div>
+							<div class="col-span-8">Members in this Group</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearheight"></div>
+				<div class="col-span-10">
+					<div class=" alert-box alert-white table">
+<%-include("Edit/uploadBatchUsers")%>
+	</div>
+</div>
+			</div>
+			<a id="inviteCodes"></a>
+			<div class="hide" id="dotoggroup_02_invitecodes">
+				<div class="alert-box alert-confirmation editor "><p>Create Member Registration codes to hand out and allow Users to register themselves into this Group from https://www.*****.com/register/</p></div>
+				<div class="col-span-5">
+					<div class="alert-box alert-white alert-center editor">
+						<h4>Create Member Registration Codes</h4>
+						<p>You have <strong>4,987</strong> User places left to use across all your Groups.</p>
+						<p>Max. <strong>1,000</strong> Users can be registered per Group.</p>
+						<p>You have <strong>998</strong> Registration Codes left to add to this Group.</p>
+						<div class="clearheight"></div>
+<%-include("Edit/setRegistrationCodes")%>
+						</div>
+					</div>
+				<%if(!foundCodes){%>
+					<div class="col-span-5">
+						<div class="alert-box alert-white alert-center editor">
+							<h4>Remove Member Registration Codes</h4>
+							<p>No Registration Codes are waiting to be used for this Group.</p>
+						</div>
+					</div>
+				<%}else{%>
+				<div class="col-span-5"><div class="alert-box alert-white alert-center editor"><h4>Remove Member Registration Codes</h4><p>You have <strong><%=numFC%></strong> unused Member Registration Codes in this Group.</p>
+						<p>1. Remove Member Registration Codes.</p>
+						<p>2. Create new Member Registration Codes in your other Groups.</p>
+						<div class="clearheight"></div>
+						<!-- <form name="remove" action="/tests/groups/setRegistrationCodes/" method="get"> -->
+						<p class="titlename">Remove 
+						<!-- <select name="removenumofstudents"><option value="1">1</option></select> -->
+							Registration Codes.</p>
+							<input type="hidden" name="rg_id" value="<%=G._id%>">
+							<p>
+								<!-- <a href="/tests/groups/setRegistrationCodes/" class="btn btn-cancel genericSubmitLink"> -->
+								<a href="/tests/groups/setRegistrationCodes/?group=<%=G._id%>" class="btn btn-cancel">
+									Remove Member Registration Codes
+								</a>
+							</p>
+					<!-- </form> -->
+					</div></div>
+				<%}%>
+					<div class="clearheight"></div>
+				</div>
+				<hr>
+				<i class="fa fa-ticket" aria-hidden="true"></i> 
+				<a href="#" id="regCodeUsageTrigger">View Member &amp; Registration code usage across all Groups</a>
+			</div>
+			<div class="hide group-message" id="dotoggroup_01_resetp">
+			    <div class="row">
+        			<div class="col-span-10">
+						<div class="col-span-3">
+							<div class="alert-box alert-white editor">
+							<h5>Login Details</h5>
+							<p>Reset passwords or send login details</p>
+							<a href="#" id="toggroup_03_pass" class="showcont">View</a>
+						</div>
+					</div>
+					<div class="col-span-05">
+						&nbsp;
+					</div>
+					<div class="col-span-3">
+						<div class="alert-box alert-white editor">
+							<h5>Language</h5>
+							<p>Change Interface Language</p>
+							<a href="#" id="toggroup_03_lang" class="showcont">View</a>
+						</div>
+					</div>
+					<div class="col-span-05">
+						&nbsp;
+					</div>
+					<div class="col-span-3">
+						<div class="alert-box alert-white editor">
+							<h5>Group Access</h5>
+							<p>Control Group Access</p>
+							<a href="#" id="toggroup_03_access" class="showcont">View</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="msgDiv<%=G._id%>"></div>
+				<div class="alert-box alert-white table hide padtop" id="dotoggroup_03_pass">
+					<div class="clearheight10"></div>
+						<div class="tab">
+						<h5>Login Details</h5>
+						<p class="explain">Tip: To change individual Member passwords, edit their details in the Members table below.</p>
+					</div>	
+					<div class="clearheight"></div>
+					<hr class="tab">
+					<div class="clearheight"></div>
+<%-include("Edit/resetGroupPassword")%>
+	    		</div>
+	    		<div class="alert-box alert-white table hide padtop" id="dotoggroup_03_lang">
+					<div class="clearheight10"></div>
+					<div class="tab">
+						<h5>Language</h5>
+						<p class="explain">Tip: To change the language for an individual Member, edit their details in the Members table below.</p>
+					</div>	
+					<div class="clearheight"></div>
+					<hr class="tab">
+					<div class="clearheight"></div>
+					<form action="/a/users/group/resetGroupPassword.rpc.php" method="post" class="genericPostForm" id="usedForIeResubmit_resetAllLangs">
+						<input type="hidden" name="rg_id" value="<%=G._id%>">
+						<div class="field-group">
+						<label class="form-field-title" for="grouplang">Select Language:</label>
+							<select name="grouplanguage" id="grouplang">
+								<%-include("Edit/language")%>
+							</select> (Interface Language)
+							</div>
+						<p><input type="submit" class="genericSubmitLink btn btn-create tab" value="Update All Members"></p>
+						<div class="clearheight"></div>
+					</form>
+	    		</div>
+	    		<div class="alert-box alert-white table hide padtop" id="dotoggroup_03_access">
+					<div class="clearheight10"></div>
+					<div class="tab">
+						<h5>Group Access</h5>
+						<p class="explain">Tip: To change individual Member access, edit their details in the Members table below.</p>
+					</div>	
+					<div class="clearheight"></div>
+					<hr class="tab">
+					<div class="clearheight"></div>
+					<form action="/a/users/group/resetGroupPassword.rpc.php" method="post" class="genericPostForm" id="usedForIeResubmit_resetAllAccess">
+						<input type="hidden" name="rg_id" value="<%=G._id%>">
+						<div class="field-group">
+						<label class="form-field-title" for="group_access">Group Members:</label>
+							<select name="groupaccess" id="group_access">
+								<option value="1000" selected="selected">-- Select --</option>
+								<option value="1">Can access this Group</option>
+								<option value="0">Cannot access this Group</option>
+							</select>
+						</div>
+						<p><input type="submit" class="genericSubmitLink btn btn-create tab" value="Update"></p>
+						<div class="clearheight"></div>
+					</form>
+	    		</div>
+    		</div>
+			<div class="hide editor group-message" id="dotoggroup_01_notify">
+				<div class="alert-box editor alert-confirmation ">
+					<div class="clearheight10"></div>
+					Upgraded accounts can send notification emails to Group Members.
+					<div class="clearheight"></div>
+					<span class="little">
+						<a href="#" class="upgradeRpc">Upgraded Account Features</a>
+					</span>
+				</div>
+			</div>
+			<div class="hide editor group-message" id="dotoggroup_01_delete">
+				<div class="alert-box alert-white alert-center editor">
+					<h5>Option 1: Delete Group options</h5>
+					<ul>
+						<li>Delete all Users in this Group and their Results.</li>
+						<li>Delete all Users in this Group, their Results and Un-assign all Tests from this Group.</li>
+						<li>Delete all Users in this Group, their Results and this Group completely.</li>
+					</ul>
+				<p><a href="/tests/groups/delete/?group_id=<%=G._id%>" class="btn btn-create">View Options</a></p>
+			</div>
+			<div class="clearheight"></div>
+			<div class="alert-box alert-white alert-center editor">
+				<h5>Option 2: Delete Individual Members</h5>
+				<p>You can delete individual Members via their rows below.</p>
+			</div>
+		</div>
+		<div class="clearheight30"></div>
+		<h4 class="edit-message">Group Message</h4>
+		<p><a href="#" id="tog_groupmessage">+ Add Message</a></p>
+		<div class="delay_hide_sceditor group-message editor" id="dotog_groupmessage" style="display: none;">
+			<div class=" alert-box alert-white group-message-instructions-width">
+				<p>Group Members will see your message when they log in.</p>
+				<p>You can also set individual private messages under each Members name below.</p>
+			</div>
+			<div>
+				<form id="dosubmit_groupmessage" class="genericPostForm" method="post" action="/tests/groups/new?_method=PUT">
+					<input name="div_id" type="hidden" value="gm">
+					<input name="rg_id" type="hidden" value="<%=G._id%>">
+					<textarea rows="3" cols="70" class="fullBBcodeEditor showTooltip" id="group_msg" name="group_message" title="This message text is optional and will show to Group Members when they log in. Update with no content to remove any message you have set." style="display: none;"><%=G.group_message%></textarea>
+					<div id="msgDivMain" style="display: none;" class="ajaxsuccess"></div>
+					<div id="customMsg_editGroupMsg"></div>
+					<div id="msgDivLoggedOutJsonError"></div><br>
+					<p><input type="submit" id="submit_groupmessage" class="btn btn-create btnSubmit" value="Update"></p>
+				</form>
+			</div>
+		</div>
+		<div class="clearheight30"></div>
+		<a class="scroll_export_members"></a>
+		<div class="top_hidden_box_div hide closeMeContainer editor">
+			<h4>Export Member Details<a href="#" class="closeMeLink right close"></a></h4>
+			<p>Exports will include:</p>
+			<ul>
+				<li>Name</li>
+				<li>Username</li>
+				<li>Email Address</li>
+				<li>Date Registered</li>
+				<li>Date of Last Login</li>
+				<li>Registration code information <span class="showTooltip tooltip" title="Only applicable if Users registered themselves with a registration code.">&nbsp;</span></li>
+			</ul>
+			<p>Passwords are stored encrypted for security reasons and not included in exports.</p>
+			<p>Exports are in .CSV 'COMMA separated' format.</p>
+			<div class="clearheight"></div>
+
+			<div class="col-span-5">
+				<p class="bold">Export Members From This Group Only</p>
+				<p><a href="/a/users/group/userDetails.export.php?rg_id=<%=G._id%>">Export</a></p>
+			</div>
+			<div class="col-span-5">
+				<p class="bold">Export Members From All My Groups</p>
+				<p>Order Export: <a href="/a/users/group/userDetails.export.php?export_order_by=user">By Name</a>
+			 	| <a href="/a/users/group/userDetails.export.php?export_order_by=group">By Group</a></p></div>
+				<div class="clearheight"></div>
+			</div>
+			<a id="viewgm"></a>
+			<h4><%=G.students.length%> Members</h4>
+			<ul class="cmtableTabs">
+				<li class="tabon"><a href="#" id="togtab_01_groupmembers">Group Members</a></li>
+				<li class="taboff"><a href="#" id="togtab_01_groupassignments"><strong>0</strong> Tests Assigned</a></li>
+			</ul>
+			<div class="table">
+				<div id="dotogtab_01_groupmembers">
+ 					<div class="table-utility row above">
+						<div class="col-span-1">
+							<div class="dropdown dropdown-x hide_if_no_data">
+								<a class="dropdown-toggle no_anchor" href="#"> Options </a>
+								<ul class="dropdown-menu">
+									<li><a href="#" class="expandAll2">Expand All</a></li>
+									<li><a href="#" class="collapseAll2">Collapse All</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-span-4">
+							<span class="hide_if_no_data not-ie67 dropdown"><a href="#" class="littledark"><i class="fa fa-filter" aria-hidden="true"></i> Sort</a>
+							<ul class="dropdown-menu filter">
+								<li><a id="sortGroupMembersFirstName" href="#">First Name</a></li>
+								<li><a id="sortGroupMembersLastName" href="#">Last Name</a></li>
+								<li><a id="ssortGroupMembersLogin" href="#">Login Date</a></li>
+	                        	<li><a id="sortGroupMembersRegistered" href="#">Registered Date</a></li>
+							</ul>
+						</span>
+					</div>
+					<div class="col-span-5 col-btns">
+						<div class="dropdown hide_if_no_data">
+						<a class="btn btn-actions btn-white no_anchor" href="#"> Export <span class="caret">&nbsp;</span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#" class="anchor_scroll_export_members">Export Member Details</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+	<%var ss=G.students%>
+<ul class="table-body" id="users-table">
+	<%ss.forEach((gst,i)=>{%>
+	<li>
+		<a id="hi<%=gst._id%>"></a>
+		<div class="row accordion-toggle closed" id="i<%=gst._id%>">
+			<div class="col-span-6">
+				<h4 class="member-name name" id="name_<%=gst._id%>"><%=//gst.firstName%> <%=//gst.lastName%> <%=list[gst._id].firstName%> <%=list[gst._id].lastName%></h4>
+			</div>
+			<span class="caret">&nbsp;</span>
+		</div>
+		<div class="accordion-fold">
+			<div class="row ">
+				<div class="col-span-8 editor">
+					<ul>
+						<li><span class="members-list-left">Username: </span><%=//gst.username%><%=list[gst._id].username%></li>
+						<li><span class="members-list-left">Password: </span>******</li>
+						<li><span class="members-list-left">Email: </span><span id="em_<%=gst._id%>"><%=//gst.email%><%=list[gst._id].email%></span></li>
+						<li><span class="members-list-left">Interface: </span><span id="lang_<%=gst._id%>"><%=//gst.language%><%=list[gst._id].language%></span></li>
+						<li><span class="members-list-left">Registered: </span><%if(list[gst._id].registeredAt){%><%=moment(list[gst._id].registeredAt).tz(teacher.timezone)%><%}%></li>
+						<li><span class="members-list-left">Last Login: </span><%if(list[gst._id].lastLogin){%><%=moment(list[gst._id].lastLogin).tz(teacher.timezone)%><%}%></li>
+					</ul>
+				</div>
+				<div class="col-span-2 col-btns">
+					<div class="dropdown">
+						<a class="dropdown-toggle btn btn-results no_anchor" href="#">Results <span class="caret">&nbsp;</span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/a/results/rguser/?user_id=<%=gst._id%>&amp;rg_id=<%=G._id%>&amp;b=members">Test Results</a></li>
+							<li><a href="/a/results/categories/?user_id=<%=gst._id%>&amp;rg_id=<%=G._id%>&amp;b=members">Category Statistics</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="divider-solid"></div>
+				<div class="col-span-7 editor">
+					<div class="question-footer">
+						<a class="popupSmall" href="/users/editUserPopup?user_id=<%=gst._id%>&amp;rg_id=<%=G._id%>">
+							<i class="fa fa-pencil" aria-hidden="true"></i> Edit details &amp; message
+						</a>
+						<span> | </span>
+						
+						<a class="trigger-generic-array" href="/users/transfer/?user_id=<%=gst._id%>&amp;rg_id=<%=G._id%>&amp;show_layover=1" data-index="<%=i%>"><i class="fa fa-user-plus" aria-hidden="true"></i> Transfer User</a>
+						<span> | </span>
+						<a class="trigger-generic-array" href="/users/transfer/?user_id=<%=gst._id%>&amp;rg_id=<%=G._id%>&amp;show_layover=1" data-index="<%=i%>"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete User</a>
+					</div>
+				</div>
+				<div class="col-span-3">
+					<p class="right">
+						<label for="activeid_<%=gst._id%>_<%=G._id%>" id="activestatus_<%=gst._id%>" class="showTooltipEast activestatus" title="Un-check this box to temporarily disallow Users access to this Group. Re-check this box to allow access again.">Can Access Group: </label>
+						<input type="checkbox" name="active_user" checked="checked" id="activeid_<%=gst._id%>_<%=G._id%>">
+					</p>
+				</div>
+			</div>
+		</div>
+	</li>
+	<%})%>
+</ul>
+
+<%-include("Edit/script0")%>
+			<div class="table-utility row above">
+				<div class="col-span-5">
+					<div class="dropdown dropdown-x hide_if_no_data">
+						<a class="dropdown-toggle no_anchor" href="#"> Options </a>
+						<ul class="dropdown-menu">
+							<li><a href="#" class="expandAll2">Expand All</a></li>
+							<li><a href="#" class="collapseAll2">Collapse All</a></li>
+							<li class="divider"><a href="#" class="anchor_scroll_export_members">Export Member Details</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+	</div>
+	<div id="dotogtab_01_groupassignments" class="hide">
+			<ul class="table-body">
+				<li class="row hint">&nbsp;</li>
+				<li class="row test-question">
+					<span class="explain">You need to Assign Tests to this Group before they can be taken by these Group members. <a href="/help/manual/#assign" class="popup">Learn more</a>.</span>
+				</li>
+			</ul>
+	</div>
+	</div><!-- END main .table -->
+
+			<div class="generic-overlay">
+				<div class="generic-overlay-content"></div>
+				<div class="clearheight30"></div>
+			</div>
+<%-include("Edit/script")%>
+</div><!-- innerWrapper -->
+<img src="/img3/icon_loading_circleV3.gif" alt="Hidden Loading Image" class="hide" width="20" height="20">
+</div>
+
+<%//-include("Edit/editGroupJS")%>
+<%-include("../partials/footer")%>

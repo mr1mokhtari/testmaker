@@ -1,0 +1,153 @@
+<div class="header scroll_top_default open">
+	<div class="branding">
+		<div class="f-left">
+			<a href="/a/"><img alt="Quiz Maker" src="/img3/retina/cm-loggedin-logo1x.jpg" srcset="/img3/retina/cm-loggedin-logo1x.jpg 1x, /img3/retina/cm-loggedin-logo2x.jpg 2x, /img3/retina/cm-loggedin-logo3x.jpg 3x" width="182" height="27"></a>
+			<span class="noprint">*****</span>
+		</div>
+		<div class="top-right-nav noprint">
+			<ul class="upgrade-logout-nav">
+				<li><a href="/a/myaccount/">Hi <%=teacher.username%></a></li>
+				<!-- <li><a href="/a/myaccount/upgrade/?trk=headerlink">Upgrade</a></li> -->
+				<li><a href="/logout/">Logout</a></li>
+			</ul>
+		</div>
+	</div>
+	<a class="skip-link noprint" href="#content">Skip to Content</a>
+		<div class="access level-1 noprint">
+    		<ul id="menu" class="menu main">
+                <li class=" dashboard home" id="home">
+                    <a href="/a/" class="menu-home touchcheck">Dashboard <span class="menu-arrow menu-arrow-white"></span></a>
+                    <ul class="level-2">
+                        <li>
+                            <div class="menu-first-section">
+                                <ul class="menu-recent-results">
+                                    <li><h2><a href="/a/">Recent Results</a></h2></li>
+                                    <li><a href="/a/">By Test</a></li>
+                                    <li><a href="/a/results/?rg_search=1&amp;filter=takenwithin&amp;within=24">By Group</a></li>
+                                    <li><a href="/a/results/?nrg_search=1&amp;filter=takenwithin&amp;within=24">By Link</a></li>
+                                </ul>
+                                <ul class="menu-stats">
+                                    <li><h2><a href="/a/results/tests/?statshome=1">Statistics</a></h2></li>
+                                    <li><a href="/a/results/tests/">By Test</a></li>
+                                    <li><a href="/a/results/groups/">By Group</a></li>
+                                    <li><a href="/a/results/groups/?links">By Link</a></li>
+                                </ul>
+                            </div>
+                            <div class="menu-second-section">
+                                <ul class="menu-tests">
+                                    <!--<li><h2>Tests</h2></li>-->
+                                    <li><h2><a href="/tests">Tests</a></h2></li>
+                                    <li><a href="/questions">Question Bank</a></li>
+                                    <li><a href="/tests/categories/">Categories</a></li>
+                                    <li><a href="/tests/files/">Files</a></li>
+                                    <li><a href="/tests/certificates/">Certificates</a></li>
+                                    <li><a href="/tests/community/">Community</a></li>
+                                </ul>
+
+                                <ul class="menu-groups">
+                                    <li><h2><a href="/tests/groups">Groups</a></h2></li>
+                                    <li><a href="/results/export/">Export </a></li>
+                                </ul>
+                                <ul class="menu-links">
+                                    <li><h2><a href="/tests/links">Links</a></h2></li>
+                                    <li><a href="/results/export/">Export</a></li>
+                                    <li><a href="/tests/themes/">Themes</a></li>
+                                    <li><a href="/users/accesslists/">Access Lists</a></li>
+                                </ul>
+
+                                <div class="menu-new">
+                                    <a href="/tests/test/new/?ref=nav">New Test +</a>
+                                    <a href="/tests/groups/new/?ref=nav">New Group +</a>
+                                    <a href="/assign/tests/?ref=nav">New Link +</a>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </li>
+
+                <li class=" dashboard help" id="help">
+                    <a href="/a/help/manual/" class="touchcheck">Help <span class="menu-arrow menu-arrow-white"></span></a>
+
+                    <ul class="help-nav">
+                        <li><a href="/a/help/manual/">User Manual</a></li>
+                        <li><a href="/a/help/">FAQ</a></li>
+                        <li><a href="#" class="video5">Videos</a></li>
+                        <li><a id="walkthrough" href="#">Tutorial</a></li>
+                        <li class="divider"><a href="/online-testing/contact-us/">Contact Us</a></li>
+                    </ul>
+                </li>
+
+
+                <li class="dashboard search-nav" id="search">
+                    <a href="#" class="no_anchor touchcheck">
+                        <span class="search-icon search-icon-white"></span>
+                    </a>
+                    <ul class="search-form">
+                        <li>
+                            <div class="search-by-row">
+                                <label for="search-by">Search:</label>
+                                <!-- dropdown of test/groups/links -->
+                                <select id="search-by">
+                                    <option value="users" selected="selected">Users</option>
+                                    <option value="tests">Tests</option>
+                                    <option value="groups">Groups</option>
+                                    <option value="links">Links</option>
+                                </select>
+                            </div>
+                            <form id="searchForm" action="users" method="get" autocomplete="off">
+                                <!-- dynamic depending on search type -->
+                                <label for="test-name" class="hide">Test name</label>
+	                            <input type="text" name="test-name" id="test-name" placeholder="Enter Test name">
+                                <label for="group-name" class="hide">Group name</label>
+	                            <input type="text" name="group-name" id="group-name" placeholder="Enter Group name">
+                                <label for="link-name" class="hide">Link name</label>
+	                            <input type="text" name="link-name" id="link-name" placeholder="Enter Link name">
+	                            <span class="user-search-field">
+		                            <label for="year">Results from:</label>
+		                            <select name="year" id="year" class="user-search-year showTooltip" title="This option applies to Link Results only">
+			                            <option value="2020" selected="selected">2020</option>
+										<option value="2020" selected="selected">2021</option>
+									</select>
+	                            </span>
+                                <label for="first" class="hide">Users first name</label>
+	                            <input type="text" class="user-search-field" name="first" id="first" placeholder="First name">
+                                <label for="last" class="hide">Users last name</label>
+	                            <input type="text" class="user-search-field" name="last" id="last" placeholder="Last name">
+                                <label for="e_mail" class="hide">Email</label>
+	                            <input type="text" class="user-search-field" name="email" id="e_mail" placeholder="Email">
+                                <label for="ip_address_search" class="hide">IP Address</label>
+	                            <input type="text" class="user-search-field" name="ip_address" id="ip_address_search" placeholder="IP Address">
+								<label for="reg_code" class="hide">Registration code</label>
+								<input type="text" class="user-search-field showTooltip" title="Search to see if a user has registered with a particular registration code." name="regcode" id="reg_code" placeholder="Registration code">
+								<label for="access_code" class="hide">Access code</label>
+								<input type="text" class="user-search-field showTooltip" title="Access list codes are applicable to Links results only (if used)" name="access_code" id="access_code" placeholder="Access list code">
+								<label for="cm_user_id" class="hide">Cm User ID</label>
+								<input type="text" class="user-search-field showTooltip" title="cm_user_ids are applicable to Links results only (if used)" name="cm_user_id" id="cm_user_id" placeholder="cm_user_id">
+								<label for="cm_user_id" class="hide">Certificate Serial Number</label>
+								<input type="text" class="user-search-field showTooltip" title="Serial numbers are displayed on Certificates when enabled in the Certificates Settings." name="certificate_serial_number" id="certificate_serial_number" placeholder="Certificate Serial Number">
+                                <div class="clear"></div>
+                                <input type="submit" class="btn btn-analytics search-btn" value="Search" id="nav-search">
+                                <div class="clearheight"></div>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class=" dashboard my-account" id="account">
+                    <a href="/a/myaccount/" class="account touchcheck">
+                        <span class="text">My Account</span>
+                        <span class="menu-arrow menu-arrow-white"></span>
+                    </a>
+                    <ul class="account-nav">
+                        <li><a href="/a/myaccount/">My Account</a></li>
+                        <!-- <li><a href="/a/myaccount/upgrade/?trk=myaccountmenu">Upgrade</a></li> -->
+                        <li><a href="/a/myaccount/assistants/?trk=myaccountmenu">Assistants</a></li>
+						<li><a href="/a/myaccount/webhooks/">Webhooks / API Keys</a></li>
+                         <li><a href="/a/myaccount/iprestrictions/">IP Restrictions</a></li>
+						<li class="divider"><a href="JavaScript:window.print();">Print this page</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+	</div>

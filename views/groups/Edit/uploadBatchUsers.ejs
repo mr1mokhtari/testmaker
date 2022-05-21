@@ -1,0 +1,158 @@
+						<form action="/register" method="post" id="dosubmit_addusers" class="editor">
+							<input name="rg_id" type="hidden" value="<%=G._id%>">
+							<input name="reg_type" type="hidden" value="test_taker_by_admin">
+							<div class="clearheight"></div>
+							<div class="field-group">
+								<div class="tab">
+									<div class="col-span-5">
+										<h5>Example Format</h5>
+											<div class="exampleuploadnames editor">
+		<!-- Lisa,Brown<br>Terry,Wright<br> -->
+		Kim,Sanders,kim@example.com<br>Paul,Smith,paul@example.com<br>(Do NOT use <strong>space</strong> after commas)</div>
+									</div>
+									<div class="col-span-05">&nbsp;</div>
+									<div class="col-span-4 editor">
+										<h5>&nbsp;</h5>
+										<ul>
+											<li>One user per line.</li>
+											<li>Ensure commas(,) between First name, Last name and Email.</li>
+											<li>Email must be unique. If the user is already registered, the same email can't be used again.</li>
+											<li>Upload Max. 50 Users at a time.</li>
+										</ul>
+
+									</div>
+								</div>
+							</div>
+							<div class="clearheight30"></div>
+							<div class="field-group">
+								<label class="form-field-title" for="listnames">* New Members:</label>
+				<!-- Four Steps Back -->
+				<textarea placeholder="Kim, Sanders, kim@example.com" name="multi_users" id="listnames" rows="2" cols="50" class="input showTooltipHTML checkEmpty" title="Format must be exact. See example &amp; instructions above.</br>
+				<!-- </br>Email addresses are optional, but required if you want login details emailed to Users.</br> -->
+				</br>Usernames are created automatically and can be edited by Users when they login. Passwords can be edited as well.</br></br>Users cannot edit their Name or Email, however you can edit all their details if required."></textarea>
+				<br>
+				<span class="tab explain">(We will create unique Usernames for each user)</span>
+			</div>
+			<div class="clearheight30"></div>
+			<div class="field-group">
+				<span class="form-field-title not-input">* Name Order:</span>
+				<input type="radio" name="upload_order" id="fle2" value="fle" class="checkEmpty" checked="checked">
+				<label for="fle2">First name, Last name, email</label><br>
+				<span class="tab">
+					<input type="radio" name="upload_order" id="lfe2" value="lfe">
+					<label for="lfe2">Last name, First name, email</label>
+				</span><br>
+				<div class="clearheight5"></div>
+				<span class="tab explain">(Which order you used when entering names above)</span>
+			</div>
+			<div class="clearheight30"></div>
+			<div class="field-group">
+				<label class="form-field-title" for="paswordup">* Common Password:</label>
+				<input type="text" maxlength="72" name="userpassword" id="paswordup" class="showTooltipHTML input" title="Option 1: Choose a common password for these new Users.<br/>
+																														  <!-- <br/>Option 2: Leave blank and ***** will create a unique password for each user.<br/> -->
+																														  <br/>Password must be at least 8 characters long.<br/>Maximum password length is 72 characters.<br/>Password must contain at least:<br/>1 Number<br/>1 Letter<br/>1 Special character">
+				<span class="explain"> </span>
+			</div>
+			<div class="clearheight30"></div>
+			<div class="field-group">
+				<label class="form-field-title" for="langup">* Language:</label>
+				<select name="language_codes" id="langup">
+					<%-include("language")%>
+				</select>
+				<div class="clearheight5"></div>
+				<span class="tab explain">(The Interface Language Members will see when they Log in)</span>
+			</div>
+			<div class="field-group">
+				<label class="form-field-title" for="syc2">Select student time zone *</label><br/>
+				<select name="timezone" id="syc2" class="select-box">
+					<%-include("timezone")%>
+				</select>
+			</div>
+			<div class="clearheight"></div>
+			<div class="field-group">
+				<hr class="tab">
+				<div class="clearheight"></div>
+				<h5 class="tab">Send Usernames and Passwords To:</h5>
+			</div>
+			<div class="field-group">
+					<label class="form-field-title" for="em_admin">1. Administrator:</label>
+				<select name="email_id_for_sending_all_details_to" id="em_admin">
+					<option value="0" selected="selected"><%=currentUser.username%> Email</option>
+					<option value="none">-- Do Not Email Login Details to Administrator -- </option>
+				</select>
+				<span class="explain"> Optional - Email All Login Details to Administrator </span>
+ 			</div>
+			<div class="clearheight30"></div>
+			<div class="field-group">
+				<span class="form-field-title not-input">2. New Members:</span>
+				<input type="radio" name="email_users" id="email_off" value="no">
+				<label for="email_off">No: Do not send login details to New Members</label><br>
+				<span class="tab">
+					<input type="radio" name="email_users" id="email_on" value="yes" onclick="$('#show_email_form').show();$('#showRegBtn').show();">
+					<label for="email_on">Yes: Send login details to New Members</label>
+				</span>
+			</div>
+			<div class="indentOne">
+				<div class="hide" id="show_email_form">
+					<div class="liftBox">
+						<div class="row noborder">
+							<div class="col-span-7 editor">
+								<h4>Customize this email template sent to New Members</h4>
+								<p class="explain">Upgraded accounts can customize email text below.</p>
+								<h5>Email 'Subject line' </h5>
+								<div class="clearheight"></div>
+								<div class="padleft">
+									<p>Your login details for *****</p>
+								</div>
+								<div class="clearheight"></div>
+								<h5>Email 'Body text'</h5>
+								<div class="clearheight"></div>
+								<div class="padleft">
+									<p>Hi <span class="showTooltip contactEmail" title="Each Users 'First name' will be replaced here automatically">John,</span></p>
+									<p>Your username is: 
+										<span class="showTooltip contactEmail" title="Each Users 'Username' will be replaced here automatically">john123</span>
+									</p>
+									<p>Your password is: 
+										<span class="showTooltip contactEmail" title="Each Users 'Password' will be replaced here automatically">pass123</span>
+									</p>
+									<p><span class="showTooltip" title="Link sent to Users">https://www.*****.com/</span></p>
+									<p>You can now log into your new ***** account with the details given above.</p>
+									<p>For further information please contact: <span class="contactEmail showTooltip" title="This is the email address in your My Account preferences."><%=currentUser.username%> Email</span></p>
+									<p>This email was sent on behalf of,
+										<br>
+										<%=currentUser.username%> Name
+									</p>
+								</div>
+							</div>
+							<div class="col-span-3">
+								<span class="email_bg">
+									<i class="fa fa-at" aria-hidden="true"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="clearheight"></div>
+					<h5>Send Date</h5>
+					<p>
+						<input type="text" class="showTooltip" autocomplete="off" name="send_from_date" id="datepickerfrom_addmembers" value="" size="16" maxlength="10" title="Send emails out on a specific date and time. Leave blank to have emails sent shortly.">
+						<select name="send_from_h"><option value="12">12</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option></select>
+						<select name="send_from_m"><option value="00">00</option><option value="05">05</option><option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option><option value="30">30</option><option value="35">35</option><option value="40">40</option><option value="45">45</option><option value="50">50</option><option value="55">55</option></select>
+						<select name="send_from_ampm"><option value="am">am</option><option value="pm">pm</option></select>											<br>
+						<span class="littledark">Leave blank to send in a few minutes.</span>
+					</p>
+					<h5>Enter your own Account login password</h5>
+					<div class="clearheight5"></div>
+					<p>
+						<input type="text" class="showTooltip" name="acc_password" size="16" autocomplete="off" value="" title="Verify your ***** login password to send emails. Required for security reasons.">
+					</p>
+				</div>
+				<div class="clearheight"></div>
+				<div class="hide" id="showRegBtn">
+					<p><strong>Note:</strong> The usernames and passwords will be displayed on the following page for you to copy for a reference.</p>
+					<p>Each user can edit their username and password when they login.</p>
+					<div class="clearheight"></div>
+					<a href="#" id="submit_addusers" class="btn btn-create">Register New Users</a>
+					<div class="clearheight"></div>
+				</div>
+			</div>
+		</form>

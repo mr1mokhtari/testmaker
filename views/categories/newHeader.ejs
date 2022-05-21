@@ -1,0 +1,83 @@
+<!-- https://www.sceditor.com/documentation/getting-started/-->
+<!-- Include the default theme -->
+<!-- <link rel="stylesheet" href="sceditor/default.min.css" /> -->
+<!-- Include the editors JS -->
+<!-- <script src="sceditor/sceditor.min.js"></script> -->
+<!-- Include the BBCode or XHTML formats -->
+<!-- <script src="/sceditor/bbcode.js"></script> -->
+<!-- <script src="/sceditor/xhtml.js"></script> -->
+
+
+
+
+<link rel="stylesheet" type="text/css" href="https://www.classmarker.com/js3/css/smoothness/jquery-ui-1.12.1.custom.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="https://www.classmarker.com/css3/cm.css?v=264" media="screen"> -->
+<link rel="stylesheet" type="text/css" href="/stylesheets/cm.css?v=264" media="screen">
+<link rel="stylesheet" type="text/css" href="https://www.classmarker.com/css3/quiz.css?v=264" media="screen">
+<link rel="stylesheet" type="text/css" href="https://www.classmarker.com/css3/cmbbcode.css?v=264" media="screen">
+<link href="https://www.classmarker.com/js3/featherlight/featherlight.css" type="text/css" rel="stylesheet">
+
+<script>
+	var web_root = "/";
+	var webpath_img = "/img3/";
+	var s3_assets_path = "https://";
+	var maxSize = {"image": 512000 , "document": 5242880, "video": 5242880, "audio": 2097152};
+	// var webpath_admin = "/a/";
+	var webpath_admin = "https://webdev-tmhgc.run-eu-central1.goorm.io/";
+	// var webpath_admin = "https://a1a2a3.run-eu-central1.goorm.io/";
+	var BBCODE_CSS = "/stylesheets/bbcode/jquery.sceditor.default.min.css";
+</script>
+
+<script src="https://www.classmarker.com/js3/jquery-1.9.1.min.js"></script>
+<script src="https://www.classmarker.com/js3/jquery-ui-1.12.1.min.js"></script>
+<script src="https://www.classmarker.com/js3/xbbcode.js?vs=210"></script>
+<script src="https://www.classmarker.com/js3/featherlight/featherlight.js?v=210"></script>
+<link rel="stylesheet" type="text/css" href="https://www.classmarker.com/css3/bbcode/bbcode.css?v=264" media="screen">
+
+<script src="https://www.classmarker.com/js3/bbcode/sceditor.custom.js?v=210"></script>
+<!-- <script src="https://www.classmarker.com/js3/cm_inst_editquestions.js?v=210"></script> -->
+<script src="/js/cm_inst_editquestions.js?v=210"></script>
+<!-- <script src="https://www.classmarker.com/js3/generic.overlay.js?v=210"></script> -->
+<script src="/js/generic.overlay.js?v=210"></script>
+<!-- <script src="https://www.classmarker.com/js3/cm_inst.js?v=210"></script> -->
+<script src="/js/cm_inst.js?v=210"></script>
+<!-- <script src="https://www.classmarker.com/js3/cmall.js?v=210"></script> -->
+<script src="/js/cmall.js?v=210"></script>
+<!-- <script src="https://www.classmarker.com/js3/bbcode/vendor/jquery.sceditor.bbcode.js?v=210"></script> -->
+<script src="/js/jquery.sceditor.bbcode.js?v=210"></script>
+<!-- <script src="https://www.classmarker.com/js3/jquery.form.js?v=210"></script> -->
+<script src="/js/jquery.form.js?v=210"></script>
+
+<script src="https://www.classmarker.com/js3/minicolors/jquery.minicolors.js?v=210"></script>
+<!-- NEW NEW NEW -->
+<script src="/js/cmEditInline/jquery.cmEditInline.js?v=211"></script>
+
+<script src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/791178814/?random=1597724718941&amp;cv=9&amp;fst=1597724718941&amp;num=1&amp;bg=ffffff&amp;guid=ON&amp;resp=GooglemKTybQhCsO&amp;u_h=768&amp;u_w=1366&amp;u_ah=768&amp;u_aw=1366&amp;u_cd=24&amp;u_his=8&amp;u_tz=270&amp;u_java=false&amp;u_nplug=1&amp;u_nmime=2&amp;gtm=2oa871&amp;sendb=1&amp;ig=0&amp;data=event%3Dgtag.config&amp;frm=0&amp;url=https%3A%2F%2Fwww.classmarker.com%2Fa%2Ftests%2Fqb%2Fmanage%2F%3Fqtype%3Dmcsa&amp;ref=https%3A%2F%2Fwww.classmarker.com%2Fa%2Ftests%2Fqb%2F%3Fall%3D1&amp;tiba=ClassMarker%20-%20Manage%20Question&amp;hn=www.google.com&amp;async=1&amp;rfmt=3&amp;fmt=4"></script>
+
+
+<link rel="stylesheet" type="text/css" href="https://www.classmarker.com/js3/minicolors/jquery.minicolors.css?v=264" media="screen">
+<link rel="stylesheet" media="print" type="text/css" href="https://www.classmarker.com/css3/cmprint.css">
+<link rel="stylesheet" media="print" type="text/css" href="https://www.classmarker.com/css3/cmprint.css">
+
+<!-- <script>
+	$(document).ready(function(){
+		$('#fileSelectorDiv').jqm({
+			ajax: '/a/tests/rpc/fileSelector.rpc.php?1597724718',
+			trigger: 'li[id^=selectYt_]',
+			onLoad: function(hash) { // Called right after ajax content is loaded.
+			}
+		});
+		$('#regCodeUsage').jqm({ajax: '/a/tests/rpc/regCodeUsage.rpc.php?1597724718', trigger: 'a[id^=regCodeUsage]'});
+		$('#createCatDiv').jqm({ajax: '/a/tests/rpc/editCategory.rpc.php?insertnew=11597724718', trigger: 'a[id^=createCatRpc]'});
+		$('#symbolsDiv').jqm({ajax: '/inc/lib/misc/symbols.php?V3=1', trigger: 'a[id^=showSymbols]'});
+		$('#miscJqm').jqm({ajax:'@href', trigger: 'a.miscJQM'});
+		$(document).on('click',"a.upgradeRpc",function(e){
+			e.preventDefault();
+			$('#docSelectorDiv').jqmHide();
+			$('#upgradeDiv').jqm({ajax: '/a/tests/rpc/misc.rpc.php?upgradeMsg=11597724718'});
+			$('#upgradeDiv').jqmShow({toTop: true});
+		});
+		/* Help video */
+		$('#obj_video5').jqm({ajax: '/misc/tour.rpc.php?id=video5', trigger: '.video5'});
+	});
+</script> -->

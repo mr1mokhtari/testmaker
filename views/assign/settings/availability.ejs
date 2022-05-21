@@ -1,0 +1,116 @@
+<h4>Test Access</h4>
+<div class="settings-box">
+	<div class="accordion-toggle scroll_Availability setting-availability closed">
+		<h3 class="form-field-title">Availability</h3>
+		<div class="settings-status"><%if(av=='1'){%>Available<%}else{%>Unavailable<%}%></div><div class="caret">&nbsp;</div>
+	</div>
+	<div class="accordion-fold">
+		<div class="field-group">
+			<span class="form-field-title"><strong>Option 1</strong></span>
+			<br><br>
+			<span class="form-field-title no-input">Currently: </span>
+			
+			<input type="radio" id="showfromon" name="settings[show_from]"  value="1" <%if(edits=='0'){%> checked="checked"<%}else if(edits=='1'){if(setting.show_from=='1'){%> checked="checked"<%}}%> >
+			<label for="showfromon">Available</label>
+			<span class="showTooltip tooltip" title="Test will be available to Start">Tip</span>
+			
+			<div class="clearheight5"></div>
+			<span class="tab">
+				<input type="radio" id="showfromoff" name="settings[show_from]" value="0" <%if(edits=='0'){%> <%}else{if(setting.show_from=='0'){%>checked="checked"<%}}%> >
+				<label for="showfromoff">Unavailable</label>
+				<span class="showTooltip tooltip" title="Test will not be available to Start.">Tip</span>
+			</span>
+		</div>
+		<hr class="tab">
+		<span class="form-field-title"><strong>Option 2</strong></span>
+		<br><br>
+		<div class="field-group">
+			<p class="littledark tab">Your time zone: <%=teacher.timezone%> <span class="showTooltipHTML tooltip" title="Ensure your time zone is correct before setting available dates.<br/><br/>Edit your time zone via your My Account section.">Tip</span></p>
+			<div class="alert-box alert-default editor littledark tab">Users can enter the Test between these times. As long as they enter <i>before</i> the end date/time, they will be able to complete their Test. If they leave and try to come back after the end date, they will not be able to access it.</div>
+			<p class=" tab"></p>
+			<span class="littledark tab">YYYY/MM/DD</span><br>
+			<label class="form-field-title not-input" for="datepickerfrom">Available from:</label>
+			<%if(edits=='1' && setting.show_from_date!=''){%>
+				<%var f=moment(setting.show_from_full).tz(teacher.timezone)%>
+				<%var u=moment(setting.show_until_full).tz(teacher.timezone)%>
+			<%}%>
+			<input type="text" readonly="readonly" name="settings[show_from_date]" id="datepickerfrom" <%if(edits=='0'){%> value="" <%}else{if(setting.show_from_date!=null && setting.show_from_date!=''){%> value='<%=f.format('YYYY-MM-DD')%>' <%}else{%> value="" <%}}%>  size="15" maxlength="10" autocomplete="off" class="XhasDatepicker">&nbsp;
+			<%var h=['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']%>
+			<%var m=['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55',]%>
+			<select name="settings[show_from_h]">
+				<%h.forEach((o)=>{%>
+					<option value="<%=o%>" <%if(edits=='1' && setting.show_from_date!=''){ if(f.format('HH')==o){%> selected<%}}%> > <%=o%></option>
+				<%})%>
+			</select>
+			<select name="settings[show_from_m]">
+				<%m.forEach((o)=>{%>
+					<option value="<%=o%>" <%if(edits=='1' && setting.show_from_date!=''){ if(f.format('mm')==o){%> selected<%}}%> > <%=o%></option>
+				<%})%>
+			</select>
+			<!-- <select name="settings[show_from_ampm]">
+				<option value="am">am</option>
+				<option value="pm">pm</option>
+			</select> -->
+			<span class="showTooltipHTML tooltip" title="Date / Time settings explained:<br/><br/>04/30/2020 00:00 is the first minute of the 30th April.<br/><br/>04/30/2020 12:00 is midday of the 30th April.">Tip</span><br>
+			<label class="form-field-title not-input" for="datepickeruntil">Available until:</label>
+		
+			<input type="text" readonly="readonly" name="settings[show_until_date]" id="datepickeruntil" <%if(edits=='0'){%> value="" <%}else{if(setting.show_until_date!=null && setting.show_until_date!=''){%> value='<%=u.format('YYYY-MM-DD')%>' <%}else{%> value="" <%}}%> size="15" maxlength="10" autocomplete="off" class="XhasDatepicker">&nbsp;
+			<select name="settings[show_until_h]">
+				<%h.forEach((o)=>{%>
+					<option value="<%=o%>" <%if(edits=='1' && setting.show_from_date!=''){ if(u.format('HH')==o){%> selected<%}}%> > <%=o%></option>
+				<%})%>
+			</select>
+			<select name="settings[show_until_m]">
+				<%m.forEach((o)=>{%>
+					<option value="<%=o%>" <%if(edits=='1' && setting.show_from_date!=''){ if(u.format('mm')==o){%> selected<%}}%> > <%=o%></option>
+				<%})%>
+			</select>
+			<!-- <select name="settings[show_until_ampm]">
+				<option value="am">am</option><option value="pm">pm</option>	
+			</select> -->
+		</div>
+		<div id="resultandresume" style="display:<%if(edits=='0'){%>none<%}%> <%if(edits=='1'){if(setting.result=='1'){%>none<%}else{%>block<%}}%>;">
+			<hr>
+			<div class="field-group">
+				<input type='hidden' name='settings[show_results_when_unavailable]' value='0' id='srwu'>
+    			<input class="tab" type="checkbox" name= "settings[show_results_when_unavailable]" value="1" <%if(edits=='0'){%> <%}else if(edits=='1'){if(setting.show_results_when_unavailable=='1'){%> checked=true <%}}%>id="show_results_when_unavailable">
+    			<label for="show_results_when_unavailable">Show Test &amp; Results When Unavailable</label>
+    			<span class="showTooltipHTML tooltip" title="By default, when Tests are set as 'Unavailable' (in Option 1 OR Option 2 above), your Test takers will not see them listed at all on their 'My Tests' page.<br/><br/>Turn this setting on to allow Test takers to view their Completed Test results when this Test is not Available, or see the Test listed and the Date it will become available to take.<br/><br/>You can come back and change this setting later to completely hide the exam.">Tip</span>
+				<span class="explain tab padleft30"> (Select "Results Page" options below)</span>
+				<br>
+				<input type='hidden' name='settings[can_resume_when_unavailable]' value='0' id='crwu'>
+    			<input class="tab" type="checkbox" name= "settings[can_resume_when_unavailable]" value="1"  <%if(edits=='0'){%> <%}else if(edits=='1'){if(setting.can_resume_when_unavailable=='1'){%> checked=true <%}}%>  id="can_resume_when_unavailable">
+	    		<label for="can_resume_when_unavailable">Can Resume When Unavailable</label>
+    			<span class="showTooltipHTML tooltip" title="Allow Test takers to Resume and Finish their 'In Progress' Test after it is no longer available.">Tip</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="settings-box">
+	<div class="accordion-toggle scroll_Attempts setting-attempts closed">
+		<h3 class="form-field-title">Attempts</h3>
+		<div class="settings-status"><%if(edits=='0'){%> Unlimited Attempts Allowed<%}else if(edits=='1'){if(setting.practice=='2'){%>Unlimited Attempts Allowed <%}else if(setting.practice=='0'){%>One Attempt Allowed <%}else{%><%=setting.attempts_allowed%> Attempts Allowed<%}}%></div>
+		<div class="caret">&nbsp;</div>
+	</div>
+	<div class="accordion-fold">
+		<div class="field-group">
+			<span class="form-field-title not-input">Attempts:</span> 
+			<input type="radio" name="settings[practice]" id="one_attempt" value="0"  <%if(edits=='0'){%> <%}else if(edits=='1'){if(setting.practice=='0'){%> checked="checked"<%}}%> >
+			<label for="one_attempt">One</label>
+			<div class="clearheight5"></div>
+			<span class="tab">
+				<input type="radio" name="settings[practice]" value="1" id="num_attempts" <%if(edits=='1'){if(setting.practice==='1'){%> checked<%}}%>> 
+				<input type="text" name="settings[attempts_allowed]" size="3" <%if(edits=='0'){%> value="" <%}else if(edits=='1'){if(setting.practice=='1'){%> value="<%=setting.attempts_allowed%>"<%}else{%>value="" <%}}%> id="num_attempts_count" maxlength="3">
+				<label for="num_attempts">Multiple (set as 2 or higher)</label>
+			</span>
+			<div class="clearheight5"></div>
+			<span class="tab">
+				<input type="radio" name="settings[practice]" id="unlimited_attampts" value="2" <%if(edits=='0'){%>checked<%}%><%if(edits=='1'){if(setting.practice==='2'){%> checked<%}}%>>
+				<label for="unlimited_attampts">Unlimited</label>
+			</span>
+		</div>
+		<div class="clearheight"></div>
+	</div>
+</div>
+<div class="clearheight30"></div>

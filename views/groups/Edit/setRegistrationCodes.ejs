@@ -1,0 +1,9 @@
+<form name="add" action="/tests/groups/setRegistrationCodes" method="post">
+	<p class="titlename">
+		Create 
+		<%-include("addnumofstudents")%>
+		new Member Registration Codes for this Group.
+	</p>
+	<input type="hidden" name="rg_id" value="<%=G._id%>">
+	<p><a href="#" class="btn genericSubmitLink">Add Member Registration Codes</a> (Maximum of 50 at a time)</p>
+</form>

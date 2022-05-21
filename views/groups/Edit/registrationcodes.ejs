@@ -1,0 +1,50 @@
+<body onload="window.focus();">
+	<!-- <h1><img alt="ClassMarker" src="/img3/retina/quiz-maker1x.jpg" srcset="/img3/retina/quiz-maker1x.jpg 1x, /img3/retina/quiz-maker2x.jpg 2x, /img3/retina/quiz-maker3x.jpg 3x" width="205" height="31"></h1> -->
+	<br><br>
+	<h2>Group Member Registration Codes</h2>
+	<br>
+	<div class="alert-box alert-default">
+		<p>Each registration code below is a unique code (each code can only be used once).</p>
+	</div>
+	<div class="alert-box alert-default">
+		<h3>Group: <%=G.group_name%></h3>
+		<p>These codes are for registering into the Group - <strong><%=G.group_name%></strong></p>
+		<p>Print and give one code to each user.</p>
+		<p>Alternatively you can batch upload users via the Manage members page for each Group you create.</p>
+	</div>
+	<p class="no-print"><a href="JavaScript:window.print();"><i class="fa fa-print" aria-hidden="true"></i> Print this page</a></p>
+	<!-- <p class="no-print"><a href="/a/users/registrationcodes/?rg_id=592380&amp;export_reg_codes=1"><i class="fa fa-download" aria-hidden="true"></i> Export to excel</a></p> -->
+	<%if(codes[0]){%>
+	<%codes.forEach((C)=>{%>
+	<div class="regcodes">
+				<strong>1) Go To:</strong> www.*****.com/register/<br>
+				<strong>2) Select:</strong> 'Test Takers' option<br>
+				<strong>3) Registration Code:</strong> <%=C%><br><br>
+	</div>
+	<%})%>
+	<%}%>
+	<%if(!codes[0]){%>
+	<table class="qb-q-info"> 
+		<tr>Unused Codes:</tr>
+		<%foundCodes.forEach((fC,i)=>{%>
+		<tbody>
+			<tr>
+				<td><%=i+1%>-</td>
+				<td>Code:</td>
+				<td class="padleft5"><span><%=fC.code%></span></td>
+				<td>  |  Date Added:</td>
+				<td class="padleft5">
+					<span><%=fC.createdAt.toDateString()%></span>
+				</td>
+				<td>
+					<form action="/tests/groups/setRegistrationCodes/<%=fC._id%>?_method=DELETE" method="post">
+						<input type="hidden" name="rg_id" value="<%=G._id%>">
+						<input type="submit" class="btn genericSubmitLink" value="Remove From Codes">
+					</form>
+				</td>
+			</tr>
+		</tbody>		
+		<%})%>
+	</table>
+	<%}%>
+</body>

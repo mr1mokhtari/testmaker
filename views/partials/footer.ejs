@@ -1,0 +1,77 @@
+<div id="footerprint" class="printonly">www.*****.com</div>
+
+<div id="footer">
+	<div id="footercontent">
+		<ul>
+			<li><a href="/">***** Home</a></li>
+			<li><a href="/online-testing/">About *****</a></li>
+			<li><a href="/online-testing/terms/">Terms and Conditions</a></li>
+			<li><a href="/online-testing/privacy/">Privacy</a></li>
+			<li class="last"><a href="/online-testing/contact-us/">Contact Us</a></li>
+			<li><a href="/a/help/">FAQ</a></li>
+			<li><a href="/a/help/manual/">User Manual</a></li>
+			<li><a href="/a/help/video/">Video Tutorial</a></li>
+		</ul>
+		<p>Copyright © 2020 *****. All rights reserved.</p>
+	</div>
+</div>
+
+<div class="jqmWindow" id="imgUploadDiv"></div>
+<div class="jqmWindow jqmID2" id="fileSelectorDiv"></div>
+<div class="jqmWindow jqmID3" id="createCatDiv"></div>
+<div class="jqmWindow" id="upgradeDiv"></div>
+<div class="jqmWindowWide jqmID5" id="miscJqm"></div>
+<div class="jqmWindow" id="obj_ref"></div>
+<div class="jqmWindow jqmID4" id="symbolsDiv"></div>
+<div class="jqmWindowWide clearHtml jqmID6" id="obj_video5"></div>
+<div class="jqmWindowWide jqmID2" id="regCodeUsage"></div>
+
+<script>
+	$(document).ready(function(){
+		$('#fileSelectorDiv').jqm({
+			ajax: '/tests/rpc/fileSelector',
+			trigger: 'li[id^=selectYt_]',
+			onLoad: function(hash) { // Called right after ajax content is loaded.
+			}
+		});
+		$('#regCodeUsage').jqm({ajax: '/tests/rpc/regCodeUsage?1605359089', trigger: 'a[id^=regCodeUsage]'});
+		$('#createCatDiv').jqm({ajax: '/tests/rpc/editCategory', trigger: 'a[id^=createCatRpc]'});
+		$('#symbolsDiv').jqm({ajax: '/tests/rpc/symbols', trigger: 'a[id^=showSymbols]'});
+		$('#miscJqm').jqm({ajax:'@href', trigger: 'a.miscJQM'});
+		$(document).on('click',"a.upgradeRpc",function(e){
+			e.preventDefault();
+			$('#docSelectorDiv').jqmHide();
+			$('#upgradeDiv').jqm({ajax: '/a/tests/rpc/misc.rpc.php?upgradeMsg=11605359089'});
+			$('#upgradeDiv').jqmShow({toTop: true});
+		});
+		/* Help video */
+		$('#obj_video5').jqm({ajax: '/misc/tour.rpc.php?id=video5', trigger: '.video5'});
+	});
+</script>
+
+<script>
+ka_path = "/ka.php?";
+</script>
+
+<script>
+(function (i, s, o, g, r, a, m) {
+	i['GoogleAnalyticsObject'] = r;
+	i[r] = i[r] || function () {
+		(i[r].q = i[r].q || []).push(arguments)
+	}, i[r].l = 1 * new Date();
+	a = s.createElement(o),
+		m = s.getElementsByTagName(o)[0];
+	a.async = 1;
+	a.src = g;
+	m.parentNode.insertBefore(a, m)
+})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+ga('create', 'UA-473958-2', 'auto');
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script>
+
+
+
+	</body>
+</html>
+

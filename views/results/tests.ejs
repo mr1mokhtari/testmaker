@@ -1,0 +1,306 @@
+<%-include('../partials/headerResult')%>
+<title>***** - Group Test results</title>
+</head>
+
+<body> <!-- if it is preview mode, run extra css code start with #preview !-->
+	<%-include('../partials/teacherHead')%>
+	<div id="content" class="clearfix">
+		<div class="innerWrapper">
+			<%-include('menu')%>
+			
+<div class="masthead clearfix">
+	
+	<div class="page pagecontent">
+		<h2 class="test-name-big name-big">
+			<a href="/tests/test/?test_id=<%=test._id%>" class="graylink"><%=test.test_name%></a>
+		</h2>
+		<h2 class="group-name name">
+			<a href="/a/users/group/?rg_id=<%=group._id%>" class="graylink"><%=group.group_name%></a>
+		</h2>
+	</div>
+	
+	
+	<div class="aside asidecontent">
+		<ul class="cmtableTabs">
+			<li class="tabon"><a href="/results/tests/test/rgusers/?test_id=<%=test._id%>&amp;rg_id=<%=group._id%>&amp;return=g">Results</a></li>
+			<li class="tabff"><a href="/assign/rgmanage/?test_id=<%=test._id%>&amp;rg_id=<%=group._id%>&amp;return=listresults&show=1">Settings</a></li>
+		</ul>
+		<div class="table editor">
+			<div class="clearheight5"></div>
+			<div class="row noborder midpad">
+				<div class="col-span-10 graph">
+					<span class="value">0% AVERGEEEEE!!!!!!</span>
+					<div class="graphics bar-pass showTooltip" title="No Pass Mark Set">
+						<span class="bar-graph bar-pass" style="width: 0px;">&nbsp;</span>
+					</div>
+				 </div>
+			</div>				
+			<div class="row noborder midpad">
+				<div class="col-span-10 graph">
+					<span class="value"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+					<%if(setting.time_limit!=0){%>
+					 	<%=setting.time_limit%> minute(s)
+					<%}else{%>
+						Unlimited
+					<%}%>
+				 </div>
+			</div>			
+			<div class="row noborder midpad">
+				<div class="col-span-10 graph">
+					<span class="value"><i class="fa fa-repeat" aria-hidden="true"></i></span>
+					<%if(setting.practice==0){%>
+						One Attempt Allowed
+					<%}else if(setting.practice==1){%>
+						<%=settings.attempts_allowed%> Attempts Allowed
+					<%}else if(setting.practice==2){%>
+						Unlimited Attempts Allowed
+					<%}%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+			
+			
+		<a class="scroll_export_results"></a>
+		<%-include('export')%>	
+		<div class="clearheight30"></div>
+		<div class="settings-box">
+			<div class="accordion-toggle closed">
+				<div class="cat-stats-icon"></div>
+				<h3 class="cat-stats">Statistics by Category</h3>&nbsp;
+				<div class="caret">&nbsp;</div>
+			</div>
+			<div class="accordion-fold accordion-fold-no-top-pad">
+				<div class="table"><div class="row"><div class="alert-box editor alert-confirmation ">
+
+		<div class="clearheight10"></div>Only upgraded accounts can view category statistics.<div class="clearheight"></div>
+		<span class="little"><a href="#" class="upgradeRpc">Upgraded Account Features</a></span>
+
+		</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		<div class="clearheight"></div>
+		<div class="alert-box editor hide show_grade_refresh">
+			<a href="javascript:location.reload();">Refresh</a> this page to view modified scores from your recent grading.
+		</div>
+
+			
+<div class="table table-results">
+	<div class="table-utility row above">
+		<div class="col-span-3">
+			<span class="column-title">
+				<a href="#" class="sort-trigger" data-sort="acs" data-sort-by="name">Name</a><span class="ui-icon ui-icon-triangle-2-n-s"></span>
+			</span>
+		</div>
+		<div class="col-span-15">
+			<span class="column-title"><a href="#" class="sort-trigger" data-sort="desc" data-sort-by="percentage_duration">Percentage</a> <span class="ui-icon ui-icon-triangle-2-n-s"></span></span>
+		</div>
+		<div class="col-span-1">
+			<span class="column-title">Score</span>
+		</div>
+		<div class="col-span-1">
+		   <span class="column-title"><a href="#" class="sort-trigger" data-sort="desc" data-sort-by="duration">Duration</a> <span class="ui-icon ui-icon-triangle-2-n-s"></span></span>
+		</div>
+		<div class="col-span-1">
+			<span class="column-title"><a href="#" class="sort-trigger" data-sort="desc" data-sort-by="date">Date</a> <span class="ui-icon ui-icon-triangle-2-n-s"></span></span>
+		</div>
+
+
+		<div class="col-span-15 col-btns">
+			<div class="dropdown">
+				<a href="#" class="btn btn-analytics dropdown-toggle result-stats no_anchor">Statistics <span class="caret">&nbsp;</span></a>
+				<ul class="dropdown-menu">
+					<li><a href="/results/questions/?test_id=<%=test._id%>&amp;rg_id=<%=group._id%>">By Question</a></li>
+					<li><a href="/results/tests/test/?test_id=<%=test._id%>">By Group/Link</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-span-1 col-btns">
+			<div class="dropdown">
+				<a class="btn btn-actions btn-white no_anchor" href="#">Actions <span class="caret">&nbsp;</span></a>
+				<ul class="dropdown-menu dropdown results-actions">
+					<li><a href="#" class="anchor_scroll_export_results">Export Options</a></li>
+					<li><a href="#" class="anchor_scroll_export_results">Delete Options</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+			<div class="row rgr-row overall">
+				<div class="col-span-25">
+					<h2 class="group-name name">Average <span class="showTooltipHTML tooltip" title="Average Percentage and Score values are calculated from completed Tests: Total Points Scored divided by Total Points Available, rounded to one decimal point.<br/><br/>Averages are cached and recalculated within 1 hour.">Tip</span></h2>
+				</div>
+				<div class="col-span-2 graph">
+					<h5 class="in-row-heading ">Percentage</h5>
+					<span class="value">0%</span>
+					<div class="graphics">
+						<span class="bar-graph" style="width: 0px;">&nbsp;</span>
+					</div>
+				</div>
+				 <div class="col-span-1">
+					<h5 class="in-row-heading">Points</h5>
+					<span class="valuse">0/20</span>
+				</div>
+				 <div class="col-span-1">
+					<h5 class="in-row-heading">Duration</h5>
+					<span class="value">00:01:01</span>
+				</div>
+				<div class="col-span-2">
+					&nbsp;
+				</div>
+			</div>
+	<ul class="table-body overlay-bg-darken-trigger sort-data-set hover-row">
+	<%storage.forEach((lvl,i)=>{%>
+		<%var student = lvl.student%>
+		<%var exams = [];k=0;%>
+		<%lvl.exams.forEach((ex,j)=>{exams[j]=ex;k++})%>
+		<li data-percentage="0" data-duration="0" data-date="0" data-name="<%=student.lastName%><%=student.firstName%>">
+			<div class="row no-overflow rgr-row">
+				<div class="col-span-25">
+					
+					<%if(exams[k-1]!=undefined){%>
+						<a class="trigger-results-array graylink" data-result-id="<%=student._id%>" data-index="<%=k-1%>" href="/test/results/?test_id=<%=exams[k-1]._id%>&t=1" style="text-decoration: underline;"><%=student.firstName%> <%=student.lastName%></a>
+					<%}else{%>
+						<p class="member-name name"><%=student.firstName%> <%=student.lastName%></p>
+					<%}%>
+								 
+				</div>
+				<div class="col-span-2 graph">
+					<h5 class="in-row-heading">Percentage</h5>
+					<span class="value"><%if(exams[k-1]!=undefined){%><%=exams[k-1].perc%><%}else{%>-<%}%></span>
+					<%if(exams[k-1]!=undefined){%>
+						<div class="graphics">
+							<span class="bar-graph" style="width: <%=exams[k-1].perc%>px;">&nbsp;</span>
+						</div>
+					<%}%>
+					<!-- <div class="graphics">	</div> -->
+				</div>
+				<div class="col-span-1">
+					<h5 class="in-row-heading">Score</h5>
+					<span class='value'><%if(exams[k-1]!=undefined){%><%=exams[k-1].points['total']%>/<%=exams[k-1].t_point%><%}else{%>-<%}%></span>
+					<div class="graphics"> </div>
+				</div>
+				<div class="col-span-1">
+					<h5 class="in-row-heading">Duration</h5>
+					<span class="value"><%if(exams[k-1]!=undefined){%><%=secondsToHms((exams[k-1].endTime-exams[k-1].beginTime)/1000)%><%}else{%>-<%}%></span>
+				</div>
+				 <div class="col-span-2">
+					<h5 class="in-row-heading ">Date</h5>
+					&nbsp;
+					 <span class="value"><%if(exams[k-1]!=undefined){%><%= moment(new Date(parseInt(exams[k-1].beginTime))).tz(teacher.timezone)%><%}else{%>-<%}%></span>
+				</div>
+				<div class="col-span-1 col-btns">
+					&nbsp;
+					<%if(exams[k-1]!=undefined){%>
+						<!-- <a href="/test/results/?test_id=<%=test._id%>&amp;rg_id=<%=group._id%>&amp;user_id=<%=lvl.student._id%>&amp;return=t&amp;exam_id=<%=exams[k-1]._id%>" class="btn  btn-grading btn-answers trigger-results" data-index="5">Grade</a> -->
+					<a href="/test/results/?test_id=<%=exams[k-1]._id%>&t=1" class="btn  btn-grading btn-answers trigger-results" data-index="<%=k-1%>">Grade</a>
+					<%}%>
+				</div>
+				<div class="col-span-05">
+					<%if(k>1){%>
+					<a href="#" class="showPrevRes showTooltipUnder" id="tog_s<%=student._id%>" original-title="View Previous Scores"> </a>
+					<%}%>
+				</div>
+			</div>
+			<div class="hide" id="dotog_s<%=student._id%>" style="display: none;">
+				<%exams.forEach((e,q)=>{if((q+1)!=k){%>
+				<div class="row rgr-row no-overflow  previous-scores-last">
+					<div class="col-span-25">
+						<p class="name">#<%=q+1%> </p>
+					</div>
+					<div class="col-span-2 graph">
+						<h5 class="in-row-heading ">Percentage</h5><span class="value"><%=e.perc%>%</span>
+						<div class="graphics">
+							<span class="bar-graph" style="width: <%=e.perc%>px;">&nbsp;</span>
+						</div>
+					</div>
+					<div class="col-span-1"><%=e.points['total']%>/<%=e.t_point%></div>
+					<div class="col-span-1"><%=secondsToHms((e.endTime-e.beginTime)/1000)%></div>
+					<div class="col-span-2"><%= moment(new Date(parseInt(e.beginTime))).tz(teacher.timezone)%></div>
+					<div class="col-span-1 col-btns">&nbsp;</div>
+				</div>
+				<%}})%>
+			</div>
+		</li>
+	<%})%>
+
+		
+<!-- <li data-percentage="0" data-duration="61" data-date="1604306991" data-name="SmithPaul"><div class="row no-overflow rgr-row">
+				<div class="col-span-25">
+					<p class="member-name name"><a class="trigger-results-array graylink" data-result-id="8879676" data-index="5" href="/test/results/?test_id=1479449&amp;rg_id=592380&amp;user_id=8879676&amp;return=t" style="text-decoration: underline;">Paul Smith</a>
+								 </p>
+				</div><div class="col-span-2 graph">
+							<h5 class="in-row-heading ">Percentage</h5><span class="value">0%</span>
+							<div class="graphics bar-grading">
+								<span class="bar-graph bar-grading" style="width: 0px;">&nbsp;</span>
+								
+							</div>
+						</div>
+						 <div class="col-span-1">
+							<h5 class="in-row-heading">Points</h5>
+							 <span class="value">0/20</span>
+						</div>
+						 <div class="col-span-1">
+							<h5 class="in-row-heading">Duration</h5>
+							<span class="value">00:01:01</span>
+						</div>
+						<div class="col-span-2">
+						<h5 class="in-row-heading ">Date</h5>Mon 2 Nov '20 12:19pm</div>
+						<div class="col-span-1 col-btns">
+							<a href="/test/results/?test_id=1479449&amp;rg_id=592380&amp;user_id=8879676&amp;return=t" class="btn  btn-grading btn-answers trigger-results" data-index="5">Grade</a>
+						</div>
+						<div class="col-span-05">
+							<a href="#" class="showPrevRes showTooltipUnder" id="tog_s8879676" original-title="View Previous Scores"> </a>
+						</div>
+					</div>
+	
+	<div class="hide" id="dotog_s8879676" style="display: none;"><div class="row rgr-row no-overflow  previous-scores-last">
+						<div class="col-span-25"><p class="name">1st </p></div>
+						<div class="col-span-2 graph">
+							<h5 class="in-row-heading ">Percentage</h5><span class="value">11.1%</span>
+							<div class="graphics">
+								<span class="bar-graph" style="width: 11px;">&nbsp;</span>
+								
+							</div>
+						</div><div class="col-span-1">2/18</div>
+						 <div class="col-span-1">00:01:06</div>
+						<div class="col-span-2">Fri 23 Oct '20 7:27pm</div>
+						<div class="col-span-1 col-btns">&nbsp;</div></div>
+	</div>
+	</li>		 -->
+</ul>
+
+	<%-include('classOverlay')%>
+</div>
+
+<div class="center-text"><a href="#" class="anchor_scroll_top_default backtotop"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a></div>
+
+<div class="alert-box editor hide show_grade_refresh">
+		<a href="javascript:location.reload();">Refresh</a> this page to view modified scores from your recent grading.
+		</div>
+	</div><!-- innerWrapper -->
+<img src="/img3/icon_loading_circleV3.gif" alt="Hidden Loading Image" class="hide" width="20" height="20">
+</div>
+
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+	
+<%-include('../partials/footer')%>
+	
+
+<%
+	function secondsToHms(d) {
+		d = Number(d);
+		var h = Math.floor(d / 3600);
+		var m = Math.floor(d % 3600 / 60);
+		var s = Math.floor(d % 3600 % 60);
+
+		var hDisplay = h > 0 ? (h > 9 ? h+":" : "0"+h+":") : "00:";
+		var mDisplay = m > 0 ? (m > 9 ? m+":" : "0"+m+":") : "00:";
+		var sDisplay = s > 0 ? (s > 9 ? s : "0"+s) : "00";
+		return hDisplay + mDisplay + sDisplay;
+	}
+%>

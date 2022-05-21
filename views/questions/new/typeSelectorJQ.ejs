@@ -1,0 +1,348 @@
+<%if(question!=0){%>
+<script>
+	var type = '<%=question.type%>',
+		mc_correct='<%=question.mc_correct%>',
+		tf_correct='<%=question.tf_correct%>',
+		random_a='<%=question.random_a%>',
+		radio_or_checkbox_not_used='<%=question.radio_or_checkbox_not_used%>',
+		grade_style='<%=question.grade_style%>'
+			
+	var page_type = 'qb_manage';
+	var active_question_form=type;
+	if(active_question_form=="mcsa"||active_question_form=="mcma"){
+		active_question_form="mc"
+		for(i=0;i<mc_correct.length;i+=2){
+			if(i==18){
+				$('#a10').attr("checked",true)					
+			}else{
+				$('#a'+mc_correct[i]).attr("checked",true)
+				$('#a'+mc_correct[i]).prev('h5').addClass('editShowCorrect');
+				$('#a'+mc_correct[i]).next('label').addClass('editShowCorrect');
+			}
+		}
+	}
+	if(active_question_form=="tf"){		
+		$('#tf1').prev('h5').removeClass('editShowCorrecttf');
+		$('#tf1').next('label').removeClass('editShowCorrecttf');
+		$('#tf'+tf_correct).attr("checked","checked")
+		$('#tf'+tf_correct).prev('h5').addClass('editShowCorrecttf');
+		$('#tf'+tf_correct).next('label').addClass('editShowCorrecttf');
+	}	
+</script>
+<%}%>
+<script></script>
+<script>
+	var page_type = 'qb_manage';
+	/* initialise */
+	var new_or_edit='<%=question.type%>'
+	if(!new_or_edit){
+	var active_question_form = 'mc';//Global scope - keep outside of $(document).ready
+	}
+
+	$(document).ready(function () {
+		$('#questionExamplesDiv').jqm({ajax: '/tests/rpc/questionExamples', trigger: 'a[id^=showQuestionExamples]'});
+		$('.showCorrect').change(function(){
+			$(this).prev('h5').toggleClass('editShowCorrect');
+			$(this).next('label').toggleClass('editShowCorrect');
+		});
+		$('.showCorrecttf').change(function(){
+			$('.showCorrecttf').each( function (){
+				$(this).prev('h5').toggleClass('editShowCorrecttf');
+				$(this).next('label').toggleClass('editShowCorrecttf');
+			})
+		});
+		$('.mc_formdiv').removeClass("hide");
+		
+		$( "#edit_mc" ).on({
+			click: function() {
+				active_question_form = 'mc';//	
+				$('#qtype').val('mcsa');
+				highlightQuestionType('mc');//
+				downplayQuestionType(active_question_form);//
+				showQuestionTypeSubMenu('mc');
+				showDiv();
+				emptyFrameEditorQuestion();
+				$('#question').sceditor('instance').focus();
+			}, mouseenter: function() {
+				highlightQuestionType('mc');
+			}, mouseleave: function() {
+				downplayQuestionType(active_question_form);
+			}
+		});
+
+		$( "#edit_tf" ).on({
+			click: function() {
+				active_question_form = 'tf';
+				$('#qtype').val('tf');
+				highlightQuestionType('tf');
+				downplayQuestionType(active_question_form);
+				showQuestionTypeSubMenu('tf');
+				showDiv();
+				emptyFrameEditorQuestion();
+				$('#question').sceditor('instance').focus();
+			}, mouseenter: function() {
+				highlightQuestionType('tf');
+			}, mouseleave: function() {
+				downplayQuestionType(active_question_form);
+			}
+		});
+
+		$( "#edit_ft" ).on({
+			click: function() {
+				active_question_form = 'ft';
+				$('#qtype').val('ft');
+				highlightQuestionType('ft');
+				downplayQuestionType(active_question_form);
+				showQuestionTypeSubMenu('ft');
+				showDiv();
+				emptyFrameEditorQuestion();
+				$('#question').sceditor('instance').focus();
+			}, mouseenter: function() {
+				highlightQuestionType('ft');
+			}, mouseleave: function() {
+				downplayQuestionType(active_question_form);
+			}
+		});
+
+		$( "#edit_p" ).on({
+			click: function() {
+				active_question_form = 'p';
+				$('#qtype').val('p');
+				highlightQuestionType('p');
+				downplayQuestionType(active_question_form);
+				showQuestionTypeSubMenu('p');
+				showDiv();
+				emptyFrameEditorQuestion();
+				$('#questionp').focus();
+			}, mouseenter: function() {
+				highlightQuestionType('p');
+			}, mouseleave: function() {
+				downplayQuestionType(active_question_form);
+			}
+		});
+
+		$( "#edit_e" ).on({
+			click: function() {
+				active_question_form = 'e';
+				$('#qtype').val('e');
+				highlightQuestionType('e');
+				downplayQuestionType(active_question_form);
+				showQuestionTypeSubMenu('e');
+				showDiv();
+				emptyFrameEditorQuestion();
+				$('#question').sceditor('instance').focus();
+			}, mouseenter: function() {
+				highlightQuestionType('e');
+			}, mouseleave: function() {
+				downplayQuestionType(active_question_form);
+			}
+		});
+
+		$("#save_question1").on({//?????????????
+			click:function(){
+				$("#questionForm").submit()
+				window.location.href = 'http://www.google.com'
+			}
+		})
+		var cntmclck=0;
+		$( "#edit_m" ).on({
+			click: function() {
+				active_question_form = 'm';
+				$('#qtype').val('m');
+				highlightQuestionType('m');
+				downplayQuestionType(active_question_form);
+				showQuestionTypeSubMenu('m');
+				showDiv();
+				setDefaultQuestionMatching();
+				$('#question').sceditor('instance').focus();
+				if(cntmclck==0){//avoids showing both text-box & multimedia-box
+					$( "#type_simple_text" ).trigger('click')
+					cntmclck++
+				}
+			}, mouseenter: function() {
+				highlightQuestionType('m');
+			}, mouseleave: function() {
+				downplayQuestionType(active_question_form);
+			}
+		});
+
+
+
+		showDiv();
+		$('#question').sceditor('instance').focus();
+		
+		$("#tog_extra").on({
+			click:function(){
+				$("#tog_extra").addClass("hide")
+				$("#dotog_extra").removeClass("hide")
+			}
+		})
+		$("#tog_extra_ft_answers").on({
+			click:function(){				
+				$("#tog_extra_ft_answers").addClass("hide")
+				$("#dotog_extra_ft_answers1").removeClass("hide")				
+			}
+		})
+		$("#tog_dummy_answer").on({
+			click:function(){				
+				$("#tog_dummy_answer").addClass("hide")
+				$("#dotog_dummy_answer").removeClass("hide")				
+			}
+		})	
+				$("#tog_extra_matching").on({
+			click:function(){				
+				$("#tog_extra_matching").addClass("hide")
+				$("#dotog_extra_matching").removeClass("hide")				
+			}
+		})
+
+	});
+
+
+	function emptyFrameEditorQuestion() {
+		/* By default we put "Match the options below:" text in the matching editor question box when no question has been added yet - to help explain it's purpose */
+		if(trim($('#frame_editor_question').contents().find('p').html()) === "Match the options below:") {//.find('#qa_p_editor_question') to .find('p')
+			$('#frame_editor_question').contents().find('p').html('<br>');
+		}
+	}
+	function setDefaultQuestionMatching() {
+		/* By default we put "Match the options below:" text in the matching editor question box when no question has been added yet - to help explain it's purpose */
+		if (trim($('#frame_editor_question').contents().find('p').html()) === '<br>') {
+			$('#frame_editor_question').contents().find('p').html("Match the options below:");
+		}
+	}
+
+	function highlightQuestionType(currentQuestionType) {
+
+		if (currentQuestionType == 'mc') {
+			$('.qt_icon_multiplechoice_grey').addClass('qt_hide');
+			$('.qt_icon_multiplechoice_red').removeClass('qt_hide');
+			$('.qt_multiplechoice_caption').addClass('qt_color_red');
+			$('.mc_formdiv').removeClass('hide');
+		}
+
+		if (currentQuestionType == 'tf') {
+			$('.qt_icon_truefalse_red').removeClass('qt_hide');
+			$('.qt_icon_truefalse_grey').addClass('qt_hide');
+			$('.qt_truefalse_caption').addClass('qt_color_red');
+			$('.tf_formdiv').removeClass('hide');
+		}
+
+		if (currentQuestionType == 'ft') {
+			$('.qt_icon_freetext_red').removeClass('qt_hide');
+			$('.qt_icon_freetext_grey').addClass('qt_hide');
+			$('.qt_freetext_caption').addClass('qt_color_red');
+			$('.ft_formdiv').removeClass('hide');
+		}
+
+		if (currentQuestionType == 'p') {
+			$('.qt_icon_grammar_red').removeClass('qt_hide');
+			$('.qt_icon_grammar_grey').addClass('qt_hide');
+			$('.qt_grammar_caption').addClass('qt_color_red');
+			$('.p_formdiv').removeClass('hide');
+		}
+
+		if (currentQuestionType == 'e') {
+			$('.qt_icon_essay_red').removeClass('qt_hide');
+			$('.qt_icon_essay_grey').addClass('qt_hide');
+			$('.qt_essay_caption').addClass('qt_color_red');
+		}
+
+		if (currentQuestionType == 'm') {
+			$('.qt_icon_matching_red').removeClass('qt_hide');
+			$('.qt_icon_matching_grey').addClass('qt_hide');
+			$('.qt_matching_caption').addClass('qt_color_red');
+			$('.m_formdiv').removeClass("hide");
+		}
+
+	}
+
+	function downplayQuestionType(selectedQuestionType) {
+
+		if (selectedQuestionType != 'mc') {
+			$('.qt_icon_multiplechoice_grey').removeClass('qt_hide');
+			$('.qt_icon_multiplechoice_red').addClass('qt_hide');
+			$('.qt_multiplechoice_caption').removeClass('qt_color_red');
+		}
+
+		if (selectedQuestionType != 'tf') {
+			$('.qt_icon_truefalse_red').addClass('qt_hide');
+			$('.qt_icon_truefalse_grey').removeClass('qt_hide');
+			$('.qt_truefalse_caption').removeClass('qt_color_red');
+		}
+
+		if (selectedQuestionType != 'ft') {
+			$('.qt_icon_freetext_red').addClass('qt_hide');
+			$('.qt_icon_freetext_grey').removeClass('qt_hide');
+			$('.qt_freetext_caption').removeClass('qt_color_red');
+		}
+
+		if (selectedQuestionType != 'p') {
+			$('.qt_icon_grammar_red').addClass('qt_hide');
+			$('.qt_icon_grammar_grey').removeClass('qt_hide');
+			$('.qt_grammar_caption').removeClass('qt_color_red');
+		}
+
+		if (selectedQuestionType != 'e') {
+			$('.qt_icon_essay_red').addClass('qt_hide');
+			$('.qt_icon_essay_grey').removeClass('qt_hide');
+			$('.qt_essay_caption').removeClass('qt_color_red');
+		}
+
+		if (selectedQuestionType != 'm') {
+			$('.qt_icon_matching_red').addClass('qt_hide');
+			$('.qt_icon_matching_grey').removeClass('qt_hide');
+			$('.qt_matching_caption').removeClass('qt_color_red');
+		}
+
+	}
+
+	function showQuestionTypeSubMenu(selectedQuestionType) {
+
+		//so far, only matching question type got sub menu...
+		if (selectedQuestionType == 'm') {
+			$('.matching_setting_box').removeClass('qt_hide');
+		} else {
+			$('.matching_setting_box').addClass('qt_hide');
+		}
+
+
+		/* more question type sub menu... */
+	}
+
+	function showDiv() {
+
+		/*
+		 Change which question form displays
+
+		 Hide all */
+		$('.question_explain_div').hide();
+		$('#questionForm [class*="_formdiv"]').hide();/* Hide all divs */
+		$('#questionForm [class*="_formdiv"] input, #questionForm [class*="_formdiv"] textarea, #questionForm [class*="_formdiv"] select').attr('disabled', 'disabled');/* Disable all inputs */
+
+		/* SHow required */
+		$('#questionForm [class*="'+ active_question_form+'_formdiv"] input, #questionForm [class*="'+ active_question_form+'_formdiv"] textarea, #questionForm [class*="'+ active_question_form+'_formdiv"] select').removeAttr('disabled');/* Activate required divs */
+
+		$('#questionForm textarea.free_user_stay_disabled').attr('disabled', 'disabled');
+		$('#questionForm [class*="'+ active_question_form+'_formdiv"]').show();/* Show required divs */
+
+		$('#div_preview').hide();
+		$('.edit_question_link').hide();
+
+		$('[id^="form_div_"]').each(function () {
+			$(this).hide();
+		});
+
+		if (typeof isMSIE8 !== 'undefined') {
+			$('#form_div').removeClass('move_off_screen');
+		} else {
+			$('#form_div').show();
+		}
+		$('#button_row').show();
+		$('[id^="edit_"]').each(function () {
+			$(this).closest('li').removeClass('selected');
+		});
+		$('#edit_' + active_question_form).closest('li').addClass('selected');
+		$('.question-selector').show();
+			}
+</script>

@@ -1,0 +1,42 @@
+<%-include("../partials/headerResult")%>
+<%-include("../partials/teacherHead")%>
+<div id="content" class="clearfix">
+	<div class="innerWrapper">
+		<div class="col-span-7">
+			<p class="breadcrumb3">
+				<a href="/tests/groups" class="first"><span>Groups</span></a>
+				<span>New Group</span>
+			</p>
+		</div>
+		<div class="col-span-3">
+			<ul class="menu-sections" id="walkthrough-menu">
+				<li class="test"><a href="/tests/"><span>Tests</span></a></li>
+				<li class="group"><a class="sect" href="/tests/groups"><span>Groups</span></a></li>
+				<li class="link"><a class="sect" href="/tests/links"><span>Links</span></a></li>
+			</ul>	
+		</div>
+		<div class="clearheight20"></div>
+		<div class="clearheight20"></div>
+		<hr>
+		<form action="/tests/groups/new/" id="dosubmit_gn" method="post">
+			<div class="field-group">
+				<label class="form-field-title" for="group_name1">Group name:</label>
+				<input class="input showTooltip checkEmpty" id="group_name1" type="text" name="group_name" size="40" maxlength="100" original-title="The 'Group name' is seen by Group Members.">
+			</div>
+			<div class="field-group">
+				<a href="#" id="submit_gn" class="btn btn-create tab">Create Group</a>
+			</div>
+		</form>
+		<hr>
+		<div class="col-span-8 editor">
+			<h5>About Groups:</h5>
+			<p>Group Members will log in via the ClassMarker.com homepage where they can easily take the Tests you have assigned to their Group/s.</p>
+			<p>If you prefer to give Tests without the need to pre-register users, try our Links option instead.</p>
+			<p>Learn more about the difference between: <a href="/online-testing/manual/#assign" class="popup">Groups &amp; Links</a>.</p>
+		</div>
+		<div class="clearheight60"></div>
+		<div class="clearheight60"></div>
+	</div><!-- innerWrapper -->
+	<img src="/img3/icon_loading_circleV3.gif" alt="Hidden Loading Image" class="hide" width="20" height="20">
+</div>
+<%-include("../partials/footer")%>

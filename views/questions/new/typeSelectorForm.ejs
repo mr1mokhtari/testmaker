@@ -1,0 +1,503 @@
+<form method="post" <%if(question!=0 && !test){%><%if(dup==0){%>action="/questions/<%=question._id%>?_method=PUT"<%}else{%>action="/questions"<%}%><%}else{%>action="/questions"<%}%>  id="questionForm">
+	<div id="form_div" class="editQuestionDiv">
+		<input type="hidden" name="question[type]" id="qtype" <%if(question!=0){%>value='<%=question.type%>'<%}else{%>value="mcsa"<%}%> >
+		<!-- /////@@@@@@@@@@@ Return Value @@@@@@@@@@!!!!!!!!!!!!!//// -->
+		<input type="hidden" name="return_url" value="/">
+		<div class="matching_setting_box qt_hide">
+			<div class="matching_icon_pointer">
+				<img class="small_icon" src="/img3/icon-menu-pointer.png" alt="">
+			</div>
+			<div class="delay_hide_sceditor hide m_formdiv" style="display: none;">
+				<div class="matching-question-style">
+					<div class="qt_title">
+						Match Type
+						<div class="showTooltipHTML qt_tip" title="Use 'Drop Down' when Matches are text that can be selected from a Drop down select box, maximum 30 characters<br> Use 'Multimedia' for longer text or multimedia elements">	What's this?
+						</div>
+					</div>
+					<div id="type_simple_text">
+						<input type="hidden" name="matching_t" value="0" class="m_forminput" disabled="disabled">
+						<div class="qt_icon">
+							<img class="qt_icon_simpletext_grey" src="/img3/icon-simpletext-grey.png" srcset="/img3/icon-simpletext-grey.png 1x, /img3/icon-simpletext-grey_3x.png 2x" alt="" style="display: none;" width="50" height="20">
+							<img class="qt_icon_simpletext_red" src="/img3/icon-simpletext-red.png" srcset="/img3/icon-simpletext-red.png 1x, /img3/icon-simpletext-red_3x.png 2x" alt="" width="50" height="20">
+							<div class="qt_simpletext_caption qt_color_red">
+								Drop Down
+							</div>
+						</div>
+					</div>
+					<div id="type_multimedia">
+						<div class="qt_icon">
+							<img class="qt_icon_multimedia_grey" src="/img3/icon-multimedia-grey.png" srcset="/img3/icon-multimedia-grey.png 1x, /img3/icon-multimedia-grey_3x.png 2x" alt="" width="41" height="27">
+							<img class="qt_icon_multimedia_red" src="/img3/icon-multimedia-red.png" srcset="/img3/icon-multimedia-red.png 1x, /img3/icon-multimedia-red_3x.png 2x" alt="" style="display: none;" width="41" height="27">
+							<div class="qt_multimedia_caption">Multimedia</div>		
+						</div>
+					</div>
+				</div>
+				<div class="matching-question-style">
+					<div class="qt_title">Points Option						
+						<div class="showTooltipHTML qt_tip" title="Use 'Single' to set a single point value for this Question (See Grading Scale below for more options) <br/>Use 'Per Match' to set separate points per match.">What's this?</div>
+					</div>
+					<div id="grade_same">
+						<input type="hidden" name="grading_m" value="0" id="grade_multiple_points_style" class="m_forminput" disabled="disabled">
+						<div class="qt_icon">
+							<img class="qt_icon_perQuestion_grey" src="/img3/icon-perQuestion-grey.png" srcset="/img3/icon-perQuestion-grey.png 1x, /img3/icon-perQuestion-grey_3x.png 2x" alt="" style="display: none;" width="28" height="33">
+							<img class="qt_icon_perQuestion_red" src="/img3/icon-perQuestion-red.png" srcset="/img3/icon-perQuestion-red.png 1x, /img3/icon-perQuestion-red_3x.png 2x" alt="" width="28" height="33">
+							<div class="qt_perQuestion_caption qt_color_red">Single</div>
+						</div>
+					</div>
+					<div id="grade_different">
+						<div class="qt_icon">
+							<img class="qt_icon_perMatch_grey" src="/img3/icon-perMatch-grey.png" srcset="/img3/icon-perMatch-grey.png 1x, /img3/icon-perMatch-grey_3x.png 2x" alt="" width="28" height="33">
+							<img class="qt_icon_perMatch_red" src="/img3/icon-perMatch-red.png" srcset="/img3/icon-perMatch-red.png 1x, /img3/icon-perMatch-red_3x.png 2x" alt="" style="display: none;" width="28" height="33">
+							<div class="qt_perMatch_caption">Per Match</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+<div class="e_formdiv delay_hide_sceditor  mc_formdiv tf_formdiv ft_formdiv m_formdiv" style="display: block;">
+	<div class="col-span-7">
+		<h5>Question</h5>				
+		<textarea name="question[question]" rows="3" cols="67" id="question" class="edit_qboxes question_text qclear mc_forminput tf_forminput ft_forminput e_forminput fullBBcodeEditor" style="display: none;"><%if(question!=0){%><%=question.question%><%}%></textarea>
+		
+		<div class="sceditor-container wysiwygMode ltr" style="width: 540px;" id="editor_question">		
+		</div>
+	</div>
+		
+		<div class="col-span-3">
+			<h5>&nbsp;</h5>	
+			<div class="aside-message assign littledark">
+				<ul>
+					<li><a href="#" id="showQuestionExamples">View Question Examples</a></li>
+					<li><a href="#" class="open_symbols_lightbox">Copy &amp; Paste Symbols</a></li>
+					<li><a href="/learn/?trk=promo" class="popup">Learn how to write great Tests</a></li>
+				</ul>
+			</div>
+		</div>	
+		<div class="clearheight"></div>
+	</div>
+	<%if(!question ||(question.type=="mcma"||question.type=="mcsa")){%>
+	<!-- Multiple Choice -->
+	<div class=" delay_hide_sceditor mc_formdiv" style="display: block;">
+		<div class="multiple_choice_answers">
+		<h5>Answers <span class="showTooltip tooltip" title="Type at least two answer options and select which answer/s are correct.">Tip</span></h5>
+			<%var mc_options=["A","B","C","D","E","F","G","H","I","J"]%>
+			<%mc_options.forEach((op,o)=>{%>
+			<%if(o==4){%>
+				<div id="tog_extra" class="unit_box col_left hideme"><a href="#" class="btn btn-add-wysiwyg hideme">Add more answer options</a></div>
+				<div class="hide delay_hide_sceditor" id="dotog_extra" style="display: none;">
+			<%}%>
+			<div class="unit_box">
+				<div class="answer">
+					<div class="answer_heading">
+						<h5 class="">(<%=op%>)</h5>
+						<input class="showCorrect mc_forminput" type="checkbox" name="question[mc_correct]" value="<%=o+1%>" id="a<%=o+1%>">
+						<label for="a<%=o+1%>" class="">This answer option is correct</label>
+					</div>
+					<textarea name="question[mc_options]" rows="3" cols="67" id="ans<%=o+1%>" class="qclear mc_forminput fullBBcodeEditor" style="display: none;"><%if(question!=0){%><%=question.mc_options[o].answer%><%}%></textarea>
+					<div class="sceditor-container wysiwygMode ltr" style="width: 540px;" id="editor_ans<%=o+1%>">
+					</div>
+				</div>
+			</div>
+			<%if(o==9){%>
+				</div>
+			<%}%>
+			<%})%>
+			<div class="clear"></div>
+			<div id="show_selected_letters" class="hide"></div>
+			<div class="clearheight"></div>
+		</div>
+	</div>
+	<%}%>
+	<%if(!question ||(question.type=="tf")){%>
+	<!-- True False Form -->
+	<div class="hide tf_formdiv" style="display: none;">
+		<div class="multiple_choice_answers">
+				<h5>
+					Answers 
+					<span class="showTooltip tooltip" title="You can use the default True or False text, or edit as required.">Tip</span>
+				</h5>
+			<div class="unit_box">			
+				<input type="radio" name="question[tf_correct]" class="showCorrecttf tf_forminput  editShowCorrecttf" value="1" id="tf1" checked="checked" disabled="disabled">
+				<label for="tf1" class=" editShowCorrecttf">This answer is correct</label>
+				<div class="clearheight5"></div>
+				<input type="text" name="question[tf_options]" size="30" id="tfans1" class="tf_forminput" <%if(question!=0){%>value="<%=question.tf_options[0].answer%>"<%}else{%>value="True"<%}%> disabled="disabled">
+				<div class="clearheight"></div>			
+				<input type="radio" name="question[tf_correct]" class="showCorrecttf tf_forminput  editShowCorrecttf" value="2" id="tf2" disabled="disabled">
+				<label for="tf2" class="">This answer is correct</label>
+				<div class="clearheight5"></div>
+				<input type="text" name="question[tf_options]" size="30" id="tfans2" class="tf_forminput" <%if(question!=0){%>value="<%=question.tf_options[1].answer%>"<%}else{%>value="False"<%}%> disabled="disabled">
+			</div>
+		</div>
+		<div class="clearheight"></div>
+	</div>
+	<%}%>
+	<%if(!question ||(question.type=="ft")){%>
+	<!-- Free Text Form -->
+	<div class="hide ft_formdiv" style="display: none;">
+		<div class="free_text_answers">
+			<h5>Accepted answers
+				<span class="showTooltip tooltip" title="Add each separate accepted answer or phrase per input box. Users will not see these when answering this question. See Question examples for more information.">Tip</span>
+			</h5>
+			<div class="unit_box">
+			<%for(i=0;i<20;i++){%>
+				<%if(i==10){%>
+					<a href="#" id="tog_extra_ft_answers" class="hideme">
+						More Accepted answer options
+					</a>
+					<div class="hide" id="dotog_extra_ft_answers1">
+				<%}%>
+				<p>
+					<input type="text" name="question[ft_correct]" class="qclear ft_forminput" size="30" id="ftans<%=i+1%>" <%if(question!=0){%>value="<%=question.ft_correct[i]%>"<%}else{%>value=""<%}%> disabled="disabled">
+					<%if(i==0){%>Mandatory<%}else{%>Optional<%}%>
+				</p>
+				<%if(i==19){%>
+					</div>
+				<%}%>
+			<%}%>
+
+
+			</div>
+		</div>
+		<div class="clearheight">
+		</div>
+	</div>
+	<%}%>
+	<%if(!question ||(question.type=="p")){%>
+	<!-- Grammar Form + Side Help links -->
+	<div class="hide p_formdiv" style="display: none;">
+		<div class="col-span-7">
+			<div>
+				<h5>
+					Incorrect version 
+					<span class="showTooltip tooltip" title="Add a sentence with incorrect punctuation or grammar.">Tip</span>
+				</h5>
+		
+				<p>
+					<input type="text" name="question[p_incorrect]" size="60" id="questionp" <%if(question!=0){%>value="<%=question.p_incorrect%>"<%}else{%>value=""<%}%> class="edit_qboxes qclear p_forminput" disabled="disabled">
+				</p>
+			</div>
+			<div class="unit_box">
+				<h5>
+					Correct version  (users will not see this during the test)
+			    	<span class="showTooltip tooltip" title="ClassMarker will compare corrections made to the sentence above with the correct version you add here.">Tip</span>
+				</h5>
+				<p>
+					<input type="text" name="question[p_correct]" size="60" id="pans" <%if(question!=0){%>value="<%=question.p_correct%>"<%}else{%>value=""<%}%> class="edit_qboxes qclear p_forminput" disabled="disabled">
+				</p>
+			</div>
+		</div>
+				
+		
+		<div class="col-span-3">
+			<h5>&nbsp;</h5>	
+			<div class="aside-message assign littledark">
+				<ul>
+					<li>
+						<a href="#" id="showQuestionExamples">View Question Examples</a>
+					</li>
+					<li>
+						<a href="#" class="open_symbols_lightbox">Copy &amp; Paste Symbols</a>
+					</li>
+					<li>
+						<a href="/learn/?trk=promo" class="popup">Learn how to write great Tests</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="clearheight"></div>
+	</div>
+
+	<!-- Blank Space -->
+	<div class="hide delay_hide_sceditor e_formdiv" style="display: none;">
+				<div class="clearheight"></div>
+	</div>
+	<%}%>
+	<%if(!question ||(question.type=="m")){%>	
+	<!-- Matching Form -->
+	<div class="hide delay_hide_sceditor m_formdiv" style="display: none;">
+		<div class="clearheight"></div>
+		<div id="matching_question_box">
+			<h5>Add matching pairs</h5>
+			<div class="unit_box unit_box_matching hide" id="set_points_box" style="display: none;">
+				<span class="matching_plus_symbol">+</span>
+				<input type="text" name="positive_score" id="positive_score" class="m_forminput" size="3" value="1" disabled="disabled">&nbsp;<i>pts</i>&nbsp;&nbsp;&nbsp;&nbsp;
+				<span class="matching_minus_symbol">−</span>
+				<input type="text" name="negative_score" id="negative_score" class="m_forminput" size="3" value="0" disabled="disabled">&nbsp;<i>pts</i>&nbsp;&nbsp;
+				<a href="#" class="btn btn-white" id="set_all_points">Set all points</a>
+	  		</div>
+			<%var m_options=["A","B","C","D","E","F","G","H","I","J"]%>
+			<%m_options.forEach((mop,mn)=>{%>
+				<%if(mn==5){%>
+					<div id="tog_extra_matching" class="unit_box unit_box_matching col_center">
+						<div id="loading" style="display:none">
+							<img src="/img3/icon_loading_circleV3.gif" alt="Please wait">
+						</div>
+						<a href="#" class="btn btn-add-wysiwyg" id="add_more_matching">Add more matching pairs</a>
+					</div>
+					<div class="hide delay_hide_sceditor" id="dotog_extra_matching" style="display: none;">
+				<%}%>
+				<div class="unit_box unit_box_matching">
+					<div class="matching_pairs">
+						<div class="matching_row">
+							<div class="matching_col col_left">
+								<div>
+									<div class="grading_style_advance hide" style="display: none;">
+										<span class="matching_plus_symbol">+</span>&nbsp;
+										<input type="text" name="question[p_score]" class="m_forminput" size="3" id="p_score_<%=mn+1%>" value="1" disabled="disabled"> <i>pts</i>&nbsp;&nbsp;&nbsp;&nbsp;
+										<span class="matching_minus_symbol">−</span>&nbsp;
+										<input type="text" name="question[n_score]" class="m_forminput" size="3" id="n_score_<%=mn+1%>" value="0" disabled="disabled"> <i>pts</i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="matching_row">
+							<div class="matching_col">
+								<div class="matching_col_header">Clue <%=mop%></div>									<textarea name="question[matching_query]" rows="3" cols="67" id="matching_query_<%=mn+1%>" class="qclear m_forminput fullBBcodeEditor" style="display: none;" disabled="disabled"></textarea>
+								<div class="sceditor-container wysiwygMode ltr" style="width: 400px;" id="editor_matching_query_<%=mn+1%>">							
+									<textarea style="display: none; width: 390px; height: 93px;" dir="ltr" disabled="disabled"></textarea>
+									<div class="sceditor-grip"></div>
+									<div class="sceditor-resize-cover" style="display: none;"></div>
+								</div>
+							</div>
+							<div class="matching_col col_middle">
+								<img class="small_icon" src="/img3/icon-breadcrumb-arrow.png" srcset="/img3/icon-breadcrumb-arrow_3x.png 2x" width="10" height="7">
+							</div>
+							<div class="matching_col">
+								<%if(mn==0){%>
+								<div class="matching_col_header col_margin_left">
+									Match <%=mop%>
+								</div>
+								<%}%>
+								<div class="<%if(mn==0){%>matching_answer_tabs<%}else{%>matching_answer_tabs<%=mn+1%><%}%> col_margin_left" id="matching_answer_tabs">
+									<%if(mn!=0){%>
+<div id="new_answer_<%=mn+1%>">Match <%=mop%><span class="matching_header">
+						<select class="qclear matching_dropdown" name="question[matching_dropdown]" id="matching_dropdown_<%=mn+1%>">
+							<option value="blank">Type New Match</option>
+							<!-- <option value="matching_row_1">Same as Match A</option> -->
+						</select>
+					</span></div>
+									<%}%>
+									<div class="matching_answer_input<%if(mn!=0){%>_<%=mn+1%><%}%>">
+										<input type="text" id="matching_input_<%=mn+1%>" class="qclear matching_input" value="" maxlength="30" disabled="disabled" name='question[matching_input]'>
+										<textarea rows="3" cols="49" id="matching_option_<%=mn+1%>" class="qclear hide m_forminput fullBBcodeEditor" style="display: none;" disabled="disabled" name='question[matching_option]'></textarea>
+										<div class="sceditor-container wysiwygMode ltr" style="width: 400px; display: none;" id="editor_matching_option_<%=mn+1%>">										 
+											<textarea style="display: none; width: 390px; height: 93px;" dir="ltr" disabled="disabled"></textarea>
+											<div class="sceditor-grip"></div>
+											<div class="sceditor-resize-cover" style="display: none;"></div>
+										</div>
+										<input type="hidden" name="matching_result_<%=mn+1%>" id="matching_result_<%=mn+1%>" disabled="disabled">
+									</div>
+									<div class="bbcode matching-imgw matching_answer_existing_<%=mn+1%>"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<%if(mn==9){%>
+					</div>
+				<%}%>
+			<%})%>
+			
+			<div class="dummy_answer_box">
+				<div id="tog_dummy_answer" class="unit_box unit_box_matching col_center hideme">
+					<a href="#" class="btn btn-add-wysiwyg hideme">Add more incorrect matches</a>
+				</div>
+				<div class="hide delay_hide_sceditor col_left" id="dotog_dummy_answer" style="display: none;">
+				<%var inm_options=["A","B","C","D","E"]%>
+					<%inm_options.forEach((imop,imn)=>{%>
+					<div class="unit_box unit_box_matching extra_content">
+						<div class="matching_col_header">
+							Incorrect Match <%=imop%> 
+							<span class="showTooltip tooltip" title="Incorrect matches can raise the question difficulty because Test takers cannot guess the last unselected match or make assumptions when Clues and Matches are equal.">Tip</span>
+						</div>
+						<div class="matching_answer_input">
+							<input type="text" name="question[matching_incorrect_input]" id="matching_incorrect_input_<%=imn%>" class="qclear matching_input" value="" maxlength="30" disabled="disabled">
+							<textarea rows="3" cols="67" name="question[matching_incorrect_option]" id="matching_incorrect_option_<%=imn%>" class="qclear m_forminput fullBBcodeEditor " style="display: none;" disabled="disabled"></textarea>
+							<div class="sceditor-container wysiwygMode ltr" style="width: 400px; display: none;" id="editor_matching_incorrect_option_<%=imn%>">
+								 
+								<textarea style="display: none; width: 390px; height: 93px;" dir="ltr" disabled="disabled"></textarea>
+								<div class="sceditor-grip"></div>
+								<div class="sceditor-resize-cover" style="display: none;"></div>
+							</div>
+							<input type="hidden" name="matching_dummy_<%=imn%>" id="matching_dummy_<%=imn%>" disabled="disabled">
+						</div>
+					</div>
+					<%})%>
+				</div>
+			</div>
+			<div class="clearheight"></div>
+		</div>
+	</div>
+	<%}%>
+	<!-- Feedback -->
+	
+	<div class="delay_hide_sceditor hide e_formdiv mc_formdiv tf_formdiv ft_formdiv p_formdiv m_formdiv" style="display: block;">
+		<h5>Give Feedback</h5>
+		<div class="unit_box">
+			<a href="#" id="tog_feedback" class="btn add-feedback hideme">Add question feedback</a>
+			<div class="hide delay_hide_sceditor" id="dotog_feedback" style="display: none;"><div>
+				<h5 class="green">Feedback: Correctly answered
+		<span class="showTooltip tooltip" title="Feedback is optional. This text will show when Answer is correct. Adding rich media and Links is allowed just like Question and Answer Text.">Tip</span></h5>
+			<textarea class="edit_qboxes question_text qclear mc_forminput tf_forminput ft_forminput e_forminput p_forminput fullBBcodeEditor hides" name="question[correct_feedback]" rows="2" cols="67" id="corect_feedback"><%if(question!=0){%><%=question.correct_feedback%><%}%> </textarea><br>
+				<div class="sceditor-container wysiwygMode ltr" style="width: 540px;" id="editor_correct_feedback"></div>
+			<!-- <a href="#" class="upgradeRpc explain-underline">How to add feedback</a> -->
+				</div>
+				<div class="clearheight"></div>
+				<div>
+					<div class="incorrect_feedback_div">
+						<h5 class="red">Feedback: Incorrectly answered 
+						<span class="showTooltip tooltip" title="Feedback is optional. This text will show when Answer is incorrect. Adding rich media and Links is allowed just like Question and Answer Text.">Tip</span></h5>
+					</div>
+					<textarea class="edit_qboxes question_text qclear mc_forminput tf_forminput ft_forminput e_forminput p_forminput fullBBcodeEditor hides" name="question[incorrect_feedback]" rows="2" cols="67" id="inccorect_feedback"><%if(question!=0){%><%=question.incorrect_feedback%><%}%></textarea><br>
+					<div class="sceditor-container wysiwygMode ltr" style="width: 540px;" id="editor_incorrect_feedback">	</div>
+		<!-- <a href="#" class="upgradeRpc explain-underline">How to add feedback</a> -->
+				</div>
+			</div>
+		</div>
+		<div class="clearheight"></div>
+	</div>
+<!-- Category / Points / Shuffle Point -->
+<div class="delay_hide_sceditor hide e_formdiv mc_formdiv tf_formdiv ft_formdiv p_formdiv m_formdiv" style="display: block;">
+	<h5>Settings</h5>
+	<div class="unit_box">
+		<h5>
+			Category 
+			<span class="showTooltip tooltip" title="Select the category for this question.">Tip</span>
+		</h5>
+		<select name="cat_id" id="cat_id" class="no_parent_cat_selection parent-cat-dd">
+	<%pcats.forEach(function(pcat,i){%>
+		<option value="pc<%=pcat._id%>" disabled="">- <%=pcat.parent_cat_name%> -</option>
+		<%pcat.cat_name.forEach(function(subcat,j){%>
+			<%scats.forEach(function(scat,k){%>
+				<%if(JSON.stringify(scat._id)==JSON.stringify(subcat)){%>
+					<option value="p<%=pcat._id%>sc<%=scat._id%>" <%if(question!=0){if(question.sub_cat_id==scat._id){%>selected<%}}%>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=scat.cat_name%></option>
+				<%}%>
+			<%})%>
+		<%})%>
+	<%})%>
+			<!-- <option value="p0" disabled="">- Generic Parent -</option>
+			<option value="0" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic</option> -->
+		</select> 
+		<a href="#" id="createCatRpc_" class="not-ie67 not-ie8 littlelink">
+			New Category
+		</a>
+		<span class="showTooltip tooltip" title="Categorizing your Tests and Questions allows you to easily keep these items organized. You can also view results by Category to help better analyze problem areas.">Tip</span>
+		<div id="show_point_available">
+			<hr class="line_divider">
+			<h5>Points Available</h5>
+			<span class="showTooltip tooltip" title="How many points this question is worth. Decimals are allowed. EG: 1 or 2.5">Tip</span>
+				<input type="text" id="points" name="question[points]" maxlength="5" <%if(question!=0){%>value="<%=question.points%>"<%}else{%>value="1"<%}%> size="2">
+				<span id="calculated_points" style="display: none;"></span> 
+				<a class="points_recalculate " style="display: none;">
+					Calculate
+				</a>
+				<div id="warn_change_points"></div>
+			</div>
+		<div class="hide m_formdiv" style="display: none;">
+			<hr class="line_divider">
+			<div id="show-shuffle-mode">
+				<h5>Shuffle Mode</h5>
+				<input type="radio" name="shuffle_m" checked="checked" value="0" id="sh_1" class="m_forminput"> 
+				<label for="sh_1">
+					Shuffle Matches Only 
+					<span class="showTooltip tooltip" title="Shuffle the match options on the right side and keep the clues on the left side in order">Tip</span>
+				</label>
+				<div class="clearheight5"></div>
+				<input type="radio" name="shuffle_m" value="1" id="sh_2" class="m_forminput"> 
+				<label for="sh_2">
+					Shuffle Clues Only 
+					<span class="showTooltip tooltip" title="Shuffle the clue options on the left side and keep the matches on the right side in order">
+						Tip
+					</span>
+				</label>
+				<div class="clearheight5"></div>
+				<input type="radio" name="shuffle_m" value="2" id="sh_3" class="m_forminput"> 
+				<label for="sh_3">
+					Shuffle Clues and Matches 
+					<span class="showTooltip tooltip" title="Shuffle both clue and match options">Tip</span>
+				</label>
+			</div>
+		</div>
+		<div class="hide mc_formdiv" style="display: block;">
+			<hr class="line_divider">
+			<div id="random_options">
+				<h5>Randomize Answers
+		 			<span class="showTooltip tooltip" title="Show answer options in random order.">Tip</span>
+				</h5>
+				<input type="radio" name="question[random_a]"  value="0" id="ra_1" class="mc_forminput"  <%if(question!=0){if(question.random_a=='0'){%>checked="checked"<%}}%> <%if(question==0){%>checked="checked"<%}%> > 
+				<label for="ra_1">No</label>
+				<div class="clearheight5"></div>
+				<input type="radio" name="question[random_a]" value="1" id="ra_2" class="mc_forminput" <%if(question!=0){if(question.random_a=='1'){%>checked="checked"<%}}%> > 
+				<label for="ra_2">Yes</label>
+			</div>
+		</div>
+		<div class="hide mc_formdiv" style="display: block;">
+			<div id="show_radio_or_checkbox">
+				<hr class="line_divider">
+				<h5>Answer Selection</h5>
+				<input type="radio" name="question[radio_or_checkbox_not_used]" <%if(question!=0){if(question.radio_or_checkbox_not_used=='0'){%>checked="checked"<%}}%> <%if(question==0){%>checked="checked"<%}%> value="0" id="roc_0" class="mc_forminput"> 
+				<label for="roc_0">
+					Radio buttons 
+					<span class="explain">
+						- Only one answer option can be selected
+					</span>
+				</label>
+				<span class="showTooltip tooltip" title="Radio buttons are used to enforce (and indicate) only one answer can be selected as the correct answer.">Tip</span>
+				
+				<div class="clearheight5"></div>
+				<input type="radio" name="question[radio_or_checkbox_not_used]" value="1" <%if(question!=0){if(question.radio_or_checkbox_not_used=='1'){%>checked="checked"<%}}%> id="roc_1" class="mc_forminput"> 
+				<label for="roc_1">
+					Checkboxes 
+					<span class="explain">
+						- Multiple answer options can be selected
+					</span>
+				</label>
+			<span class="showTooltipHTML tooltip" title="Checkboxes are used to indicate one or more answers can be selected as the correct answer (Tip: Checkboxes can make questions more difficult when only one answer is correct).">Tip</span>
+			</div>
+		</div>
+		<div class="hide mc_formdiv m_formdiv" style="display: block;">
+			<div id="show_grade_style" style="display: none;">
+				<hr class="line_divider">
+				<h5>Grading Scale</h5>
+				<input type="radio" name="question[grade_style]" <%if(question!=0){if(question.grade_style=='0'){%>checked="checked"<%}}%> <%if(question==0){%>checked="checked"<%}%> value="0" id="gs_0" class="mc_forminput"> 
+				<label for="gs_0">Off</label>
+				<span class="showTooltipHTML tooltip" title="Full points for correct answer<br/>Zero points if any error is made">Tip</span>
+				<div class="clearheight5"></div>
+				<input type="radio" name="question[grade_style]" value="1" id="gs_1" <%if(question!=0){if(question.grade_style=='1'){%>checked="checked"<%}}%> class="mc_forminput"> 
+				<label for="gs_1">Partial with deduction</label>
+				<span class="showTooltip tooltip" title="Partial points for some correct, remove partial points for incorrect answers">Tip</span>
+				<div class="clearheight5"></div>
+				<input type="radio" name="question[grade_style]" value="2" id="gs_2" class="mc_forminput" <%if(question!=0){if(question.grade_style=='2'){%>checked="checked"<%}}%>> 
+				<label for="gs_2">Partial without deduction</label>
+				<span class="showTooltip tooltip" title="Partial points for some correct, do not remove points for incorrect answers">Tip</span>
+			</div>
+		</div>
+	</div>
+	</div>
+	
+<!-- ???	 -->
+<div id="div_preview" class="hide editor bbcode" style="display: none;"></div>
+<div id="msgDivError"></div>
+	
+		<%if(test){%>
+					<!-- // For adding Q to Test // -->
+		<input type="hidden" name="question[used_in]" value="<%=test._id%>">
+		<input type="hidden" name="test_id" value="<%=test._id%>">
+		<%}%>
+<!-- Buttons	 -->
+<div id="edit-question-btns">	
+	<a class="btn btn-analytics preview_question_link ">Preview</a>
+	<a class="btn btn-analytics edit_question_link margleft" style="display: none;">Edit</a>
+	<a href="#" id="save_question" class="btn btn-create margleft">Save</a>	
+	<a href="/questions" class="btn btn-cancel cancel_link right confirm-cancel">Cancel</a>
+</div>	
+</form>
+
+<div class="jqmWindowWide jqmID1" id="questionExamplesDiv"></div>
+<img src="/img3/icon_loading_circleV3.gif" class="hide" alt="Hidden Loading Image" width="20" height="20">
+
+
+<!-- <div class="jqmWindow jqmID4" id="createCatDiv" style="z-index: 3000; display: none;"><div class="ajaxerror"><i class="fa fa-sign-out" aria-hidden="true"></i> Task incomplete. You were logged out due to inactivity. You can <a href="https://www.?.com/" class="popup">Log in</a>, then come back and try again.</div></div> -->

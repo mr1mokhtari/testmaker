@@ -1,0 +1,363 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<h4 class="gray-div">Insert<span class="f-right"><a class="close jqmClose cancel-padding"></a></span></h4>
+		<div class="tab-list">
+			<ul class="cmtableTabs">
+				<li class="tabon" id="imageTab"><a href="#">Images</a></li>
+				<li class="taboff" id="documentTab"><a href="#">Documents</a></li>
+				<li class="taboff" id="videoTab"><a href="#">Video</a></li>
+				<li class="taboff" id="audioTab"><a href="#">Audio</a></li>
+			</ul>
+		</div>
+		<div class="table" id="table-add-margin">
+			<div id="mm-source-list">
+				<div class="row show-top"><a href="#" class="source strong" id="slidedowngroup_01_files">From my files</a></div>
+				<div class="row" id="fromWeb"><a href="#" class="source" id="slidedowngroup_01_web">From the web</a></div>
+				<div class="row hide" id="fromYoutube"><a href="#" class="source" id="slidedowngroup_01_youtube">Youtube</a></div>
+				<div class="row hide" id="fromVimeo"><a href="#" class="source" id="slidedowngroup_01_vimeo">Vimeo</a></div>
+				<div class="row hide" id="fromSoundcloud"><a href="#" class="source" id="slidedowngroup_01_soundcloud">Soundcloud</a></div>
+				<div class="row"><a href="#" class="source" id="slidedowngroup_01_upload">Upload</a></div>
+			</div>
+			<div id="mm-operation-area">
+				<div class="row" id="no-bottom-border">
+					<div id="doslidedowngroup_01_files">
+						<div id="cmImageInstructions">
+							<!-- %%%%%%%%%%%%%%% -->
+							<div class="alert-box alert-confirmation editor ">Upgraded accounts can upload files to ClassMarker to use with their tests, themes and certificates.
+								<div class="clearheight"></div> <span class="little"><a href="/online-testing/quiz-features/" class="popup">Upgraded Account Features</a></span></div>
+							<!-- %%%%%%%%%%%%%%% -->
+						</div>
+						<!-- Asagadiki da hide-i sildim -->
+						<div id="cmImagePreviewDivHolder" class="hide">
+							<p><a class="btn btn-results" id="cmImageConfirm">Embed image</a>
+								<a class="btn" id="cmImageTryAgain">Select another image</a></p>
+							<div id="cmImage"></div>
+						</div>
+							<!-- %%%%%%%%%%%%%%% -->
+						<div class="hide" id="cmDocumentInstructions">
+							<div class="alert-box alert-confirmation editor ">Upgraded accounts can upload files to ClassMarker to use with their tests, themes and certificates.
+								<div class="clearheight"></div> <span class="little"><a href="/online-testing/quiz-features/" class="popup">Upgraded Account Features</a></span></div>
+						</div>
+							<!-- %%%%%%%%%%%%%%% -->
+						<div id="cmDocumentPreviewDivHolder" class="hide">
+							<p><a class="btn btn-results" id="cmDocumentConfirm">Embed document link</a>
+								<a class="btn" id="cmDocumentTryAgain">Edit</a></p>
+							<div class="clearheight"></div>
+							<div id="cmDocument"></div>
+							<div class="clearheight"></div>
+						</div>
+							<!-- %%%%%%%%%%%%%%% -->
+						<div class="hide" id="cmVideoInstructions">
+							<div class="alert-box alert-confirmation editor ">Upgraded accounts can upload files to ClassMarker to use with their tests, themes and certificates.
+								<div class="clearheight"></div> <span class="little"><a href="/online-testing/quiz-features/" class="popup">Upgraded Account Features</a></span></div>
+						</div>
+							<!-- %%%%%%%%%%%%%%% -->
+						<div id="cmVideoPreviewDivHolder" class="hide">
+							<p><a class="btn btn-results" id="cmVideoConfirm">Embed video</a>
+								<a class="btn" id="cmVideoTryAgain">Select another video</a></p>
+							<div id="cmVideo"></div>
+						</div>
+							<!-- %%%%%%%%%%%%%%% -->
+						<div class="hide" id="cmAudioInstructions">
+							<div class="alert-box alert-confirmation editor ">Upgraded accounts can upload files to ClassMarker to use with their tests, themes and certificates.
+								<div class="clearheight"></div> <span class="little"><a href="/online-testing/quiz-features/" class="popup">Upgraded Account Features</a></span></div>
+						</div>
+						<!-- %%%%%%%%%%%%%%% -->
+						<div id="cmAudioPreviewDivHolder" class="hide">
+							<p><a class="btn btn-results" id="cmAudioConfirm">Embed audio</a>
+								<a class="btn" id="cmAudioTryAgain">Select another audio</a></p>
+							<div id="cmAudio"></div>
+						</div>
+					</div>
+
+					<div class="hide" id="doslidedowngroup_01_web">
+						<div id="externalImageInstructions">
+							<h5>Externally hosted images</h5>
+							<p>Example: https://www.example.com/images/image.jpg</p>
+							<p><input type="text" id="external_image_url" size="30" value="https://"></p>
+							<p><a id="externalImagePreview" class="btn btn-create">Preview</a></p>
+							<div class="alert-box editor "><strong>Note:</strong> External files should be hosted starting with https://, not http://<br></div>
+						</div>
+						<div class="hide" id="externalImagePreviewDivHolder">
+							<p><a class="btn btn-results" id="externalImageConfirm">Embed image</a>
+								<a class="btn" id="externalImageTryAgain">Edit</a></p>
+							<div id="externalImage"></div>
+						</div>
+
+						<div class="hide" id="externalDocumentInstructions">
+							<h5>Externally hosted documents</h5>
+							<p>Example: https://www.example.com/documents/document.txt</p>
+							<p><input type="text" id="external_document_url" size="30" value="https://"></p>
+							<p><strong>Link Title</strong><br>
+							</p><p><input type="text" id="external_document_title" size="30" name="not_used" class="showTooltip" title="The text users see and click on to download this file. E.G. Download the PDF"></p>
+							<p><a id="externalDocumentPreview" class="btn btn-create">Preview</a></p>
+							<div class="alert-box editor "><strong>Note:</strong> External files should be hosted starting with https://, not http://<br></div>				</div>
+						<div class="hide" id="externalDocumentPreviewDivHolder">
+							<p><a class="btn btn-results" id="externalDocumentConfirm">Embed document</a>
+								<a class="btn" id="externalDocumentTryAgain">Edit</a></p>
+							<div id="externalDocument"></div>
+						</div>
+
+						<div class="hide" id="externalVideoInstructions">
+							<h5>Externally hosted video files</h5>
+							<p>Example: https://www.example.com/videos/video.mp4</p>
+							<p><input type="text" id="external_video_url" size="30" value="https://"></p>
+							<p><a id="externalVideoPreview" class="btn btn-create">Preview</a></p>
+							<div class="alert-box editor "><div class="littledark"><h5>Instructions</h5>
+									<strong>Video format:</strong> .mp4 <br>
+									<strong>Note:</strong> You can only use Video that is encoded as .mp4 for best support across modern browsers. Other formats will not work across all browsers.<br>
+									<strong>Note:</strong> Internet Explorer 8 or below is not supported for playing uploaded or external video files. Use YouTube.com or Vimeo.com instead.<br>
+									<strong>Note:</strong> External files should be hosted starting with https://, not http://<br>
+									</div>
+							</div>
+						</div>
+						<div class="hide" id="externalVideoPreviewDivHolder">
+							<p><a class="btn btn-results" id="externalVideoConfirm">Embed video</a>
+								<a class="btn" id="externalVideoTryAgain">Edit</a></p>
+							<div id="externalVideo"></div>
+						</div>
+
+						<div class="hide" id="externalAudioInstructions">
+							<h5>Externally hosted audio files</h5>
+							<p>Example: https://www.example.com/audios/audio.mp3</p>
+							<p><input type="text" id="external_audio_url" size="30" value="https://"></p>
+							<p><a id="externalAudioPreview" class="btn btn-create">Preview</a></p>
+							<div class="alert-box editor ">
+								<div class="littledark"><h5>Instructions</h5>
+									<strong>Audio format:</strong> .mp3 <br>
+									<strong>Note:</strong> You can only use Audio that is encoded as .mp3  for best support across modern browsers. Other formats will not work across all browsers.<br>
+									<strong>Note:</strong> Internet Explorer 8 or below is not supported for playing uploaded or external audio files.<br>
+									<strong>Note:</strong> External files should be hosted starting with https://, not http://<br>
+								</div>
+							</div>
+						</div>
+						<div class="hide" id="externalAudioPreviewDivHolder">
+							<p><a class="btn btn-results" id="externalAudioConfirm">Embed audio</a>
+								<a class="btn" id="externalAudioTryAgain">Edit</a></p>
+							<div id="externalAudio"></div>
+						</div>
+
+					</div>
+
+					<div class="hide" id="doslidedowngroup_01_youtube">
+						<div class="youtubeVideoId">
+							<img src="/img3/youtube_32.png">
+							<input type="text" name="video_id" size="25" id="test_video_id" placeholder="Link or Video ID">
+							<a href="#" id="youtubeTestVideo" class="btn btn-create">Preview</a>
+						</div>
+						<div class="youtubeDemo hide">
+							<a href="#" id="youtubeConfirm" class="btn btn-results">Embed This Video</a>
+							<a href="#" id="youtubeTryAgain" class="btn btn-create">Try Again</a>
+							<div id="youtube"></div>
+						</div>
+
+						<div class="clearheight"></div>
+						<a href="#" id="tog_ythelp" class="showcont">Help</a>
+						<div class="videoHelp youtubeHelp hide littledark" id="dotog_ythelp">
+							<div class="clearheight"></div>
+							<h5>Example:</h5>
+							<p><strong>(Do not add YouTube embed code)</strong></p>
+							<p class="gray">When viewing your video on www.youtube.com the link will look like this:</p>
+							<p class="well">https://www.youtube.com/watch?v=<strong>HMt3lXVB5W4</strong></p>
+							<p>You can add the whole link or just the YouTube video ID: </p>
+							<p class="well"><strong>HMt3lXVB5W4</strong></p>
+						</div>
+					</div>
+
+					<div class="hide" id="doslidedowngroup_01_vimeo">
+						<div class="vimeoVideoId">
+							<img src="/img3/vimeo_32.png">
+							<input type="text" name="video_id" size="25" id="test_vimeo_video_id" placeholder="Link">
+							<a href="#" id="vimeoTestVideo" class="btn btn-create">Preview</a>
+						</div>
+						<div class="vimeoDemo hide">
+							<a href="#" id="vimeoConfirm" class="btn btn-results">Embed This Video</a>
+							<a href="#" id="vimeoTryAgain" class="btn">Try Again</a>
+
+							<div id="vimeo"></div>
+						</div>
+						<div class="clearheight"></div>
+						<a href="#" id="tog_vimhelp" class="showcont">Help</a>
+						<div class="videoHelp vimeoHelp hide littledark" id="dotog_vimhelp">
+							<div class="clearheight"></div>
+							<h5>Example:</h5>
+							<p><strong>(Do not add Vimeo embed code)</strong></p>
+							<p class="gray">When viewing your video on www.vimeo.com the link will look like this:</p>
+
+							<p class="well">https://vimeo.com/17903047</p>
+
+						</div>
+					</div>
+
+					<div class="hide" id="doslidedowngroup_01_soundcloud">
+						<div class="soundcloudAudioId">
+							<img src="/img3/soundcloud_32.png">
+							<input type="text" name="soundcloud_audio_url" size="25" id="test_soundcloud_id" placeholder="Link">
+							<a href="#" id="soundcloudTestAudio" class="btn">Preview</a>
+						</div>
+						<div class="soundcloudDemo hide">
+							<a href="#" id="soundcloudConfirm" class="btn btn-create">Embed This Audio</a>
+							<a href="#" id="soundcloudTryAgain" class="btn">Try Again</a>
+							<div id="soundcloud"></div>
+						</div>
+						<div class="clearheight"></div>
+						<div class="alert-box editor "><strong>Note</strong>: Internet Explorer 8 or below is not supported for playing Soundcloud.com files.</div>				<a href="#" id="tog_soundcloudhelp" class="showcont">Help</a>
+						<div class="videoHelp vimeoHelp hide littledark" id="dotog_soundcloudhelp">
+							<div class="clearheight"></div>
+							<h5>Example:</h5>
+							<p><strong>(Do not add soundcloud embed code)</strong></p>
+							<p class="gray">When viewing your audio on www.soundcloud.com the link will look like this:</p>
+							<p class="well">https://soundcloud.com/glennmorrison/beethoven-moonlight-sonata  (<strong>Note</strong>: Make sure all links always start wth HTTPS when possible)</p>
+						</div>
+					</div>
+						<!-- *********** -->
+					<div class="hide" id="doslidedowngroup_01_upload">
+						<div class="alert-box alert-confirmation editor ">Upgraded accounts can upload files to ClassMarker to use with their tests, themes and certificates.
+						<div class="clearheight"></div> <span class="little"><a href="/online-testing/quiz-features/" class="popup">Upgraded Account Features</a></span>
+						</div>
+					</div>
+						<!-- *********** -->
+				</div>
+			</div>
+		</div>
+		
+		<div class="gray-div"></div>
+
+<script>
+	var web_root = '/';
+	$(document).ready(function() {
+		$('.uploadAssets').ajaxForm({
+			dataType: 'json',
+			//contentType: 	'application/json; charset=utf-8',
+			beforeSend: beforeuploadAssetsPostForm,
+			success: uploadAssetsFormResponse,
+			error: uploadAssetsError
+		});
+		function beforeuploadAssetsPostForm(xhr, jqForm, options){
+			disabledGenericSubmitLink = true;
+
+			if ($('#upload_file').val() == ''){
+				alert('Please select a file to upload.');
+				disabledGenericSubmitLink = false;
+				$('.loadingDiv').hide();
+				xhr.abort();
+				return false;
+			}
+			if ($.trim($('#ref_name').val()) == ''){
+				alert('Please add your \'File reference name\' to this item.');
+				disabledGenericSubmitLink = false;
+				$('.loadingDiv').hide();
+				xhr.abort();
+				return false;
+			}
+
+			var ext = $.trim($('#upload_file').val()).split('.').pop().toLowerCase();
+			var allow ='';
+			switch($('input[name="file_type"]').val()) {
+				case 'image':
+					allow = new Array('jpg','jpeg','gif','png');
+					break;
+				case 'document':
+					allow = new Array('csv','doc','docx','dot','dotx','key','numbers','odt','odp','ods','pages','pdf','ppt','pot','potx','pps','ppsx','pub','rtf','sldx','txt','xls','xlt','xlsx');
+					break;
+				case 'video':
+					allow = new Array('mp4');
+					break;
+				case 'audio':
+					allow = new Array('mp3');
+					break;
+				default:
+					break;
+				}
+			if ($.inArray(ext, allow) == -1) {
+				alert('You cannot upload this file type here.\n\nCheck the allowed files formats for this TAB and try again.');
+				disabledGenericSubmitLink = false;
+				$('.loadingDiv').hide();
+				xhr.abort();
+				return false;
+
+			}
+
+			/* if a document, change file upload size to be larger, sizes and extension types are also validated on server side as well.
+			 var docs_allow = new Array(< ?php
+			 $comma = '';
+			 foreach ($C_allowed_document_types as $ext){
+			 echo  $comma . '\''.$ext . '\'';
+			 $comma = ',';
+			 }
+			 ? >);
+			 if ($.inArray(ext, docs_allow) != -1){//change max file upload limit if a document
+			 $('#mfs').val('< ?=C_MAX_DOCUMENT_SIZE_BYTES? >');
+			 }
+			 */
+
+			$('#complete').hide();
+			$('#error').hide();
+
+			$('.loadingDiv').show();
+
+
+			return true;
+
+		}
+
+		function uploadAssetsError(XMLHttpRequest, textStatus, errorThrown){
+			disabledGenericSubmitLink = false;
+			//console.log(JSON.parse(XMLHttpRequest.responseText));
+			//console.log(textStatus);
+			//console.log(errorThrown);
+			$('.loadingDiv').hide();
+			alert('Looks like something went wrong. Please try again. If problem persists refresh this page and try again.');
+		}
+
+		function uploadAssetsFormResponse(data){
+			disabledGenericSubmitLink = false;
+
+			$('.loadingDiv').hide();
+			if (data) {
+				if (data.response == 'success') {
+					$('form.uploadAssets').hide();
+					$('#uploadedImagePath').val(data.file_path);  // Used while uploading images in certificate page
+					var file_url = getDocPathForDropDown(data.file_path);
+					switch (data.file_type) {
+						case 'image':
+							/* Show image ready for embed */
+							$('#cmUploadImage').html('<img src="' + file_url + '" data-cmimg-url="' + data.file_path + '" class="previewImg" />');
+							$('#successImageDiv').show();
+							$('input[name="image_stage"]').val(1); // record the stage of upload
+							break;
+						case 'video':
+							/* Show video ready for embed */
+							$('#cmUploadVideo').html('<iframe class="black-background" width="242" height="197" src="/videoaudioiframe.php?type=cmvideo&content=' + data.file_path + '" data-cmvideo-url="' + data.file_path + '"  frameborder="0" allowfullscreen></iframe>');
+							$('#successVideoDiv').show();
+							$('input[name="video_stage"]').val(1); // record the stage of upload
+							break;
+						case 'audio':
+							/* Show audio ready for embed */
+							$('#cmUploadAudio').html('<iframe width="308" height="33" src="/videoaudioiframe.php?type=cmaudio&content=' + data.file_path + '" data-cmaudio-url="' + data.file_path + '"  frameborder="0"></iframe>');
+							$('#successAudioDiv').show();
+							$('input[name="audio_stage"]').val(1); // record the stage of upload
+							break;
+						default:
+							/* Must be Doc: Show success - give Link Title form field to use for embedding */
+							//$('#cmUploadedImage').html('<a href="'+getDocPathForDropDown(data.file_path)+'" data-cmdoc-url="'+data.file_path+'" class="popup" />');
+							$('#uploaded_file_reference').val(data.file_path);
+							$('#successDocumentDiv').show();
+							$('input[name="document_stage"]').val(1); // record the stage of upload
+							break;
+					}
+
+				} else {
+					alert(data.msg);
+				}
+			} else {
+				alert('Looks like something went wrong. Please try again. If problem persists refresh this page and try again.');
+			}
+		}
+
+	});
+	</script>
+	</body>
+</html>

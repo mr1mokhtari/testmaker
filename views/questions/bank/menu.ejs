@@ -1,0 +1,90 @@
+	<!-- Tests -->
+		<!-- Tests/Question Bank -->
+		<!-- Tests/Categories -->
+		<!-- Tests/Files -->
+		<!-- Tests/Certificates -->
+		<!-- Tests/Community -->
+		<%if(!test){%>
+		<div class="col-span-7">
+			<p class="breadcrumb3">
+				<a href="/tests/" class="first">
+					<span>Tests</span>
+				</a>
+				<%if(!newQ){%>
+					<span>Question Bank</span>
+				<%}else{%>
+					<a href="/questions"><span>Question Bank</span></a>
+					<%if(!question){%>
+						<span>Add New Questions</span>
+					<%}else{%>
+						<%if(!dup){%>
+							<span>Edit Question</span>
+						<%}else{%>
+							<span>Duplicate Question</span>
+						<%}%>
+					<%}%>
+				<%}%>
+			</p>
+		</div>
+		<%}else{%>
+		<div class="col-span-7">
+			<p class="breadcrumb3">
+				<a href="/tests/" class="first">
+					<span>Tests</span>
+				</a>
+				<a href="/tests/test/?test_id=<%=test._id%>">
+					<span>Edit Test</span>
+				</a>
+				<%if(!newQ){%>
+					<span>Select Questions</span>
+				<%}else{%>
+					<span>Add New Questions</span>
+				<%}%>
+			</p>
+		</div>
+		<%}%>
+		<!-- Tests   Groups    Links -->
+		<div class="col-span-3">
+			<ul class="menu-sections" id="walkthrough-menu">
+				<li class="test">
+					<a href="/tests/">
+						<span>Tests</span>
+					</a>
+				</li>
+				<li class="group">
+					<a class="sect" href="/tests/groups">
+						<span>Groups</span>
+					</a>
+				</li>
+				<li class="link">
+					<a class="sect" href="/tests/links">
+						<span>Links</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+<%if(test){%>
+<div class="clearheight20"></div>
+<div class="col-span-7">
+	<h4 class="test-name name">
+		<a href="/tests/test/?test_id=<%=test._id%>" class="graylink"><%=test.test_name%></a>
+	</h4>
+	<p class="question-name name ">
+		<span class="bold">Questions:</span>
+		<span id="num_questions" class="bold plus_left"><%=test.questions.length%></span>
+		Static 
+	<!-- Number of random questions Selected-->
+			<%var zn=0%>
+			<%if(test.random_option=="option1"){%>
+				<%zn=test.random_1_num;%>
+			<%}else if(test.random_option=="option2"){%>
+				<%test.random_2_num.forEach((num)=>{%>
+				<%zn+=num%>
+				<%})%>
+			<%}%>
+		<span class="plus">+</span>
+			<span class="bold"><%=zn%></span>
+		Auto selected on start 
+	</p>
+</div>
+<%}%>

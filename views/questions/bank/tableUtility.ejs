@@ -1,0 +1,66 @@
+<div class="table-utility row above">
+	<div class="col-span-5">
+		<div class="dropdown dropdown-x">
+			<a class="dropdown-toggle no_anchor" href="#">
+				Options
+			</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a href="#" class="expandAnswers">
+						Expand answers
+					</a>
+				</li>
+				<li>
+					<a href="#" class="collapseAnswers">
+						Collapse answers
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<%if(test){%>
+		<div class="col-span-5 col-btns"><a class="btn btn-analytics" href="/tests/test/?test_id=<%=test._id%>">Back To Test</a></div>
+	<%}%>
+	<%if(!test){%>
+	<div class="col-span-4 col-btns">
+		<div class="dropdown">
+			<a class="btn btn-analytics dropdown-toggle no_anchor" href="#">
+				<i class="fa fa-plus" aria-hidden="true"></i>
+				Add Questions
+			</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a href="/questions/new">
+						Add a new question
+					</a>
+				</li>
+				<!-- <li>
+					<a href="/questions/import">
+						Import spreadsheet (.CSV)
+					</a>
+				</li> -->
+			</ul>
+		</div>
+	</div>
+	<div class="col-span-1 col-btns">
+		<div class="dropdown">
+			<a class="btn btn-actions btn-white no_anchor" href="#">
+				Actions XXX
+				<span class="caret">&nbsp;</span>
+			</a>
+			<ul class="dropdown-menu  edit-test-options">
+				<li>
+					<a href="/a/tests/qb/settings/">
+						Edit question settings
+					</a>
+				</li>
+				<li class="divider">
+					<a href="#" class="qbankExport">
+						Export questions
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>	
+	<%}%>
+</div>

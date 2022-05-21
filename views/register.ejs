@@ -1,0 +1,45 @@
+<%-include("./partials/header.ejs")%>
+<h1 class="col-full">
+	Sign Up!
+</h1>
+<div class="clearheight20"></div>
+<div id="main" class="col-full">
+<form method="post" action="/register"  id="">
+	<div class="home-content-left">
+		<label for="firstNameId">First name *</label><br>
+		<input type="text" name="firstName" id="firstNameId" maxlength="50">
+	</div>
+	<div class="home-content-right">
+		<label for="lastNameId">Last name *</label><br>
+		<input type="text" name="lastName" id="lastNameId" maxlength="50">
+	</div>
+	<div class="clearheight"></div>
+	<div class="home-content-left">
+		<label for="usernameId">Username *</label><br>
+		<input type="text" class="showTooltip" name="username" id="usernameId" maxlength="30" original-title="Minimum 3 Characters and only contain numbers, letters, underscores and maximum 1 dot">
+		<div class="clear"></div>
+		<!-- Check availablity codes -->
+	</div>
+	<div class="home-content-right">
+		<label for="passwordId">Password *</label><br>
+		<input class="showTooltipHTML" maxlength="72" type="password" name="password" id="passwordId" original-title="Password must be at least 8 characters long.<br/>Maximum password length is 72 characters.<br/>Password must contain at least:<br/>1 Number<br/>1 Letter<br/>1 Special character">
+	</div>
+	<div class="clearheight"></div>
+	<div class="home-content-left">
+		<label for="emailId">Email address *</label><br>
+		<input type="text" name="email" id="emailId">
+	</div>
+	<div class="clearheight"></div>
+	<p id="agreetermsid" class="nopad">
+		<input type="checkbox" class="reg-check-box nopad" id="checkbox" name="agreeterms" id="agree-to-terms" title="I agree with the ClassMarker.com Terms and conditions and Privacy policy">
+		<label for="agree-to-terms" class="agree-label">I agree with the <a href="/online-testing/terms/" class="popup">Terms &amp; Conditions</a> and <a href="/online-testing/privacy/" class="popup">Privacy Policy</a>.</label>
+	</p>
+	<div class="clearheight"></div>
+	<!-- <input name="username" placeholder="username" type="text"> -->
+	<!-- <input name="password" placeholder="password" type="password"> -->
+	<!-- <input name="password" placeholder="repeat password" type="password"> -->
+	<input type="submit" value="Sign Up" class="btnSubmit" name="register-button" id="register-button">	
+</form>
+</div>
+<p class="mandatory">* fields are mandatory</p>
+<%-include("./partials/footer.ejs")%>

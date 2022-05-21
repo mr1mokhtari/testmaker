@@ -1,0 +1,69 @@
+<%-include("../partials/headerResult")%>
+<%-include("../partials/teacherHead")%>
+<div id="content" class="clearfix">
+	<div class="innerWrapper">
+		<div class="col-span-7">
+			<p class="breadcrumb3">
+				<span class="first">Select Test</span>
+			</p>
+		</div>
+		<div class="col-span-3">
+			<ul class="menu-sections" id="walkthrough-menu">
+				<li class="test"><a href="/tests/"><span>Tests</span></a></li>
+				<li class="group"><a class="sect" href="/tests/groups"><span>Groups</span></a></li>
+				<li class="link"><a class="sect" href="/tests/links"><span>Links</span></a></li>
+			</ul>	
+		</div>
+		<div class="clearheight20"></div>
+		<div class="clearheight20"></div>
+		<ul class="steps stepbars stepsbars2">
+			<li class="step-1  current"><a href="/assign/tests/">Select Test</a></li>
+			<li class="step-2 ">Assign</li>
+			<li class="step-3 ">Settings</li>
+			<li class="step-4 last">Review</li>
+		</ul>
+		<h5>Filter Tests by Category:</h5>
+		<select name="cat_id" id="cat_select" class="no_parent_cat_selection parent-cat-dd">
+			<option value="-1" selected="selected">Show All Tests</option>
+			<%pcats.forEach(function(pcat,i){%>
+				<option value="pc<%=pcat._id%>" disabled="">- <%=pcat.parent_cat_name%> -</option>
+				<%pcat.cat_name.forEach(function(subcat,j){%>
+					<%scats.forEach(function(scat,k){%>
+						<%if(JSON.stringify(scat._id)==JSON.stringify(subcat)){%>
+							<option value="<%=scat._id%>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=scat.cat_name%></option>
+						<%}%>
+					<%})%>
+				<%})%>
+			<%})%>
+		</select>
+	<div class="clearheight30"></div>
+	<form action="/assign/groups/" method="get" id="dosubmit_rg"><div class="table">
+		<ul class="table-body hover-row">
+			<%tests.forEach((t,i)=>{%>
+			<%var tsc=t.sub_cat_id%>
+			<%var ind=tsc.indexOf("sc")%>
+			<%var ind2=tsc.slice(ind+2,tsc.length)%>
+				<li class="sbcid<%=ind2%> row" id="assigntog_<%=t._id%>" style="display: list-item;">
+					<div class="col-span-8">
+						<input class="checkbox assignselect " type="radio" id="t<%=t._id%>" name="test_id" value="<%=t._id%>">
+						<label for="t<%=t._id%>" class="hand test-name name"><%=t.test_name%></label>
+					</div>
+				</li>
+			<%})%>
+		</ul>
+		</div>
+		</form>
+		<div class="clearheight"></div>
+		<div class="col-span-7 editor">
+			<h5>Why do I need to Assign Tests?</h5>
+			Assigning Tests allows you to:
+			<ul>
+				<li>Select the settings that are used when giving the Test (such as Time limits / Randomize questions)</li>
+				<li>Select which <strong>Group</strong> to assign the Test to, or Create a <strong>Link</strong> for the Test to send out or Embed the Test on your website.</li>
+				<li>Learn about <a href="/online-testing/manual/#assign" class="popup">Groups and Links</a></li>
+			</ul>
+		</div>
+	</div><!-- innerWrapper -->
+	<img src="/img3/icon_loading_circleV3.gif" alt="Hidden Loading Image" class="hide" width="20" height="20">
+</div>
+<%-include("../partials/footer")%>

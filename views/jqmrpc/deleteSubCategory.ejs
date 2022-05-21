@@ -1,0 +1,25 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<div class="row">
+			<div class="col-span-9"><h4>Delete Sub Category</h4></div>
+			<div class="col-span-1"><a class="close jqmClose"></a></div>
+		</div>
+		<div class="clearheight10"></div>
+		<div class="row">
+			<div class="col-span-7 editor">
+				<p><strong>Note:</strong> Sub Categories can only be deleted when they are <strong>not</strong> being used with any of your Questions or Tests.</p>
+				<div class="clearheight10"></div>
+				<hr>
+				<h5 class="category-name name"><%=scat.cat_name%></h5>
+				<form method="post" action="/tests/categories/subcat?_method=DELETE">
+					<input name="scat_id" type="hidden" value="<%=scat._id%>">
+					<input name="pcat_id" type="hidden" value="<%=pcat_id%>">
+					<input type="submit" class="btn btn-delete" value="Delete Sub Category">
+				</form>
+			</div>
+		</div>
+		<div class="clearheight30"></div>
+	</body>
+</html>

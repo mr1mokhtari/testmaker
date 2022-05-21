@@ -1,0 +1,41 @@
+<div class="result-overlay" style="top: 755.8px; display: none;">
+	<a href="#" class="close-result-overlay close overlay-right scroll_top_results">&nbsp;</a>
+
+	<!-- ||result-overlay-navigation||-->
+
+	<div class="result-overlay-navigation" style="display: block;">
+		<div class="col-span-4 result-overlay-user-previous">&nbsp;</div>
+		<div class="col-span-2 center-div">
+				<div class="dropdown student_question_filter_links">
+					<span class="btn btn-actions btn-white"><i class="fa fa-print" aria-hidden="true"></i>&nbsp;&nbsp;Print</span>
+					<ul class="dropdown-menu">
+						<li><a class="print_options print_all_questions setup_print_result_overlay_all_questions">Print All Questions &gt;</a></li>
+						<li style="display: none;"><span class="print_options"><input type="checkbox" id="poqc"> <label for="poqc"><span class="q_qc_count bold">0</span> Correct</label></span></li>
+						<li style="display: none;"><span class="print_options"><input type="checkbox" id="poqpc"> <label for="poqpc"><span class="q_qpc_count bold">0</span> Partially Correct</label></span></li>
+						<li style="display: none;"><span class="print_options"><input type="checkbox" id="poqw"> <label for="poqw"><span class="q_qw_count bold">0</span> Incorrect</label></span></li>
+						<li style="display: list-item;"><span class="print_options"><input type="checkbox" id="poqrg"> <label for="poqrg"><span class="q_qrg_count bold">1</span> Require Grading</label></span></li>
+						<li style="display: list-item;"><span class="print_options"><input type="checkbox" id="poqu"> <label for="poqu"><span class="q_qu_count bold">17</span> Unanswered</label></span></li>
+						<li><a class="print_options print_selected_questions setup_print_result_overlay_selected_questions">Print Selected Questions &gt;</a></li>
+					</ul>
+				</div>
+		</div>
+		<div class="col-span-4 result-overlay-user-next">&nbsp;</div>
+		<div class="clearheight5"></div><hr>
+	</div>
+	<div class="clear"></div>
+
+	<!--|| result-overlay-content ||-->
+	<div class="result-overlay-content">
+		<%-include('cOverlayContents')%>
+	</div>
+	
+	<div class="result-overlay-navigation" style="display: block;">
+		<hr><div class="clearheight5"></div>
+		<div class="col-span-4 result-overlay-user-previous">&nbsp;</div>
+		<div class="col-span-2 center-div">
+			<a href="#" class="anchor_scroll_top_results backtotop"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+		</div>
+		<div class="col-span-4 result-overlay-user-next">&nbsp;</div>
+	</div>
+	<a href="#" class="close-result-overlay close overlay-right">&nbsp;</a>
+</div>

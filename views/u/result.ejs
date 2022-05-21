@@ -1,0 +1,341 @@
+<%if(t!=1){%>
+<html lang="en">
+	<head>
+		<%-include("../questions/new/newHeader")%>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/cmstudent.css?v=274" media="screen">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/quiz.css" media="screen">
+		<%if(setting.allow_printing!="1"){%><link rel="stylesheet" media="print" type="text/css" href="/stylesheets/noprint.css"><%}%>
+	</head>
+	<body>
+		<%-include("header")%>
+		<div id="content" class="clearfix">
+			<div class="innerWrapper">
+<%}%>
+				<div class="col-span-5 col result-col-1">
+					<div class="clearheight"></div>
+					<h2 class="member-name name"><%=student.firstName%> <%=student.lastName%></h2>
+					<h2 class="test-name name"><%=test.test_name%></h2>
+					<h2 class="group-name name"><%=group.group_name%></h2>
+				</div>
+				<div class="col-span-1">&nbsp;</div>
+				<div class="col-span-4 result-col-2">
+					<div class="testres">
+						<%var total=exam.points['total']%>
+						<div class="score grade">
+							<%if(setting.show_score_percentage=="0"){%>
+								<span id="percentagespan"><%=exam.perc%></span>%
+							<%}%>
+						</div>
+						<div class="testresleft">
+							<%if(setting.show_score_points=="0"){%>
+								<div>Points:</div>
+							<%}%>
+							<div>Duration:</div>
+							<div>Date started:</div>
+							<div>Date finished:</div>
+						</div>
+						<div class="testresright">
+							<%if(setting.show_score_points=="0"){%>
+								<div><span id="pointsscoredspan"><%=exam.points['total']%></span>&nbsp;out of <span id="pointsavailablespan"><%=exam.t_point%></span></div>
+							<%}%>
+				<%var x0=new Date(parseInt(exam.endTime))%>
+				<%//var x=x0.toLocaleString()%>
+				<%var x=moment(x0).tz(student.timezone)%>
+				<%var x11=new Date(parseInt(exam.beginTime))%>
+				<%var x1=moment(x11).tz(student.timezone)%>
+							<div id="resultsdiv_duration_tt"><%=duration%></div>
+							<div id="resultsdiv_datestarted_tt"><%=x1%></div>
+							<div id="resultsdiv_datefinished_tt"><%=x%></div>
+						</div>
+						<div><p><a class="littlelink showcont noprint" href="#" id="tog_s">Show previous scores</a></p>
+							<div id="dotog_s" class="hide table" style="display: none;">
+
+								<%found_prev_exams.forEach((fpe,i)=>{if(i+1!=found_prev_exams.length){%>
+								<div class="row previous-scores">
+									<div class="col-span-3">Exam #<%=i+1%></div>
+									<div class="col-span-7 graph">
+										<span class="value"><%=fpe%>%</span>
+										<div class="graphics">
+											<span class="bar-graph" style="width: <%=fpe%>px;">&nbsp;</span>
+										</div>
+									</div>
+								</div>
+								<%}})%>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearheight"></div>
+				<div class="alert-box editor hide" id="gralert"></div>
+				<%if(setting.show_answers=="0"){%>
+				<div class="clearheight"></div>
+				<h3>Answers</h3>
+				<div class="littledark small">
+					<span class="key-element"><img src="/img3/correctv3.png" srcset="/img3/correctv3.png 1x, /img3/correctv3@3x.png 3x" alt="Correctly answered" width="15" height="16"> Correctly answered</span>
+					<span class="key-element"><img src="/img3/wrongv3.png" srcset="/img3/wrongv3.png 1x, /img3/wrongv3@3x.png 3x" alt="Incorrectly answered" width="15" height="16"> Incorrectly answered </span>
+					<span class="key-element"><img src="/img3/arrow_bluev3.png" srcset="/img3/arrow_bluev3.png 1x, /img3/arrow_bluev3@3x.png 3x" alt="Missed correct option" width="15" height="16"> Missed correct option</span>
+					<div class="clearheight5"></div>
+				</div>
+				
+				<div class="student_question_filter_links">
+					<a href="#" class="view_questions_all qfl_active">All Questions</a>
+					<a href="#" class="view_questions_correct divider_left"><span class="q_qc_count bold"></span> Correct</a>
+					<span class="hide q_qpc_element" style="display: inline;"><a href="#" class="view_questions_partially_correct divider_left"><span class="q_qpc_count bold"></span> Partially Correct</a></span>
+					<a href="#" class="view_questions_incorrect divider_left"><span class="q_qw_count bold"></span> Incorrect</a>
+					<span class="hide q_qrg_element" style="display: inline;"><a href="#" class="view_questions_require_grading divider_left"><span class="q_qrg_count bold"></span> Require Grading</a></span>
+					<span class="hide q_qu_element" style="display: inline;"><a href="#" class="view_questions_unanswered divider_left"><span class="q_qu_count bold"></span> Unanswered</a></span>
+				</div>
+				<div <%if(setting.allow_copytext!="1"){%> onselectstart="return false;" oncopy="return false;" oncut="return false;"<%}%> >
+					<%var ch=["A","B","C","D","E","F","G","H","I","J"];%>
+					<%var c=0,w=0,u=0,pc=0,rg=0%>
+					<%questions.forEach((q,i)=>{%>
+					<div class="qd">
+						<div class="single_question_box">
+							<div class="qbox">
+								<div class="qboxprogress"><h2>Question <%=i+1%> of <%=questions.length%></h2></div>
+								<div class="clear"></div>
+							</div>
+							<div class="col600">
+								<div class="qsholder  bbcode editor qpad"><%=q.question%></div>
+								<div class="dotted_quiz"></div>
+							<%if(q.type=="mcsa"||q.type=="tf"||q.type=="mcma" ){%>
+								<p class="chosen cac">Correct answer: 
+									<strong>
+									<%q.mc_correct.forEach((c)=>{%><%=ch[c-1]%>)  <%})%>
+									<%q.tf_correct.forEach((c)=>{%><%=ch[c-1]%>)  <%})%>
+									</strong><br>You chose: <strong>
+									<%if(exam.answers[q._id]!=undefined){%>
+										<%if(q.type=="mcsa" || q.type=="tf" ){%>
+											<%=ch[exam.answers[q._id]-1]+") "%>
+										<%}%>
+										<%if(q.type=="mcma"){exam.answers[ q._id ].choices.forEach((cc)=>{%> <%=ch[cc-1]%>) <%})}%>
+									<%}%>
+									</strong>
+								</p>
+								<%}else{%>
+								<div class="tsarow">
+									<div class="tsatick">&nbsp;</div>
+									<div class="tsaansheader cac">Answer given:</div>
+								</div>
+								<div class="tsarow">
+									<%if(q.type!="e"){%>
+										<div class="tsatick">
+										<%if(q.points==exam.points[q._id]){%>
+											<img class="cac" src="/img3/correctv3.png" srcset="/img3/correctv3.png 1x, /img3/correctv3_3x.png 3x" alt="Correct answer" width="15" height="16">
+										<%}else{%>
+											<img src="/img3/wrongv3.png" srcset="/img3/wrongv3.png 1x, /img3/wrongv3_3x.png 3x" alt="Incorrect answer" width="15" height="16">
+										<%}%>
+										</div>
+									<%}%>
+									<div class="tsaans editor cac"><%=exam.answers[q._id]%></div>
+								</div>
+								<%}%>	
+							<%if(q.type=="ft"){%>
+							<div class="tsarow">
+								<div class="tsatick">&nbsp;</div>
+								<div class="tsaansheader">Accepted answers:</div>
+							</div>
+							<div class="tsarow">
+								<div class="tsatick">&nbsp;</div>
+								<div class="tsaans editor">
+									<%q.ft_correct.forEach((ftans)=>{if(ftans!=""){%>
+									<%=ftans%><br>
+									<%}})%>
+								</div>
+							</div>
+							<!-- <div class="clearheight"></div> -->
+							<!-- <div class="dotted_quiz"></div> -->
+							<%}%>
+							<%if(q.type=="p"){%>
+							<div class="tsarow">
+								<div class="tsatick">&nbsp;</div>
+								<div class="tsaansheader cac">Correct answer:</div>
+							</div>
+							<div class="tsarow cac">
+								<div class="tsatick">&nbsp;</div>
+								<div class="tsaans editor"><%=q.p_correct%></div>
+							</div>
+							<%}%>
+							<%if(q.type=="mcsa"){%>
+								<%q.mc_options.forEach((op,o)=>{ if(op.answer!=""){%>
+								<div class="sarow">
+									<div class="satick">
+									<%if(exam.answers[q._id]!=undefined){%>
+										<%if(q.mc_correct.indexOf(o+1)>=0 && exam.answers[q._id].indexOf(o+1)>=0){%>
+											<img class="cac" src="/img3/correctv3.png" srcset="/img3/correctv3.png 1x, /img3/correctv3_3x.png 3x" alt="Correct answer" width="15" height="16">
+										<%}else if(q.mc_correct.indexOf(o+1)<0 && exam.answers[q._id].indexOf(o+1)>=0 ){%>
+										<img src="/img3/wrongv3.png" srcset="/img3/wrongv3.png 1x, /img3/wrongv3_3x.png 3x" alt="Incorrect answer" width="15" height="16">
+										<%}else if(q.mc_correct.indexOf(o+1)>=0 && (exam.answers[q._id].indexOf(o+1)<0)){%>
+										<img class="cac" src="/img3/arrow_bluev3.png" srcset="/img3/arrow_bluev3.png 1x, /img3/arrow_bluev3_3x.png 3x" alt="Missed correct answer" width="15" height="16">
+										<%}%>
+									<%}else{%>
+										<%if(q.mc_correct.indexOf(o+1)>=0){%>
+										<img class="cac" src="/img3/arrow_bluev3.png" srcset="/img3/arrow_bluev3.png 1x, /img3/arrow_bluev3_3x.png 3x" alt="Missed correct answer" width="15" height="16">
+										<%}%>
+									<%}%>
+									</div>
+									<div class="saabc"><%=ch[o]%>) </div>
+									<div class="saans  bbcode"><%=op.answer%></div>
+								</div>
+								<%}})%>
+							<%}%>
+							<%if(q.type=="mcma"){%>
+								<%var blueArrow=0%>
+								<%q.mc_options.forEach((op,o)=>{ if(op.answer!=""){%>
+								<div class="sarow">
+									<div class="satick">
+									<%if(exam.answers[q._id]!=undefined){%>
+										<%if(q.mc_correct.indexOf(o+1)>=0 && exam.answers[q._id].choices.indexOf((o+1).toString())>=0){%>
+											<img class="cac" src="/img3/correctv3.png" srcset="/img3/correctv3.png 1x, /img3/correctv3_3x.png 3x" alt="Correct answer" width="15" height="16">
+										<%}else if(q.mc_correct.indexOf(o+1)>=0 && exam.answers[q._id].choices.indexOf((o+1).toString())<0){%>
+										<%blueArrow=1%>
+										<img class="cac" src="/img3/arrow_bluev3.png" srcset="/img3/arrow_bluev3.png 1x, /img3/arrow_bluev3_3x.png 3x" alt="Missed correct answer" width="15" height="16">
+										<%}else if(q.mc_correct.indexOf(o+1)<0 && exam.answers[q._id].choices.indexOf((o+1).toString())>=0 ){%>
+										<img src="/img3/wrongv3.png" srcset="/img3/wrongv3.png 1x, /img3/wrongv3_3x.png 3x" alt="Incorrect answer" width="15" height="16">
+										<%}%>
+									<%}else{%>
+										<%if(q.mc_correct.indexOf(o+1)>=0){%>
+										<%blueArrow=1%>
+										<img class="cac" src="/img3/arrow_bluev3.png" srcset="/img3/arrow_bluev3.png 1x, /img3/arrow_bluev3_3x.png 3x" alt="Missed correct answer" width="15" height="16">
+										<%}%>
+									<%}%>
+									</div>
+									<div class="saabc"><%=ch[o]%>) </div>
+									<div class="saans  bbcode"><%=op.answer%></div>
+								</div>
+								<%}})%>
+							<%}%>
+							<%if(q.type=="tf"){%>
+								<%q.tf_options.forEach((op,o)=>{%>
+								<div class="sarow">
+									<div class="satick">
+									<%if(exam.answers[q._id]!=undefined){%>
+										<%if(q.tf_correct.indexOf(o+1)>=0 && exam.answers[q._id].indexOf(o+1)>=0){%>
+											<img class="cac" src="/img3/correctv3.png" srcset="/img3/correctv3.png 1x, /img3/correctv3_3x.png 3x" alt="Correct answer" width="15" height="16">
+										<%}else if(q.tf_correct.indexOf(o+1)>=0 && (exam.answers[q._id].indexOf(o+1)<0)){%>
+										<img class="cac" src="/img3/arrow_bluev3.png" srcset="/img3/arrow_bluev3.png 1x, /img3/arrow_bluev3_3x.png 3x" alt="Missed correct answer" width="15" height="16">
+										<%}else if(q.tf_correct.indexOf(o+1)<0 && exam.answers[q._id].indexOf(o+1)>=0 ){%>
+										<img src="/img3/wrongv3.png" srcset="/img3/wrongv3.png 1x, /img3/wrongv3_3x.png 3x" alt="Incorrect answer" width="15" height="16">
+										<%}%>
+									<%}else{%>
+										<%if(q.tf_correct.indexOf(o+1)>=0){%>
+										<img class="cac" src="/img3/arrow_bluev3.png" srcset="/img3/arrow_bluev3.png 1x, /img3/arrow_bluev3_3x.png 3x" alt="Missed correct answer" width="15" height="16">
+										<%}%>
+									<%}%>
+									</div>
+									<div class="saabc"><%=ch[o]%>) </div>
+									<div class="saans  bbcode"><%=op.answer%></div>
+								</div>
+								<%})%>
+							<%}%>
+								<div class="dotted_quiz"></div>
+								<%if(q.type=="mcma"){if(blueArrow){%>
+								<p class="chosen">You did not select all available correct options.</p>
+								<%}}%>
+								<%if(q.type=="e"){%>
+								<%if(exam.points[q._id]==undefined){%>
+								<p class="alert-box margright error" id="remove-on-graded<%=q._id%>">This question requires grading.</p>
+								<i class="qrg"></i>
+								<i class="qytpe_essay"></i>
+								<%rg++}}%>
+								<!-- C|W|PC|U|RG -->
+								
+								<%if(q.type=="e" || q.type=="tf"|| q.type=="ft" || q.type=="mcsa" || q.type=="mcma" || q.type=="p"){%>
+									<%if(q.type!="e" && exam.points[q._id]==undefined){%>
+										<%u++%>
+										<i class="qu"></i>
+									<%}else if(q.points==exam.points[q._id]){%>
+										<%c++%>
+										<i class="qc"></i>
+									<%}else if(exam.points[q._id]==0){%>
+										<%w++%>
+										<i class="qw"></i>
+									<%}else if(parseFloat(exam.points[q._id])>0 && q.points!=exam.points[q._id]){%>
+										<%pc++%>
+										<i class="pc"></i>
+									<%}%>
+								<%}%>
+								<%if(setting.show_score_points=="0"){%>
+									<p class="headlinetop"><strong>Points:</strong> <span id="<%=q._id%>pointsscored"><%if(exam.points[q._id]){%><%=exam.points[q._id]%><%}else{%>0<%}%></span> out of <%=q.points%></p>
+								<%}%>
+								
+	<%if(t==1){%>
+		<%var qp=(q.points.replace('.', '-'))%>
+	<p class="editpoints">
+		<a class="showcont <%if(q.type=='e'){%>essay<%}%>" href="#" id="eprg_<%=q._id%>_<%=exam._id%>_599426_8879676_<%=qp%>">Edit points</a>
+	</p>
+	<div class="boxinlineV3 hide" id="diveprg_<%=q._id%>_<%=exam._id%>_599426_8879676_<%=qp%>" style="display: none;">
+		<!-- <form id="epcounter2" class="editPointsForm" method="post" action="/a/tests/rpc/editPoints.rpc.php">
+			<input type="hidden" name="aid" value="8476536">
+			<input type="hidden" name="ts" value="1606548106">
+			<input type="hidden" name="tv" value="e726e06a25f3dda09d200741ce293cb7">
+			<input type="hidden" name="tk" value="EUDY">
+			<input type="hidden" name="tid" value="1568412">
+			<input type="hidden" name="test_type" value="rg">
+			<input type="hidden" name="type" value="rg_edit_points">
+			<input type="hidden" name="gid" value="599426">
+			<input type="hidden" name="question_id" value="24588576">
+			<input type="hidden" name="sid" value="8879676">
+			<h4>Edit Points for this answer:</h4>Select points for this answer: 
+			<select name="points">
+				<option value="0">0</option><option value="0.1">0.1</option><option value="0.2">0.2</option><option value="0.3">0.3</option><option value="0.4">0.4</option><option value="0.5">0.5</option><option value="0.6">0.6</option><option value="0.7">0.7</option><option value="0.8">0.8</option><option value="0.9">0.9</option><option value="1">1</option>
+			</select> or <span class="little"><a href="#" onclick="$('#epcounter2 select[name=points] option:last-child').prop('selected', true);return false;">Set full points</a></span>
+			<div class="clearheight"></div>
+			<a class="savepoints btn btn-create">Save</a>
+			<a class="btn cancelbtn">Cancel</a>
+		</form> -->
+	</div>
+	<%}%>
+								
+								<p class="cac headlinetop"><strong>Feedback:</strong> <span class="bbcode" id="<%=q._id%>feedback"><%if(exam.points[q._id]==0 || exam.points[q._id]==undefined){%><%=q.incorrect_feedback%><%}else{%><%=q.correct_feedback%><%}%></span></p>
+							</div>
+						</div>
+					</div>
+					<%})%>
+					<script>
+						$('span.q_qw_count').show().text(<%-w%>);
+						$('span.q_qu_count').show().text(<%-u%>);
+						$('span.q_qc_count').show().text(<%-c%>);
+						$('span.q_qrg_count').show().text(<%-rg%>);
+						$('span.q_qpc_count').show().text(<%-pc%>);
+						if(<%-rg%> > 0){
+							$('div#gralert').removeClass('hide')
+							$('div#gralert').text("This score is not final. Some questions have been sent for manual grading.")
+						}
+					</script>
+					<%if(setting.display_all_questions_in_results=="0"){%>
+					<script>
+						$('span.q_qu_element').css({display:'none'});
+						$('span.q_qrg_element').css({display:'none'});
+						$('a.view_questions_all').css({display:'none'});
+						$('a.view_questions_correct').css({display:'none'});
+						$('a.view_questions_all').removeClass('qfl_active');
+						$('a.view_questions_incorrect').addClass('qfl_active');
+						$("div#content div[class='qd']").hide();
+    					$("div#content div[class='qd']:has(i.qw)").fadeIn();
+						// $("div#content div[class='qd']:has(i.qpc)").fadeIn();
+					</script>
+					<%}%>
+					
+					<%if(setting.show_correct_answers!="0"){%>
+					<script>
+						$('img.cac').addClass('hide')
+						$('p.cac').addClass('hide')
+						$('div.cac').addClass('hide')
+					</script>
+					<%}%>
+				</div>
+				<%}%>
+				<div class="clearheight"></div>
+			<script>
+				var score_tracker = true;
+			</script>
+<%if(t!=1){%>	
+			</div><!-- innerWrapper -->
+		</div>
+	</body>
+</html>
+<%}else{%>
+	<%-include('gradingScript')%>
+<%}%>

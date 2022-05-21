@@ -1,0 +1,75 @@
+<html>
+	<head></head>
+	<body>
+		<div class="col-span-9"><h4>Add New Sub Category</h4></div>
+		<div class="col-span-1">
+			<a class="close jqmClose"></a>
+		</div>
+
+    	<div class="clear"></div>
+    	<p class="little"><a href="#" id="tog_cats" class="showcont">What are Categories?</a></p>
+	 	<hr>
+    	<div id="dotog_cats" class="hide editor">
+
+        	<p class="littledark">Organize your Tests and Questions by categorizing them. This will make it easier to analyze your results and determine which users perform better across different Sub Categories.</p>
+        	<p class="littledark">For example:</p>
+        	<ul class="littledark">
+            	<li>A school teacher may wish to categorize a Test by subject, such as Maths, English, or Science. </li>
+            	<li>A manager may decide to categorize a Test by department, Sales, Marketing, or Administration.</li>
+        	</ul>
+        	<p class="littledark">If you don't want to specify a Category for your Test, no problem, all Tests are set to the Generic Parent and Sub Categories by default.</p>
+        	<hr>
+    	</div>
+		<form id="doAddCat" action="/tests/categories/subcat" method="post">
+			<input type="hidden" name="rpc" value="1">
+			<div class="row">
+				<div class="col-span-2">&nbsp;</div>
+				<div class="col-span-7 explain">
+					<p>Select which <strong>Parent Category</strong> your new <strong>Sub Category</strong> will sit under.</p>
+					<p>Re-organise Categories on your Categories page anytime.</p>
+					<div class="clearheight5"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-span-2"><span class="right">Parent Category:&nbsp;</span></div>
+				<div class="col-span-7">
+					<select name="parent_cat_id" class="parent-cat-dd">
+						<%pcats.forEach((pc,i)=>{%>
+							<option value="<%=pc.id%>"><%=pc.parent_cat_name%></option>
+						<%})%>
+						
+					</select>
+				</div>
+			</div>
+			<div class="clearheight10"></div>
+			<div class="row">
+				<div class="col-span-2"><span class="right">Sub Category:&nbsp;</span></div>
+				<div class="col-span-7">
+					<input type="text" placeholder="New Sub Category Name" size="30" maxlength="30" class="limitchars_refname3_30" name="cat_name" value=""> <span class="refname3_info margleft">Maximum 30 characters</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-span-2">&nbsp;</div>
+				<div class="col-span-7">
+					<div class="clearheight"></div>
+					<a href="#" class="btn btn-create genericSubmitLink">Create</a> <a href="#" class="jqmClose btn">Cancel</a>
+				</div>
+			</div>
+		</form>
+		<div class="clearheight5"></div>
+		<div id="addCatMsgDiv"></div>
+		<script>
+			$("document").ready(function(){
+				/* add categories */
+				$('#doAddCat').ajaxForm( {
+					dataType : 		'json',
+					cache:			false,
+					beforeSerialize: beforeSerializeGenericAllForms,
+					beforeSend: 	beforeGenericPostForm,
+					success : 		doAddCatsFormResponse,
+					error: 			genericError
+				});
+			});
+		</script>
+	</body>
+</html>

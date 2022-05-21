@@ -1,0 +1,68 @@
+		<script>
+			var epcounter = 0;//used to create unique form id reference, for resubmitting IE aborted posts
+			$(document).ready(function() {
+				$('[id^="eprg_"]').click(function(e) {
+					e.preventDefault();
+					epcounter++;
+						array = this.id.split("_");
+						qid=array[1];
+						tid=array[2];
+						gid=array[3];
+						uid=array[4];
+						available=parseFloat(array[5].replace('-', '.'));
+						form='<form id="epcounter'+epcounter+'" class="editPointsForm" method="post" action="/a/tests/rpc/editPoints.rpc.php">';
+						form+='<input type="hidden" name="aid" value="8476536"/>';
+						form+='<input type="hidden" name="ts" value="1605415459"/>';
+						form+='<input type="hidden" name="tv" value="fa712275397c9fad36c2dd74e8ee05eb"/>';
+						form+='<input type="hidden" name="tk" value="KWSA"/>';
+						form+='<input type="hidden" name="tid" value="'+tid+'"/>';
+						form+='<input type="hidden" name="test_type" value="rg"/>';
+						form+='<input type="hidden" name="type" value="rg_edit_points" />';
+						form+='<input type="hidden" name="gid" value="'+gid+'"/>';
+						form+='<input type="hidden" name="question_id" value="'+qid+'"/>';
+						form+='<input type="hidden" name="sid" value="'+uid+'"/>';
+						form+='<h4>Edit Points for this answer:</h4>';
+						form+='Select points for this answer: <select name="points">';
+						for(i = 0; i <= available; i++){
+							form+='<option value="'+i+'">'+i+'</option>';
+							for(d = 1; d <= 9; d++){
+								if ((i+'.'+d) <= available){
+									form+='<option value="'+i+'.'+d+'">'+i+'.'+d+'</option>';
+								}
+							}
+						}
+						form+='</select> or <span class="little"><a href="#" onclick="$(\'#epcounter'+epcounter+' select[name=points] option:last-child\').prop(\'selected\', true);return false;">Set full points</a></span>';
+						form+='<div class="clearheight"></div>';
+						if ($(this).attr('class').search( "essay" ) != -1){
+														form+='<input type="hidden" name="essay" value="1"/>';
+							form+='<p><br /><textarea cols="40" rows="3" disabled="disabled">Upgrade to ClassMarker Professional to add feedback</textarea></p>';
+					};
+					form+='<a class="savepoints btn btn-create">Save</a> <a class="btn cancelbtn">Cancel</a>';
+					form += '</form>';
+					$('#div' + this.id).html(form);
+					$('.savepoints').bind('click', function(e) {
+						e.preventDefault();
+							/* Bind editPointsForm */
+						$('.editPointsForm').ajaxForm( {
+							dataType : 		'json',
+							beforeSerialize: beforeSerializeGenericAllForms,
+							success:     	 editPointsFormResponse,
+							error: 			 genericError
+						});
+						$(this).closest("form").submit();
+						$(this).closest("div").slideUp(300);
+					});
+					$('.cancelbtn').bind('click', function() {
+						$(this).closest("div").slideUp(300);
+					});
+					$('#div' + this.id).slideDown(300);
+					$('#div' + this.id).slideDown(300);
+				});
+			});
+		</script>
+		<script>
+			if (typeof(ga) == 'function'){
+				ga('set', 'page', '/test/results/?test_id=1479449&rg_id=592380&user_id=8879676&show_overlay=1');
+				ga('send', 'pageview');
+			}
+		</script>

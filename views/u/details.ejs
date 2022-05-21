@@ -1,0 +1,137 @@
+<html lang="en">
+	<head>
+		<%-include("../questions/new/newHeader")%>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/cmstudent.css?v=274" media="screen">
+	</head>
+	<body>
+		<%-include("header")%>
+		<div id="content" class="clearfix">
+			<div class="innerWrapper">
+				<h2 class="member-name name">My details</h2>
+				<div class="clearheight"></div>
+				<div class="col-span-6 table-col-1">
+					
+					<div class="clearheight"></div>
+					<div class="table">
+						<div class="row overall">
+							<div class="col-span-4">
+								Name:
+							</div>
+							<div class="col-span-6">
+								<%=student.firstName%> <%=student.lastName%>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-span-4">
+								Username:
+							</div>
+							<div class="col-span-6">
+								<%=student.username%>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-span-4">
+								Email address:
+							</div>
+							<div class="col-span-6">
+								<%=student.email%>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-span-4">
+								Account administrator:
+							</div>
+							<div class="col-span-6">
+								<%=student.teacher.username%>
+							</div>
+						</div>
+					</div>
+					<div class="editor">
+						<a class="showcont" href="#" id="tog_uname">
+							Change username
+						</a>
+						<div class="hide" id="dotog_uname">
+                			<div class="clearheight"></div>
+                			<div class="alert-box">
+                    			<p>You are allowed to change your username once only.</p>This allows you to change it to something you can easily remember.                
+							</div>
+							
+							<!-- 3 Steps << -->
+                <form method="post" action="/u/details/changeUserName?_method=PUT">
+                    <input type="hidden" name="change_username" value="1">
+                    <div class="field-group">
+                        <label class="form-field-title" for="checkUsername">Username:</label>
+                        <input type="text" id="checkUsername" name="username" onclick="if (c==0){alert('You are allowed to change your username once only.');}c=1;">
+                    	<p>
+							<a href="javascript:return false;" class="tab check_username_link_wrapper">Check availability</a>
+						</p>
+                    </div>
+					
+                    <p><a href="#" class="genericSubmitLink hide btn btn-create tab">Change username</a></p>
+                </form>
+			</div>
+		</div>
+		<script>
+			var web_root = '/';
+			c=0;
+		</script>
+		<div class="clearheight30"></div>
+		<div class="editor">
+			<a class="showcont" href="#" id="tog_pword">Change password</a>
+			<div class="hide" id="dotog_pword">
+				<div class="clearheight"></div>
+				<div class="alert-box">
+					<p>You can change the password you use to log into your account.</p>Password must be at least 8 characters long.<br>Password must contain at least:<br>1 Number<br>1 Letter<br>1 Special character			
+				</div>
+				<form method="post" action="/u/details/changeUserName?_method=PUT">
+					<input type="hidden" name="change_password" value="1">
+					<div class="field-group">
+						<label class="form-field-title" for="newpass0">Current password:</label>
+						<input type="password" name="password_current" id="newpass0">
+						<hr>
+						<label class="form-field-title" for="newpass1">New password:</label>
+						<input type="password" maxlength="72" name="pass1" id="newpass1" class="showTooltipHTML" title="Password must be at least 8 characters long.<br/>Maximum password length is 72 characters.<br/>Password must contain at least:<br/>1 Number<br/>1 Letter<br/>1 Special character">
+						<br>
+						<label class="form-field-title" for="newpass2">Re-type password:</label>
+						<input type="password" maxlength="72" name="pass2" id="newpass2">
+					</div>
+					<div class="clearheight"></div>
+					<p><a href="#" class="genericSubmitLink btn btn-create tab">Change password</a></p>
+				</form>
+			</div>
+		</div>
+					
+					<div class="clearheight"></div>
+					</div>
+					<div class="col-span-1">&nbsp;</div>
+					<div class="col-span-3 table-col-3">
+						<div class="clearheightresponsive30"></div>
+
+						<div class="clearheight"></div>
+						<p><a class="btn btn-create popup" href="/docs/TestTaker-Faq.pdf"><i class="fa fa-download" aria-hidden="true"></i> Help</a></p>
+						<div class="clearheight30"></div>
+					</div>
+				<div class="clearheight"></div>
+				</div><!-- innerWrapper -->
+			</div>
+		<script>
+ka_path = "/ka.php?";
+</script>
+		<!-- <script>
+(function (i, s, o, g, r, a, m) {
+	i['GoogleAnalyticsObject'] = r;
+	i[r] = i[r] || function () {
+		(i[r].q = i[r].q || []).push(arguments)
+	}, i[r].l = 1 * new Date();
+	a = s.createElement(o),
+		m = s.getElementsByTagName(o)[0];
+	a.async = 1;
+	a.src = g;
+	m.parentNode.insertBefore(a, m)
+})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+ga('create', 'UA-473958-2', 'auto');
+ga('set', 'anonymizeIp', true);
+ga('send', 'pageview');
+</script> -->
+	</body>
+</html>

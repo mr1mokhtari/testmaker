@@ -1,0 +1,36 @@
+<div id="pageN" data-var='<%=page%>'></div>
+<!-- PAGINATION -->
+<div class="pagination">
+	<%if ((page <= totalPages && page!=1)) { %>			
+		<a href="/questions/?page=1&limit=<%=limit%>&filter_qtype=<%=search.type%>&filter_status=<%=search.status%>&filter_cat_id=<%=search.cat%>&filter_query=<%=search.query%>">
+			<span>
+  				<i class="icon ion-ios-arrow-back"></i>
+  				&lt; First
+			</span>
+		</a>
+	<%}%>
+	<%for(i=1;i<=totalPages;i++){%>
+		<a class='pa<%=i%>' href="/questions/?page=<%=i%>&limit=<%=limit%>&filter_qtype=<%=search.type%>&filter_status=<%=search.status%>&filter_cat_id=<%=search.cat%>&filter_query=<%=search.query%>">
+			<span>
+  				Page <%=i%>
+  				<i class="icon ion-ios-arrow-forward"></i>
+			</span>
+		</a>
+	<%}%>
+	<% if ((page == 1 && totalPages > 1)||page < totalPages) { %> 
+		<a href="/questions/?page=<%=parseInt(totalPages)%>&limit=<%=limit%>&filter_qtype=<%=search.type%>&filter_status=<%=search.status%>&filter_cat_id=<%=search.cat%>&filter_query=<%=search.query%>">
+			<span>
+  				<i class="icon ion-ios-arrow-back"></i>
+  				Last &gt;
+			</span>
+		</a>
+	<%}%>
+	<span class="pagination_question_count">
+		<strong>Questions:</strong> <%=numOfQuestions%>
+	</span>
+</div>
+
+<script>		
+	var pageN=document.getElementById('pageN').dataset.var
+	$('.pa'+pageN).addClass('current-pag')
+</script>

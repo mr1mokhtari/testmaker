@@ -1,0 +1,11 @@
+<%-include("../partials/header")%>
+<h1>
+	this is <%=teacher.email%> page
+</h1>
+<a href="/teachers/<%=teacher._id%>/edit">Edit</a>
+<form method="post" action="/teachers/<%=teacher._id%>?_method=DELETE">
+	<button>
+		Remove
+	</button>
+</form>
+<%-include("../partials/footer")%>

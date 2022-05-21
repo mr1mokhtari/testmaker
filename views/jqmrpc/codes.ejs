@@ -1,0 +1,44 @@
+
+
+	<span class="f-right"><a class="close jqmClose cancel-padding"></a></span>
+
+
+<h5>Registration Codes</h5>
+
+
+
+<div class="table">
+	<div class="row no_border">
+		<strong>4,980</strong> unused + <strong>14</strong> assigned *
+	</div>
+	<div class="row nopad">
+		<div class="col-span-35"><p class="explain">* Assigned Registration Codes:</p></div>
+		<div class="col-span-6"><span class="explain">Visit applicable Groups to remove "Assigned Registration Codes" so you can use them in other Groups.</span></div>
+	</div>
+</div>
+
+
+
+
+
+
+
+<div class="clearheight"></div>
+
+<h5>Registered Members &amp; Assigned Registration codes</h5>
+<div class="table">
+	<div class="row">
+		<div class="col-span-5"><strong>Group</strong></div>
+		<div class="col-span-15"><strong>Members</strong></div>
+		<div class="col-span-35"><strong>Assigned Registration Codes</strong></div>
+	</div>
+	<%groups.forEach((g)=>{%>
+	<div class="row hover-row">
+        <div class="col-span-5"><p class="group-name name nomargname">
+            <a href="/tests/groups/edit/?group_id=<%=g._id%>&amp;show_reg_codes=1" class="graylink"><%=g.group_name%></a></p>
+        </div>
+        <div class="col-span-15"><%=g.students.length%></div>
+        <div class="col-span-35"><%=list[g._id].codes_n%></div>
+    </div>
+	<%})%>
+</div>

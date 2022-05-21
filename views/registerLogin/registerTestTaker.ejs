@@ -1,0 +1,114 @@
+<%-include("../questions/new/newHeader")%>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <div class="container">
+		<% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>        
+    </div>
+<link rel="stylesheet" type="text/css" href="/stylesheets/cmhome.css" media="screen">
+<div id="main" class="features-box2 fbr1">
+	<div class="col-full">
+	<form method="post" id="regForm" action="/register" autocomplete="off">
+		<input type="hidden" name="reg_type" value="test_taker"/>
+		<div class="register-today">
+			<h2>Test taker registration for Taking online tests</h2>
+			<a id="anchorform"></a>
+			<div class="clearheight30"></div>
+			Register to <strong>Take your Tests</strong> on *****!
+			<div class="clearheight30"></div>
+			<div class="width-630"></div>
+		</div>
+			<label for="serialid">Registration Code *</label><br/>
+			<input type="text" name="serial" id="serialid" maxlength="50" />
+			<div class="clear"></div>
+			<div class="clear"></div>
+			<a href="#" id="tog_nocode" class="little">I don't have a Registration Code?</a>
+			<div class="clearheight"></div>
+			<div class="hide" id="dotog_nocode">
+				<div class="alert-box alert-white">
+					<p>Only users who have been given their unique Registration Code by a ***** Administrator can register to take their tests.</p>
+					<p>You <strong>cannot</strong> register to take your Test without your unique Registration code.</p>
+					<p><strong>Please ask the person giving you the Test for your unique Registration code.</strong></p>
+					<p>You can copy the link below and email it to your Instructor to show them how to create a registration code for you.<br/>
+						Your unique Registration code can <strong>only</strong> be created from <strong>their account</strong> to give you access to your test.</p>
+					<p>https://www.*****.com/online-testing/manual/#addmembersintro</p>
+					<p><strong>Note:</strong><br/>Do not register an Instructor account to take tests. Instructor accounts do not have any tests included, they allow administrators to first Create and then give Tests online, you must register a <strong>Test taker</strong> account with your unique Registration code to access and take your Test/s on *****.</p>
+				</div>
+				<div class="clearheight"></div>
+			</div>
+			<div class="clearheight"></div>
+			<div class="home-content-left">
+				<label for="firstid">First name *</label><br/>
+				<input type="text" name="first" id="firstid" maxlength="50" />
+			</div>
+			<div class="home-content-right">
+				<label for="lastid">Last name *</label><br/>
+				<input type="text" name="last" id="lastid" maxlength="50" />
+			</div>
+			<div class="clearheight"></div>
+			<div class="home-content-left">
+				<label for="checkUsername">Username *</label><br/>
+				<input type="text" class="showToolip" title="Minimum 3 Characters and only contain numbers, letters, underscores and maximum 1 dot" name="username" id="checkUsername" maxlength="30" /><div class="clear"></div>
+				<p id="errDivcheckUsername" class="hide"></p>
+				<div class="clear"></div>
+				<p class="check_username_link_wrapper"><a href="#" id="tog_fake" class="little">Check availability</a></p>
+			</div>
+			<div class="home-content-right">
+				<label for="password">Password *</label><br/>
+				<input class="showTooltipHTML" maxlength="72" title="Password must be at least 8 characters long.<br/>Maximum password length is 72 characters.<br/>Password must contain at least:<br/>1 Number<br/>1 Letter" type="password" name="password" id="password"/>
+			</div>
+			<div class="clearheight"></div>
+			<div class="home-content-left">
+				<label for="email">Email address *</label><br/>
+				<input type="text" name="email" id="email" />				
+				<p class="little nopad"><strong>Email address is optional.</strong> ***** only uses your email address to send you a new password if you forget it.</p>
+			</div>
+		<%-include("./selectCountry")%>
+			<div class="clearheight30"></div>
+				<p id="agreetermsid" class="nopad">
+					<input type="checkbox" class="reg-check-box" id="agree-to-terms" name="agreeterms"/>
+				<label for="agree-to-terms" class="agree-label">I agree with the *****.com <a href="/online-testing/terms/" class="popup">Terms &amp; Conditions</a> and <a href="/online-testing/privacy/" class="popup">Privacy Policy</a>.</label></p>
+			<div class="clearheight"></div>
+			<div id="generic"></div>
+			<div class="clear"></div>
+			<input type="submit" title="Register" class="btnSubmit"  name="register-button" value="Register" id="register-button" />
+			<p class="mandatory">* fields are mandatory</p>
+		</form>
+		<div class="clearheight100"></div>
+	</div>
+</div>
+
+
+<script>
+	$(document).ready(function() {
+		$('#regForm').submit(function() {
+			form_completed = true;
+			$("#regForm").find("input[type=text]").each(function () {
+				if (form_completed && $(this).val().length == 0
+					// && !($(this).attr('name') == 'email') 
+				   ) { // EMIL NOT REQUIRED
+					alert('All Mandatory * fields are required');
+					form_completed = false;
+				}
+			});
+			$("#regForm").find("input[type=password]").each(function () {
+				if (form_completed && $(this).val().length == 0) { 
+					alert('All Mandatory * fields are required');
+					form_completed = false;
+				}
+			});
+			if ( ! $('#agree-to-terms').is(':checked')) {
+				alert('You must agree to our Terms and Conditions and Privacy Policy to Register.');
+				form_completed = false;
+			}
+			return form_completed;
+		});
+	});
+</script>

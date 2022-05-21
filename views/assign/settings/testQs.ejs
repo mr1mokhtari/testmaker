@@ -1,0 +1,96 @@
+<h4>Test Questions</h4>
+<div class="settings-box">
+	<div class="accordion-toggle scroll_display_pp setting-questions-per-page closed">
+		<h3 class="form-field-title">Display</h3>
+		<div class="settings-status"><%if(edits==1){%><%=setting.questions_displayed_per_page%><%}else{%>1<%}%> Question per page</div><div class="caret">&nbsp;</div>
+	</div>
+	<div class="accordion-fold">
+		<div class="field-group">
+			<span class="form-field-title not-input">Display:</span>
+			<%var n=[1,2,3,4,5,6,7,8,9,10]%>
+			<select name="settings[questions_displayed_per_page]">
+				<%n.forEach((nn)=>{%>
+					<option value="<%=nn%>" <%if(edits=='1'){if(setting.questions_displayed_per_page==nn){%>selected="selected"<%}}%> ><%=nn%></option>
+				<%})%>
+			</select>
+			Question Per Page <span class="showTooltip tooltip" title="Define the number of Questions that will display on each Test page.">Tip</span>
+		</div>
+
+		<div class="field-group">
+			<span class="form-field-title not-input">Points:</span>
+			<input type='hidden' name='settings[show_question_points_during_test]' value='0' id='sqpdt2'>
+			<input type="checkbox" name="settings[show_question_points_during_test]" value="1" id="sqpdt">
+			<label for="sqpdt">Display Points each Question is worth during Test</label>
+			<span class="showTooltip tooltip" title="Points each Question is worth will be displayed as Question are being taken.">Tip</span>
+		</div>
+
+		<div class="field-group">
+			<span class="form-field-title not-input">Categories:</span>
+			<input type='hidden' name='settings[show_question_category_during_test]' value='0' id='sqcdt2'>
+			<input type="checkbox" name="settings[show_question_category_during_test]" value="1" id="sqcdt">
+			<label for="sqcdt">Display Category for each Question during Test</label>
+			<span class="showTooltip tooltip" title="When you categorize your Questions, you can display the Category for each Question during the Test (and on the Results page), which can help Test takers better understand the context of your Questions or see which section they are in.">Tip</span>
+		</div>
+	</div>
+</div>
+<div class="settings-box">
+	<div class="accordion-toggle scroll_random setting-random closed">
+		<h3 class="form-field-title">Randomize</h3>
+		<div class="settings-status"><%if(edits=='0'){%>No<%}%><%if(edits=='1'){if(setting.random_q=='1'){%>Yes<%}else{%>No<%}}%></div><div class="caret">&nbsp;</div>
+	</div>
+	<div class="accordion-fold">
+		<div class="field-group">
+			<input type='hidden' name='settings[random_q]' value='0' id='rq_22'>
+			<input type="checkbox" name="settings[random_q]" value="1" id="rq_2" class="tab" <%if(edits=='1'){if(setting.random_q=='1'){%> checked=true <%}}%> >
+			<label for="rq_2">Give Questions in random order <span class="showTooltip tooltip" title="ClassMarker will randomize the order in which the Questions are displayed each time the Test begins.">Tip</span></label>
+		</div>
+	</div>
+</div>
+<!-- َAnswers Section Deacted -->
+<!-- <div class="settings-box">
+	<div class="accordion-toggle scroll_answers setting-answers closed">
+		<h3 class="form-field-title">Answers</h3>
+		<div class="settings-status">Mandatory, Can change answers</div><div class="caret">&nbsp;</div>
+	</div>
+	<div class="accordion-fold">
+		<div class="field-group">
+			<span class="form-field-title not-input">Mandatory:</span>
+			<input type="checkbox" name="settings[must_select_answer]" checked="checked" value="1" id="ma_2"> <label for="ma_2">Must answer Questions</label>
+			<span class=" showTooltip tooltip" title="When turned on, Test takers must answer every Question to continue and complete the Test.">Tip</span><br>
+			<div class="tab">
+				<input type="checkbox" name="settings[correct_to_continue]" value="1" id="cc_2" class="sub-checkbox"> <label for="cc_2">Auto-Finish Test if a Question is incorrectly answered</label>
+				<span class="showTooltip tooltip" title="When turned on, Test takers must answer each Question correctly to continue and complete the Test otherwise their Test will be Finished and Submitted instantly without the chance to answer any further Questions.">Tip</span>
+			</div>
+		</div>
+		<div class="field-group">
+			<span class="form-field-title not-input">Instant review:</span>
+			<input type="checkbox" name="settings[test_feedback_q]" value="1" id="sfq_">
+			<label for="sfq_">Question grading and Feedback during Test</label>
+			<span class="showTooltip tooltip" title="Show corrections after each Question including your custom Feedback if any.">Tip</span>
+			<div class="tab">
+				<input class="sub-checkbox" type="checkbox" name="settings[test_feedback_qca]" value="1" id="sfqca_">
+				<label for="sfqca_">Reveal correct answers during Test</label>
+				<span class="showTooltip tooltip" title="Will indicate the correct answer if a Question is answered incorrectly.">Tip</span><br>
+			</div>
+		</div>
+		<div class="field-group">
+			<span class="form-field-title not-input">Change answers:</span>
+			<input type="checkbox" name="settings[allow_click_previous]" checked="checked" value="1" id="ab_2">
+			<label for="ab_2">Allow Test takers to go back during Test</label>
+			<span class="showTooltip tooltip" title="If 'Instant review' above is enabled (as well as this 'Change Answers' option), Test takers can review gradings and reattempt Questions during the Test.">Tip</span>
+			<div class="tab">
+				<span class="sub-checkbox settings-flag"><i class="fa fa-bookmark" aria-hidden="true"></i></span> Questions can be Bookmarked <span class="showTooltip tooltip" title="Test Takers can Bookmark Questions to easily jump back to.">Tip</span>
+			</div>
+		</div>
+		<div class="field-group">
+			<span class="form-field-title not-input">Spell Check:</span>
+			<input type="checkbox" name="settings[allow_spellcheck]" value="1" id="spellcheck">
+			<label for="spellcheck">Allow Browser Spell Checking</label>
+			<span class="showTooltip tooltip" title="Browsers (by Default) can show a line under incorrectly spelt words in text input boxes when this option is enabled.">Tip</span>
+			<div class="padleft padtop littledark" id="warning-feedback-and-goback">
+				<div class="alert-box alert-confirmation editor "><strong>Note:</strong> With <strong>Instant review</strong> and <strong>Change answers</strong> both enabled, Test takers can review gradings and re-attempt Questions during the Test to achieve 100%.</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+<div class="clearheight30"></div>

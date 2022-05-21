@@ -1,0 +1,11 @@
+<%-include("../partials/header")%>
+
+<%teachers.forEach((tch)=>{%>
+<li><%=tch%></li>
+<a href="/teachers/<%=tch._id%>">See more</a>
+<%})%>
+
+<br>
+
+<a href="/teachers/new">Add new Teacher</a>
+<%-include("../partials/footer")%>

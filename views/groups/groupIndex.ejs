@@ -1,0 +1,121 @@
+<%-include("../partials/headerResult")%>
+<%-include("../partials/teacherHead")%>
+<div id="content" class="clearfix"><section>
+	<div class="innerWrapper">
+		<div class="col-span-7">
+			<p class="breadcrumb3">
+				<span class="first">Groups</span>
+			</p>
+		</div>
+		<div class="col-span-3">
+			<ul class="menu-sections" id="walkthrough-menu">
+				<li class="test"><a href="/tests"><span>Tests</span></a></li>
+				<li class="group current"><a class="sect" href="/tests/groups"><span>Groups</span></a></li>
+				<li class="link"><a class="sect" href="/tests/links"><span>Links</span></a></li>
+			</ul>
+		</div>
+		<div class="clearheight20"></div>
+		<div class="clearheight20"></div>
+		<ul class="cmtableTabs"><li class="tabon"><a href="/tests/groups">Groups</a></li></ul>
+		<div class="table">
+			<div class="table-utility row">
+				<div class="col-span-1">
+					<div class="dropdown dropdown-x hide_if_no_data">
+						<a class="dropdown-toggle no_anchor" href="#"> Options </a>
+						<ul class="dropdown-menu">
+							<li><a href="#" class="expandAll2">Expand All</a></li>
+							<li><a href="#" class="collapseAll2">Collapse All</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-span-7">
+					<span class="hide_if_no_data not-ie67">
+						<input type="text" id="group_search" class="search_filter hide_if_no_data" placeholder="Search Group Name" onclick="this.select();">
+					</span>
+					<span class="hide_if_no_data not-ie67 dropdown">
+						<a href="#" class="littledark">
+							<i class="fa fa-filter" aria-hidden="true"></i> 
+							Sort
+						</a>
+						<ul class="dropdown-menu filter">
+							<li><a class="sortAlphabetical" href="#">Alphabetical</a></li>
+	                        <li><a class="sortDateAdded" href="#">Recently Added</a></li>
+						</ul>
+					</span>
+				</div>
+				<div class="col-span-2 col-btns">
+					<a class="btn btn-create" href="/tests/groups/new/"> New Group <span class="caret">&nbsp;</span></a>
+				</div>
+			</div>
+			<!-- GROUPS LIST: START -->
+<ul class="table-body">
+<%foundGroups.forEach((G,i)=>{%>
+	<li>
+		<div class="row accordion-toggle scrollTop group_container closed">
+			<div class="col-span-6">
+				<h4 class="group-name name"><%=G.group_name%></h4>
+			</div>
+			<div class="col-span-4 col-btns">
+				<a href="/tests/groups/edit/?group_id=<%=G._id%>" class="edit-group">Edit Group (<%=G.students.length%>)</a>
+				<a href="/assign/tests/" class="assign-to-group">Assign</a>
+				<div class="dropdown">
+					<a class="view-analytics no_anchor" href="#">Statistics <span class="caret">&nbsp;</span></a>
+					<ul class="dropdown-menu">
+						<li><a class="" href="/results/groups/rgtests/?rg_id=<%=G._id%>">By Test</a></li>
+						<li><a class="" href="/results/groups/rgusers/?rg_id=<%=G._id%>">By Member</a></li>
+					</ul>
+				</div>
+			</div>
+			<span class="caret">&nbsp;</span>
+		</div>
+		<%var o=0,oa=[]%>
+		<%foundSettings.forEach((s,i)=>{%>
+		<%if(s.forGroup==G._id){o+=1;oa.push(s)}%>
+		<%})%>%>
+		
+		<div class="accordion-fold subrow-container group_tests" style="display: none;">
+			<div class="row hint">Tests assigned:<%=o%></div>
+			<ul class="hover-row">
+				<%oa.forEach((s)=>{%>
+				<li class="row">
+					<%foundTests.forEach((t)=>{if(t._id==s.forTest){%>
+						<div class="col-span-6">
+							<p class="test-name name"><a href="/tests/test/?test_id=<%=s.forTest%>" class="graylink"><%=t.test_name%></a></p>
+						</div>
+						<%if(av[s._id]=='1'){%>
+							<div class="col-span-1 icon-calendar-green">
+								<span class="showTooltipHTML" title="Available to Start">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							</div>
+						<%}else{%>
+							<div class="col-span-1 icon-calendar">
+								<span class="showTooltipHTML" title="Not Available to Start">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							</div>
+						<%}%>
+					<%}})%>
+					
+					<div class="col-span-3 col-btns littledark">
+						<a class="" href="/assign/rgmanage/?show=1&amp;test_id=<%=s.forTest%>&amp;rg_id=<%=G._id%>">Settings</a>
+						| <a href="/test/start/?test_id=<%=s.forTest%>&amp;rg_id=<%=G._id%>" class="showTooltip" title="Preview taking this test with these applied settings.">Preview</a>
+						<a href="/results/tests/test/rgusers/?test_id=<%=s.forTest%>&amp;rg_id=<%=G._id%>&amp;return=g" class="btn btn-noresults">Results</a>
+					</div>
+				</li>
+				<%})%>
+			</ul>
+			<div class="row assign">
+				<a href="/assign/tests/" class="btn btn-assign alt-a">Assign a Test</a>
+			</div>
+		</div>
+	</li>
+<%})%>
+</ul>
+			<!-- GROUPS LIST: END -->
+			<div class="row col_center hide" id="load_more_row" style="display: none;"><a href="#" class="loadMore btn ">Load More Groups</a></div>
+			<div class="table-utility row bellow">
+				<div class="col-span-8">
+					<div class="dropdown dropdown-x hide_if_no_data_bottom">&nbsp;</div>
+				</div>
+				<div class="col-span-2 col-btns hide_if_no_data_bottom">&nbsp;</div>
+			</div>
+		</div>
+</div></section></div>
+<%-include("../partials/footer")%>
